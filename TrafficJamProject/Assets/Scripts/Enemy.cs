@@ -31,48 +31,9 @@ namespace Cai
 
             DrawRaycasts(hitLeft, hitRight, hitFwd);
 
-            float dist = lane.path.GetClosestDistanceAlongPath(transform.position);
-            Vector3 targetPoint = lane.path.GetPointAtDistance(dist + targetOffset);
+            TurnTowardsPath(hitLeft, hitRight);
 
-            Debug.DrawLine(transform.position, targetPoint);
-
-            float moveSpeed = car.moveSpeed;
-
-
-            if (!hitLeft && !hitRight)
-            {
-                Vector3 directTarget = lane.path.GetPointAtDistance(dist);
-
-                if (Vector3.Distance(transform.position, directTarget) > 0.025f)
-                    car.RotateToDirection(targetPoint, car.turnSpeed);
-            }
-            else if (hitRight && !hitLeft)
-            {
-                moveSpeed /= 2;
-                car.RotateToDirection(transform.position - transform.right, car.turnSpeed / 2);
-            }
-            else if (hitLeft && !hitRight)
-            {
-                moveSpeed /= 2;
-                car.RotateToDirection(transform.position + transform.right, car.turnSpeed / 2);
-            }
-
-
-            if (hitFwd)
-            {
-                float speedMult = Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist;
-                moveSpeed *= speedMult;
-
-                if (speedMult <= 0.5f)
-                    moveSpeed = 0f;
-
-                car.MoveInDirection(transform.up, moveSpeed);
-            }
-            else
-            {
-                car.MoveInDirection(transform.up, car.moveSpeed);
-            }
-
+            MoveForwardIfFree(hitFwd);
         }
 
         void ChangeLane()
@@ -97,6 +58,49 @@ namespace Cai
                 Debug.DrawLine(transform.position, fwd.point, Color.red);
             else
                 Debug.DrawLine(transform.position, transform.position + (transform.up * fwdCheckDist), Color.yellow);
+        }
+
+        void TurnTowardsPath(bool hitLeft, bool hitRight)
+        {
+            float dist = lane.path.GetClosestDistanceAlongPath(transform.position);
+            Vector3 targetPoint = lane.path.GetPointAtDistance(dist + targetOffset);
+
+            Debug.DrawLine(transform.position, targetPoint);
+
+            if (!hitLeft && !hitRight)
+            {
+                Vector3 directTarget = lane.path.GetPointAtDistance(dist);
+
+                if (Vector3.Distance(transform.position, directTarget) > 0.025f)
+                    car.RotateToDirection(targetPoint, car.turnSpeed);
+            }
+            else if (hitRight && !hitLeft)
+            {
+                car.RotateToDirection(transform.position - transform.right, car.turnSpeed / 2);
+            }
+            else if (hitLeft && !hitRight)
+            {
+                car.RotateToDirection(transform.position + transform.right, car.turnSpeed / 2);
+            }
+        }
+
+        void MoveForwardIfFree(RaycastHit2D hitFwd)
+        {
+            float moveSpeed = car.moveSpeed;
+            if (hitFwd)
+            {
+                float speedMult = Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist;
+                moveSpeed *= speedMult;
+
+                if (speedMult <= 0.5f)
+                    moveSpeed = 0f;
+
+                car.MoveInDirection(transform.up, moveSpeed);
+            }
+            else
+            {
+                car.MoveInDirection(transform.up, car.moveSpeed);
+            }
         }
     }
 
