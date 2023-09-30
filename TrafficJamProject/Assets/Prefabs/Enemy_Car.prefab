@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   moveSpeed: 30
-  turnSpeed: 1
+  turnSpeed: 0.5
   drag: 10
   angularDrag: 7.5
   mass: 2
@@ -69,6 +69,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lane: {fileID: 0}
+  targetOffset: 2.5
+  fwdCheckDist: 2
+  horizontalCheckDist: 0.5
 --- !u!212 &3581320163345931021
 SpriteRenderer:
   m_ObjectHideFlags: 0

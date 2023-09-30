@@ -63,11 +63,12 @@ namespace Cai
 
             float angleDifference = Mathf.DeltaAngle(transform.eulerAngles.z, dirAngle);
 
-            int dir = angleDifference < 1f ? -1 : 1;
+            int dir = angleDifference < 0 ? -1 : 1;
 
             float targetAngle = transform.eulerAngles.z + (speed * rb.velocity.magnitude * dir);
 
-            rb.MoveRotation(targetAngle);
+            if (angleDifference >= 1.5f || angleDifference <= -1.5f)
+                rb.MoveRotation(targetAngle);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -101,7 +102,7 @@ namespace Cai
 
         IEnumerator StopCollidingAfterDelay(float time)
         {
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(0/*time*/);
             colliding = false;
         }
     }

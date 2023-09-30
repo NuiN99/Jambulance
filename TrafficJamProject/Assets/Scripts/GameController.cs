@@ -1,17 +1,14 @@
-using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Cai
 {
-    public class RoadData : MonoBehaviour
+    public class GameController : MonoBehaviour
     {
-        public PathCreator[] roads;
-
         private void Awake()
         {
-            roads = GetComponentsInChildren<PathCreator>();
+            Physics2D.queriesStartInColliders = false;
         }
     }
 
