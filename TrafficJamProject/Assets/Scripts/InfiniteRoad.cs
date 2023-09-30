@@ -20,6 +20,12 @@ public class InfiniteRoad : MonoBehaviour
 
     [SerializeField] float spawnDistance;
 
+    [SerializeField] int numLanes;
+
+
+    public List<Lane> lanes = new();
+
+
     // Start is called before the first frame update
     void Start()
     {
