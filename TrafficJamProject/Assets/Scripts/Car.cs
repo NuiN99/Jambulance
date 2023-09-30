@@ -15,6 +15,8 @@ public class Car : MonoBehaviour
     [SerializeField] float brakeStrength = 2f;
 
     [SerializeField] float drag;
+    [SerializeField] float brakeDrag;
+    
     [SerializeField] float angularDrag;
     [SerializeField] float mass;
 
@@ -28,6 +30,8 @@ public class Car : MonoBehaviour
 
     [SerializeField] float heavyImpactForceThreshold = 4f;
     [SerializeField] float heavyImpactMultiplier = 2f;
+
+    bool braking = false;
 
     private void Awake()
     {
@@ -45,11 +49,13 @@ public class Car : MonoBehaviour
 
     public void MoveInDirection(Vector3 dir)
     {
-        rb.AddForce(moveSpeed * dir);
+        if(!braking)
+            rb.AddForce(moveSpeed * dir);
     }
     public void MoveInDirection(Vector3 dir, float speed)
     {
-        rb.AddForce(speed * dir);
+        if(!braking)
+            rb.AddForce(speed * dir);
     }
 
     public void RotateInDirection(float dir)
@@ -65,6 +71,12 @@ public class Car : MonoBehaviour
 
     public void RotateToDirection(Vector3 target, float speed)
     {
+        if (colliding)
+        {
+            Brake();
+            return;
+        }
+
         Vector3 targetDir = (target - transform.position).normalized;
         float dirAngle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
         dirAngle -= 90;
@@ -81,34 +93,37 @@ public class Car : MonoBehaviour
 
     public void Brake()
     {
-        float brakeDrag = rb.drag * brakeStrength;
+        braking = true;
         rb.drag = brakeDrag;
+    }
+    public void UnBrake()
+    {
+        braking = false;
+        rb.drag = drag;
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        colliding = true;
+        if(collision.gameObject.GetComponent<Player>())
+            colliding = true;
 
-        float collisionForce = collision.relativeVelocity.magnitude * 2.5f;
+        Vector2 collisionPoint = collision.GetContact(0).point;
+        float collisionForce = collision.relativeVelocity.magnitude;
+        Vector2 collisionDir = ((Vector2)collision.transform.position - collisionPoint).normalized;
 
-        if (GetComponent<Player>() && collision.gameObject.TryGetComponent(out Car car))
+        if (collision.gameObject.TryGetComponent(out Car car))
         {
-            //damage
-            float colForce = collision.relativeVelocity.magnitude;
-            health -= colForce * (colForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
-            if (health < 0)
-            {
-                //Trigger Game Over event etc...
-            }
-
-            //bumping
-            Vector2 collisionDir = ((Vector2)collision.transform.position - collision.GetContact(0).point).normalized;
-
             //rb.velocity = collision.relativeVelocity;
-            //car.rb.AddForce(collisionDir * collisionForce, ForceMode2D.Impulse);
+            car.rb.AddForceAtPosition(collisionDir * collisionForce, collisionPoint, ForceMode2D.Impulse);
+            car.rb.angularDrag = 0f;
+            car.Brake();
+        }
 
-            return;
+        health -= collisionForce * (collisionForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
+        if (health < 0)
+        {
+            //Destroy car
         }
     }
 
@@ -127,7 +142,7 @@ public class Car : MonoBehaviour
 
     IEnumerator StopCollidingAfterDelay(float time)
     {
-        yield return new WaitForSeconds(0/*time*/);
+        yield return new WaitForSeconds(2);
         colliding = false;
     }
 }

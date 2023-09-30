@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
         }
 
         car.RotateInDirection(rotateAxis * moveAxis, car.turnSpeed);
+
+        car.UnBrake();
     }
 
     private void OnDrawGizmos()

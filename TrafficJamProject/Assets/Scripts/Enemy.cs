@@ -102,13 +102,10 @@ public class Enemy : MonoBehaviour
     void MoveForwardIfFree(RaycastHit2D hitFwd)
     {
         if (hitFwd)
-        {
-            float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
-            car.targetSpeed = car.moveSpeed * speedMult;
+            car.Brake();
+        else
+            car.UnBrake();
 
-            if (speedMult <= 0.25f)
-                car.targetSpeed = 0f;
-        }
         car.MoveInDirection(transform.up, car.targetSpeed);
     }
 

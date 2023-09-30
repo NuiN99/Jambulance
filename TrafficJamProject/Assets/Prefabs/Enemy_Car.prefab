@@ -49,12 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  moveSpeed: 60
+  moveSpeed: 10
   turnSpeed: 0.5
   targetSpeed: 0
-  brakeStrength: 2
-  drag: 10
-  angularDrag: 7.5
+  brakeStrength: 1.1
+  drag: 3
+  brakeDrag: 4
+  angularDrag: 2
   mass: 2
   aggression: 0
   recoveryTime: 1
@@ -148,7 +149,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 10
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}

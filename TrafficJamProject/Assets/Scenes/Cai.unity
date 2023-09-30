@@ -1170,7 +1170,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
   startSpawnMult: 0
   spawnInterval: 0.1
-  minSpeedIncrement: -10
+  minSpeedIncrement: 5
   maxSpeedIncrement: 10
 --- !u!4 &1217616674
 Transform:
