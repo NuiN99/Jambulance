@@ -24,7 +24,7 @@ namespace Cai
                 car.MoveInDirection(transform.up * moveAxis, car.moveSpeed);
             }
 
-            car.RotateInDirection(rotateAxis, car.turnSpeed);
+            car.RotateInDirection(rotateAxis * moveAxis, car.turnSpeed);
         }
 
         private void OnDrawGizmos()
