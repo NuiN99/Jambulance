@@ -17,7 +17,7 @@ public class Lane : MonoBehaviour
 
     private void Start()
     {
-        //InvokeRepeating(nameof(AddNewLanePoint), 0, generationSpeed);
+        InvokeRepeating(nameof(AddNewLanePoint), 0, generationSpeed);
     }
 
     public Vector3 GetClosestPoint(Vector3 startPos, out int index)

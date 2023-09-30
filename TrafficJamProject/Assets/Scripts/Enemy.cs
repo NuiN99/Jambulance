@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour
 
     void DestroyIfFarAway()
     {
-        if(Vector2.Distance((Vector2)Camera.main.transform.position, transform.position) >= 15f)
+        if(Vector2.Distance((Vector2)Camera.main.transform.position, transform.position) >= 10f)
         {
             Destroy(gameObject);
         }
