@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] AudioClip honkSound;
 
+    bool inLane;
+
     private void Awake()
     {
         car = GetComponent<Car>();
@@ -63,40 +65,45 @@ public class Enemy : MonoBehaviour
         Vector3 intersection = currentLane.CalculateHorizontalIntersection(closestPoint, index, transform.position);
         Vector3 targetPoint = intersection + new Vector3(0, 3f);
 
+        inLane = Vector3.Distance(intersection, transform.position) <= 0.5f;
+        Color laneColor = inLane ? Color.green : Color.red;
+        GetComponent<SpriteRenderer>().color = laneColor;
+
         Debug.DrawLine(transform.position, targetPoint);
 
         if (!hitLeft && !hitRight)
         {
+            car.targetSpeed = car.moveSpeed;
             if (Vector3.Distance(transform.position, targetPoint) > 0.025f)
                 car.RotateToDirection(targetPoint, car.turnSpeed);
         }
         else if (hitRight && !hitLeft)
         {
+            if(!inLane)
+                car.targetSpeed = car.moveSpeed / 4;
+
             car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
         }
         else if (hitLeft && !hitRight)
         {
+            if (!inLane)
+                car.targetSpeed = car.moveSpeed / 4;
+
             car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
         }
     }
 
     void MoveForwardIfFree(RaycastHit2D hitFwd)
     {
-        float moveSpeed = car.moveSpeed;
         if (hitFwd)
         {
             float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
-            moveSpeed *= speedMult;
+            car.targetSpeed = car.moveSpeed * speedMult;
 
             if (speedMult <= 0.25f)
-                moveSpeed = 0f;
-
-            car.MoveInDirection(transform.up, moveSpeed);
+                car.targetSpeed = 0f;
         }
-        else
-        {
-            car.MoveInDirection(transform.up, car.moveSpeed);
-        }
+        car.MoveInDirection(transform.up, car.targetSpeed);
     }
 
     // either change lane, accelerate?
