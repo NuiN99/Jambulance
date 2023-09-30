@@ -30,8 +30,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        car.moveSpeed = Random.Range(car.moveSpeed - 30f, car.moveSpeed + 30f);
-
         StartCoroutine(AttemptActionAfterDelay());
 
         InvokeRepeating(nameof(DestroyIfFarAway), 3f, 3f);
@@ -62,9 +60,9 @@ public class Enemy : MonoBehaviour
 
     void TurnTowardsLane(bool hitLeft, bool hitRight)
     {
-        Vector3 closestPoint = currentLane.GetClosestPoint(transform.position, out int index);
-        Vector3 intersection = currentLane.CalculateHorizontalIntersection(closestPoint, index, transform.position);
-        Vector3 targetPoint = intersection + new Vector3(0, 3f);
+        Vector2 closestPoint = currentLane.GetClosestPoint(transform.position, out int index);
+        Vector2 intersection = currentLane.CalculateHorizontalIntersection(closestPoint, index, transform.position);
+        Vector2 targetPoint = intersection + (currentLane.road.direction * 3f);
 
         inLane = Vector3.Distance(intersection, transform.position) <= 0.5f;
         Color laneColor = inLane ? Color.green : Color.red;

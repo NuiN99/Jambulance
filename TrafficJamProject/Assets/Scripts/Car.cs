@@ -105,8 +105,9 @@ public class Car : MonoBehaviour
             //bumping
             Vector2 collisionDir = ((Vector2)collision.transform.position - collision.GetContact(0).point).normalized;
 
-            rb.velocity = collision.relativeVelocity;
-            car.rb.AddForce(collisionDir * collisionForce, ForceMode2D.Impulse);
+            //rb.velocity = collision.relativeVelocity;
+            //car.rb.AddForce(collisionDir * collisionForce, ForceMode2D.Impulse);
+
             return;
         }
     }

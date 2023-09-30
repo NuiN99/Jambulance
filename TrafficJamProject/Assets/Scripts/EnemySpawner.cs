@@ -11,6 +11,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float startSpawnMult = 30f;
     [SerializeField] float spawnInterval;
 
+    [SerializeField] float minSpeedIncrement = 0f;
+    [SerializeField] float maxSpeedIncrement = 0f;
+
     void SpawnEnemy()
     {
         var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
@@ -27,6 +30,14 @@ public class EnemySpawner : MonoBehaviour
         Enemy enemy = Instantiate(enemyPrefab, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
         enemy.currentLane = lane;
         enemy.roadData = roadData;
+
+        float dirAngle = (Mathf.Atan2(roadData.direction.y, roadData.direction.x) * Mathf.Rad2Deg) - 90;
+        enemy.transform.eulerAngles = new Vector3(0, 0, dirAngle);
+
+        if(enemy.TryGetComponent(out Car enemyCar))
+        {
+            enemyCar.moveSpeed += Random.Range(minSpeedIncrement, maxSpeedIncrement);
+        }
     }
 
     private void Start()

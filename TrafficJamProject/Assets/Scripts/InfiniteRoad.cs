@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InfiniteRoad : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    Player player;
     [SerializeField] GameObject RoadTexture;
 
     Vector3 startPosition;
@@ -22,11 +22,11 @@ public class InfiniteRoad : MonoBehaviour
 
     [SerializeField] int numLanes;
 
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+    }
 
-    public List<Lane> lanes = new();
-
-
-    // Start is called before the first frame update
     void Start()
     {
         activeRoads = new LinkedList<GameObject>();
@@ -35,7 +35,6 @@ public class InfiniteRoad : MonoBehaviour
         InstantiateStartingRoad();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         CheckForNewRoads();

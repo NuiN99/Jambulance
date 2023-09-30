@@ -7,6 +7,8 @@ public class RoadData : MonoBehaviour
 {
     public List<Lane> lanes = new();
 
+    public Vector2 direction;
+
     private void Awake()
     {
         lanes = GetComponentsInChildren<Lane>().ToList();

@@ -15,6 +15,13 @@ public class Lane : MonoBehaviour
     [SerializeField] float minVertical, maxVertical;
     [SerializeField] float roadScale;
 
+    public RoadData road;
+
+    private void Awake()
+    {
+        road = transform.parent.GetComponent<RoadData>();
+    }
+
     private void Start()
     {
         InvokeRepeating(nameof(AddNewLanePoint), 0, generationSpeed);
