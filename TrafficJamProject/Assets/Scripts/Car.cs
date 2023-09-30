@@ -24,10 +24,16 @@ public class Car : MonoBehaviour
 
     public bool colliding;
 
+    [SerializeField] public float health;
+
+    [SerializeField] float heavyImpactForceThreshold = 4f;
+    [SerializeField] float heavyImpactMultiplier = 2f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
 
     void Start()
     {
@@ -35,7 +41,7 @@ public class Car : MonoBehaviour
         rb.angularDrag = angularDrag;
         rb.mass = mass;
     }
-
+       
 
     public void MoveInDirection(Vector3 dir)
     {
@@ -79,6 +85,7 @@ public class Car : MonoBehaviour
         rb.drag = brakeDrag;
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         colliding = true;
@@ -87,6 +94,16 @@ public class Car : MonoBehaviour
 
         if (GetComponent<Player>() && collision.gameObject.TryGetComponent(out Car car))
         {
+            //damage
+            float colForce = collision.relativeVelocity.magnitude;
+            print(colForce);
+            health -= colForce * (colForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
+            if (health < 0)
+            {
+                //Trigger Game Over event etc...
+            }
+
+            //bumping
             Vector2 collisionDir = ((Vector2)collision.transform.position - collision.GetContact(0).point).normalized;
 
             rb.velocity = collision.relativeVelocity;
