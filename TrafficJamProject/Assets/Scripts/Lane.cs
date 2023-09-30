@@ -7,7 +7,8 @@ public class Lane : MonoBehaviour
 {
     public List<Vector2> points = new();
 
-    [SerializeField] GameObject roadSegment;
+    [SerializeField] GameObject roadIndicatorPrefab;
+    [SerializeField] GameObject roadLinePrefab;
 
     [SerializeField] float generationSpeed;
 
@@ -32,7 +33,7 @@ public class Lane : MonoBehaviour
         float closestDistance = Vector3.Distance(points[0], startPos);
 
         int newIndex = 0;
-        for (int i = 1; i < points.Count; i++)
+        for (int i = 0; i < points.Count - 1; i++)
         {
             float distance = Vector3.Distance(points[i], startPos);
 
@@ -50,6 +51,9 @@ public class Lane : MonoBehaviour
 
     public Vector3 CalculateHorizontalIntersection(Vector3 pointA, int pointBIndex, Vector3 originPoint)
     {
+        if(pointBIndex == 0 && points.Count <= 0)
+            return Vector3.zero;
+
         if (pointA.y != points[pointBIndex].y)
         {
             return Vector3.zero;
@@ -63,7 +67,6 @@ public class Lane : MonoBehaviour
 
     void AddNewLanePoint()
     {
-
         if(points.Count <= 0)
         {
             points.Add(transform.position);
@@ -77,15 +80,13 @@ public class Lane : MonoBehaviour
 
         Vector3 midPos = startPoint + (newEndPoint - startPoint) / 2;
 
-        
-        GameObject segment = Instantiate(roadSegment, midPos, Quaternion.identity, transform);
+        Instantiate(roadIndicatorPrefab, newEndPoint, Quaternion.identity, transform);
 
         Vector3 newEndPointDir = (newEndPoint - startPoint).normalized;
         float angle = (Mathf.Atan2(newEndPointDir.y, newEndPointDir.x) * Mathf.Rad2Deg) - 90;
-        
-        segment.transform.eulerAngles = new(0, 0, angle);
-
+        GameObject line = Instantiate(roadLinePrefab, midPos, Quaternion.identity, transform);
+        line.transform.eulerAngles = new(0, 0, angle);
         float dist = Vector3.Distance(startPoint, newEndPoint);
-        segment.transform.localScale = new Vector3(roadScale, dist, 1);
+        line.transform.localScale = new Vector3(.1f, dist, 1);
     }
 }

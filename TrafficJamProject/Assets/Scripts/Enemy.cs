@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -58,9 +59,6 @@ public class Enemy : MonoBehaviour
 
     void TurnTowardsLane(bool hitLeft, bool hitRight)
     {
-        //float dist = currentLane.path.GetClosestDistanceAlongPath(transform.position);
-        //Vector3 targetPoint = currentLane.path.GetPointAtDistance(dist + targetOffset);
-
         Vector3 closestPoint = currentLane.GetClosestPoint(transform.position, out int index);
         Vector3 intersection = currentLane.CalculateHorizontalIntersection(closestPoint, index, transform.position);
         Vector3 targetPoint = intersection + new Vector3(0, 3f);
@@ -74,8 +72,6 @@ public class Enemy : MonoBehaviour
         }
         else if (hitRight && !hitLeft)
         {
-            //AudioController.Instance.PlaySpatialSound(honkSound, 0.05f);
-
             car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
         }
         else if (hitLeft && !hitRight)
@@ -107,7 +103,30 @@ public class Enemy : MonoBehaviour
     IEnumerator AttemptActionAfterDelay()
     {
         yield return new WaitForSeconds(Random.Range(minActionTime, maxActionTime));
-        currentLane = roadData.ChangeLaneRandom(currentLane);
+
+        Lane startLane = currentLane;
+        int randomDir = Random.Range(0, 2) == 0 ? -1 : 1;
+        currentLane = roadData.ChangeLane(currentLane, randomDir);
+
+        if(randomDir == -1)
+        {
+            RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist * 2f);
+            if (hitLeft)
+            {
+                print("hitleft, cancelled merge");
+                currentLane = startLane;
+            }
+        }
+        else if(randomDir == 1)
+        {
+            RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist * 2f);
+            if (hitRight)
+            {
+                print("hitright, cancelled merge");
+                currentLane = startLane;
+            }
+        }   
+
         StartCoroutine(AttemptActionAfterDelay());
     }
 

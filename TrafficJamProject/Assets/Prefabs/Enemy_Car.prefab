@@ -51,12 +51,16 @@ MonoBehaviour:
   rb: {fileID: 0}
   moveSpeed: 60
   turnSpeed: 0.5
+  brakeStrength: 2
   drag: 10
   angularDrag: 7.5
   mass: 2
   aggression: 0
   recoveryTime: 1
   colliding: 0
+  health: 0
+  heavyImpactForceThreshold: 4
+  heavyImpactMultiplier: 2
 --- !u!114 &2007510244600866465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,13 +73,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b7710e7018574c45a670f5baa6a567e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lane: {fileID: 0}
+  currentLane: {fileID: 0}
   targetOffset: 2.5
   fwdCheckDist: 2
   horizontalCheckDist: 0.5
   roadData: {fileID: 0}
-  minActionTime: 2.5
-  maxActionTime: 10
+  minActionTime: 10
+  maxActionTime: 20
   reactiveTurnDivider: 4
   honkSound: {fileID: 8300000, guid: a6ccc363d1dca6f4dba7efa27a823d10, type: 3}
 --- !u!212 &3581320163345931021
