@@ -96,7 +96,6 @@ public class Car : MonoBehaviour
         {
             //damage
             float colForce = collision.relativeVelocity.magnitude;
-            print(colForce);
             health -= colForce * (colForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
             if (health < 0)
             {

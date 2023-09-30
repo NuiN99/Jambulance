@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
         var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
 
         Vector3 closestPoint = lane.GetClosestPoint(Camera.main.transform.position, out int index);
-        Vector3 randomYPos = closestPoint + new Vector3(0, Random.Range(-10, 30));
+        Vector3 randomYPos = closestPoint + new Vector3(0, Random.Range(10, 30));
         Vector3 spawnPoint = lane.CalculateHorizontalIntersection(closestPoint, index, randomYPos);
 
         Enemy enemy = Instantiate(enemyPrefab, spawnPoint, Quaternion.identity).GetComponent<Enemy>();

@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class Lane : MonoBehaviour
 {
     public List<Vector2> points = new();
 
+    [SerializeField] GameObject roadSegment;
+
+    [SerializeField] float generationSpeed;
+
+    [SerializeField] float minHorizontal, maxHorizontal;
+    [SerializeField] float minVertical, maxVertical;
+    [SerializeField] float roadScale;
 
     private void Start()
     {
-        InvokeRepeating(nameof(AddNewLanePoint), 0, 0.5f);
+        InvokeRepeating(nameof(AddNewLanePoint), 0, generationSpeed);
     }
 
     public Vector3 GetClosestPoint(Vector3 startPos, out int index)
@@ -55,18 +63,29 @@ public class Lane : MonoBehaviour
 
     void AddNewLanePoint()
     {
+
         if(points.Count <= 0)
         {
             points.Add(transform.position);
             return;
         }
 
-        Vector3 endPoint = points[points.Count - 1];
-        Vector3 increment = new(Random.Range(-1f, 1f), Random.Range(1f, 5f));
-        Vector3 newPos = endPoint + increment;
-        points.Add(newPos);
-        GameObject test = new($"{points.Count - 1}");
-        test.transform.position = newPos;
-        test.transform.SetParent(transform);
+        Vector3 startPoint = points[points.Count - 1];
+        Vector3 increment = new(Random.Range(minHorizontal, maxHorizontal), Random.Range(minVertical, maxVertical));
+        Vector3 newEndPoint = startPoint + increment;
+        points.Add(newEndPoint);
+
+        Vector3 midPos = startPoint + (newEndPoint - startPoint) / 2;
+
+        
+        GameObject segment = Instantiate(roadSegment, midPos, Quaternion.identity, transform);
+
+        Vector3 newEndPointDir = (newEndPoint - startPoint).normalized;
+        float angle = (Mathf.Atan2(newEndPointDir.y, newEndPointDir.x) * Mathf.Rad2Deg) - 90;
+        
+        segment.transform.eulerAngles = new(0, 0, angle);
+
+        float dist = Vector3.Distance(startPoint, newEndPoint);
+        segment.transform.localScale = new Vector3(roadScale, dist, 1);
     }
 }
