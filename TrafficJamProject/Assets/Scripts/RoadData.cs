@@ -15,6 +15,12 @@ namespace Cai
             roads = GetComponentsInChildren<PathCreator>().ToList();
         }
 
+        private void Start()
+        {
+            InvokeRepeating(nameof(AddNewRoadPoint), 0f, 5f);
+        }
+
+
         public PathCreator ChangeLaneRandom(PathCreator currentLane)
         {
             int dir = Random.Range(0, 2) == 0 ? -1 : 1;
@@ -40,6 +46,16 @@ namespace Cai
                 return roads[index];
             }
             return currentLane;
+        }
+
+        void AddNewRoadPoint()
+        {
+            foreach (var lane in roads)
+            {
+                Vector3 endPoint = lane.path.GetPoint(lane.path.NumPoints - 1);
+                Vector3 newPosIncrement = new(Random.Range(-1f, 1f), Random.Range(5f, 30f));
+                lane.bezierPath.AddSegmentToEnd(lane.transform.InverseTransformPoint(endPoint) + newPosIncrement);
+            }
         }
     }
 

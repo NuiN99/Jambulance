@@ -14,6 +14,8 @@ namespace Cai
         [SerializeField] public float moveSpeed;
         [SerializeField] public float turnSpeed;
 
+        [SerializeField] float brakeStrength = 2f;
+
         [SerializeField] float drag;
         [SerializeField] float angularDrag;
         [SerializeField] float mass;
@@ -71,6 +73,12 @@ namespace Cai
 
             if (angleDifference >= 1.5f || angleDifference <= -1.5f)
                 rb.MoveRotation(targetAngle);
+        }
+
+        public void Brake()
+        {
+            float brakeDrag = rb.drag * brakeStrength;
+            rb.drag = brakeDrag;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

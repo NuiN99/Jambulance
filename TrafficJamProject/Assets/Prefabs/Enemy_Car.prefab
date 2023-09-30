@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  moveSpeed: 30
+  moveSpeed: 60
   turnSpeed: 0.5
   drag: 10
   angularDrag: 7.5
@@ -76,6 +76,7 @@ MonoBehaviour:
   roadData: {fileID: 0}
   minActionTime: 2.5
   maxActionTime: 10
+  reactiveTurnDivider: 4
   honkSound: {fileID: 8300000, guid: a6ccc363d1dca6f4dba7efa27a823d10, type: 3}
 --- !u!212 &3581320163345931021
 SpriteRenderer:

@@ -20,6 +20,8 @@ namespace Cai
         [SerializeField] float minActionTime = 2.5f;
         [SerializeField] float maxActionTime = 10f;
 
+        [SerializeField] float reactiveTurnDivider = 4f;
+
         [SerializeField] AudioClip honkSound;
 
         private void Awake()
@@ -29,7 +31,7 @@ namespace Cai
 
         private void Start()
         {
-            car.moveSpeed = Random.Range(car.moveSpeed - 5f, car.moveSpeed + 5f);
+            car.moveSpeed = Random.Range(car.moveSpeed - 30f, car.moveSpeed + 30f);
 
             StartCoroutine(AttemptActionAfterDelay());
         }
@@ -73,13 +75,13 @@ namespace Cai
             }
             else if (hitRight && !hitLeft)
             {
-                AudioController.Instance.PlaySpatialSound(honkSound, 0.05f);
+                //AudioController.Instance.PlaySpatialSound(honkSound, 0.05f);
 
-                car.RotateToDirection(transform.position - transform.right, car.turnSpeed / 2);
+                car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
             }
             else if (hitLeft && !hitRight)
             {
-                car.RotateToDirection(transform.position + transform.right, car.turnSpeed / 2);
+                car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
             }
         }
 
