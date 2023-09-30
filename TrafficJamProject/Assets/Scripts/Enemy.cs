@@ -8,14 +8,28 @@ namespace Cai
     public class Enemy : MonoBehaviour
     {
         Car car;
+
         public PathCreator lane;
+
         [SerializeField] float targetOffset = 2.5f;
 
         [SerializeField] float fwdCheckDist, horizontalCheckDist;
 
+        public RoadData roadData;
+
+        [SerializeField] float minActionTime = 2.5f;
+        [SerializeField] float maxActionTime = 10f;
+
         private void Awake()
         {
             car = GetComponent<Car>();
+        }
+
+        private void Start()
+        {
+            car.moveSpeed = Random.Range(car.moveSpeed - 5f, car.moveSpeed + 5f);
+
+            StartCoroutine(AttemptActionAfterDelay());
         }
 
         private void FixedUpdate()
@@ -25,42 +39,23 @@ namespace Cai
 
         void MoveTowardsRoadUpwards()
         {
-            RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right, horizontalCheckDist);
-            RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right, horizontalCheckDist);
-            RaycastHit2D hitFwd = Physics2D.Raycast(transform.position, transform.up, fwdCheckDist);
+            RaycastHit2D hitFwd = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.up, fwdCheckDist);
+            RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
+            RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
 
-            DrawRaycasts(hitLeft, hitRight, hitFwd);
+            Vector3 leftOrigin = (transform.position + -transform.right * horizontalCheckDist);
+            Vector3 rightOrigin = (transform.position + transform.right * horizontalCheckDist);
+            Vector3 fwdOrigin = transform.position + transform.up * (fwdCheckDist - transform.localScale.y / 2);
 
-            TurnTowardsPath(hitLeft, hitRight);
+            ExtDebug.DrawBoxCastBox(leftOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitLeft));
+            ExtDebug.DrawBoxCastBox(rightOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitRight));
+            ExtDebug.DrawBoxCastBox(fwdOrigin, new Vector3(transform.localScale.x, fwdCheckDist) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitFwd));
 
+            TurnTowardsLane(hitLeft, hitRight);
             MoveForwardIfFree(hitFwd);
         }
 
-        void ChangeLane()
-        {
-
-        }
-
-        void DrawRaycasts(RaycastHit2D left, RaycastHit2D right, RaycastHit2D fwd)
-        {
-            
-            if (left)
-                Debug.DrawLine(transform.position, left.point, Color.red);
-            else
-                Debug.DrawLine(transform.position, transform.position + (-transform.right * horizontalCheckDist), Color.yellow);
-
-            if (right)
-                Debug.DrawLine(transform.position, right.point, Color.red);
-            else
-                Debug.DrawLine(transform.position, transform.position + (transform.right * horizontalCheckDist), Color.yellow);
-
-            if (fwd)
-                Debug.DrawLine(transform.position, fwd.point, Color.red);
-            else
-                Debug.DrawLine(transform.position, transform.position + (transform.up * fwdCheckDist), Color.yellow);
-        }
-
-        void TurnTowardsPath(bool hitLeft, bool hitRight)
+        void TurnTowardsLane(bool hitLeft, bool hitRight)
         {
             float dist = lane.path.GetClosestDistanceAlongPath(transform.position);
             Vector3 targetPoint = lane.path.GetPointAtDistance(dist + targetOffset);
@@ -89,10 +84,10 @@ namespace Cai
             float moveSpeed = car.moveSpeed;
             if (hitFwd)
             {
-                float speedMult = Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist;
+                float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
                 moveSpeed *= speedMult;
 
-                if (speedMult <= 0.5f)
+                if (speedMult <= 0.25f)
                     moveSpeed = 0f;
 
                 car.MoveInDirection(transform.up, moveSpeed);
@@ -102,6 +97,26 @@ namespace Cai
                 car.MoveInDirection(transform.up, car.moveSpeed);
             }
         }
-    }
 
+        // either change lane, accelerate?
+        IEnumerator AttemptActionAfterDelay()
+        {
+            yield return new WaitForSeconds(Random.Range(minActionTime, maxActionTime));
+            lane = roadData.ChangeLaneRandom(lane);
+            StartCoroutine(AttemptActionAfterDelay());
+        }
+
+        void DrawCheck(RaycastHit2D hit, Vector3 targetPos)
+        {
+            Debug.DrawLine(transform.position, targetPos, GetCheckColor(hit));
+        }
+
+        Color GetCheckColor(bool hit)
+        {
+            if (hit)
+                return Color.red;
+            else
+                return Color.yellow;
+        }
+    }
 }

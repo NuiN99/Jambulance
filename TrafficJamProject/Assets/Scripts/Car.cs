@@ -18,6 +18,8 @@ namespace Cai
         [SerializeField] float angularDrag;
         [SerializeField] float mass;
 
+        [SerializeField] float aggression;
+
         [SerializeField] float recoveryTime;
 
         public bool colliding;
