@@ -8,6 +8,7 @@ public class HighwayController : MonoBehaviour
     public Transform trafficSpawn;
     public GameObject enemyCar;
     [SerializeField] int lanes;
+    [SerializeField] int maxRows;//TBI
     [SerializeField] float spawnTimer;
     [SerializeField] int carsPerRow;
 
@@ -31,49 +32,56 @@ public class HighwayController : MonoBehaviour
 
     IEnumerator SpawnTraffic()
     {
+        GameObject[] newRow;
+        int randomIndex;
+
         while (true)
         {
-            
-            GameObject[] newRow = new GameObject[lanes];
+            newRow = new GameObject[lanes];
+            randomIndex = 0;
 
             //spawm cars while less than max car per rows
             for (int i = 0; i < carsPerRow; i++)
             {
-                // get random index
+                do
+                {
+                    // get random empty index
+                    randomIndex = Random.Range(0, lanes);
+                
+                } while (newRow[randomIndex] != null);
 
                 // spawn car on space if not occupied
-
-                
+                GameObject newCar = Instantiate(enemyCar,trafficSpawn,false);
+                newCar.transform.position = trafficSpawn.transform.position + transform.right * (randomIndex * 1f);
+                newRow[randomIndex] = newCar;
             }
 
-
-
-
             //save cars spawned to row
-            for (int i = 0; i < carGrid.GetLength(0); i++)
+            for (int i = 0; i < carGrid.GetLength(0) - 1; i++)
             {
                 //if the row is not emty
                 if (carGrid[i] == null)
                 {
-                    continue;
+                    carGrid[i] = newRow;
+                    print("row added");
+                    break;
+                    
                 }
                 else
                 {
-
-                }
-                
-                
+                    print("row skipped");
+                    continue;
+                }  
             }
             //if grid full delete first rown and move them all one back
-            if (carGrid.GetLength(0) != null)
+            if (carGrid[carGrid.GetLength(0)-1] != null)
             {
+                print(carGrid[carGrid.GetLength(0) - 1]);
                 print("Full!");
                 yield return new WaitForSeconds(spawnTimer);
                 continue;
             }
-
            
-
             yield return new WaitForSeconds(spawnTimer);
         }
         

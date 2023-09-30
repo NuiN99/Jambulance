@@ -11,10 +11,14 @@ namespace Cai
     {
         public Rigidbody2D rb;
 
+        [SerializeField] public float health;
         [SerializeField] public float moveSpeed;
         [SerializeField] public float turnSpeed;
 
         [SerializeField] float brakeStrength = 2f;
+        [SerializeField] float heavyImpactForceThreshold = 4f;
+        [SerializeField] float heavyImpactMultiplier = 2f;
+       
 
         [SerializeField] float drag;
         [SerializeField] float angularDrag;
@@ -89,6 +93,16 @@ namespace Cai
 
             if (GetComponent<Player>() && collision.gameObject.TryGetComponent(out Car car))
             {
+                //damage
+                float colForce = collision.relativeVelocity.magnitude;
+                print(colForce);
+                health -= colForce * (colForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1 ) ;
+                if (health < 0)
+                {
+                    //Trigger Game Over event etc...
+                } 
+
+                //bumping
                 Vector2 collisionDir = ((Vector2)collision.transform.position - collision.GetContact(0).point).normalized;
 
                 rb.velocity = collision.relativeVelocity;
@@ -107,6 +121,8 @@ namespace Cai
 
                 currentRoutine = StartCoroutine(StopCollidingAfterDelay(recoveryTime));
             }
+
+
                 
         }
 
@@ -115,6 +131,7 @@ namespace Cai
             yield return new WaitForSeconds(0/*time*/);
             colliding = false;
         }
+       
     }
 
 }

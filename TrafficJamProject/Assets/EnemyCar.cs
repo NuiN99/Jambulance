@@ -6,16 +6,23 @@ using UnityEngine.Rendering;
 public class EnemyCar : MonoBehaviour
 {
     [SerializeField] float speed = 1.0f;
+    Rigidbody2D mRigidBody2D; 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mRigidBody2D =  GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //also need to check for impacts!
-        transform.Translate(transform.up * -(speed) * Time.deltaTime); 
+        mRigidBody2D.velocity = transform.up * -(speed);
+
+        if(transform.position.y < -1)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
