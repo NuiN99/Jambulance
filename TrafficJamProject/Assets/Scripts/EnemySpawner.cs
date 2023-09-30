@@ -1,41 +1,36 @@
-using PathCreation;
 using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-namespace Cai
+public class EnemySpawner : MonoBehaviour
 {
-    public class EnemySpawner : MonoBehaviour
+    [SerializeField] RoadData roadData;
+    [SerializeField] GameObject enemyPrefab;
+
+    [SerializeField] float startSpawnMult = 30f;
+    [SerializeField] float spawnInterval;
+
+    void SpawnEnemy()
     {
-        [SerializeField] RoadData roadData;
-        [SerializeField] GameObject enemyPrefab;
+        var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
 
-        [SerializeField] float startSpawnMult = 30f;
-        [SerializeField] float spawnInterval;
+        Vector3 closestPoint = lane.GetClosestPoint(Camera.main.transform.position, out int index);
+        Vector3 randomYPos = closestPoint + new Vector3(0, Random.Range(-10, 30));
+        Vector3 spawnPoint = lane.CalculateHorizontalIntersection(closestPoint, index, randomYPos);
 
-        void SpawnEnemy()
-        {
-            var lane = roadData.roads[Random.Range(0, roadData.roads.Count)];
-
-            Vector3 closestPoint = lane.path.GetClosestPointOnPath(Camera.main.transform.position);
-            Vector3 randomPoint = lane.path.GetPointAtDistance(Vector3.Distance(lane.path.GetPoint(0), closestPoint) + Random.Range(10, 30));
-
-            Enemy enemy = Instantiate(enemyPrefab, randomPoint, Quaternion.identity).GetComponent<Enemy>();
-            enemy.lane = lane;
-            enemy.roadData = roadData;
-        }
-
-        private void Start()
-        {
-            for (int i = 0; i < roadData.roads.Count * startSpawnMult; i++)
-            {
-                SpawnEnemy();
-            }
-
-            InvokeRepeating(nameof(SpawnEnemy), spawnInterval, spawnInterval);
-        }
+        Enemy enemy = Instantiate(enemyPrefab, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+        enemy.currentLane = lane;
+        enemy.roadData = roadData;
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < roadData.lanes.Count * startSpawnMult; i++)
+        {
+            SpawnEnemy();
+        }
+
+        InvokeRepeating(nameof(SpawnEnemy), spawnInterval, spawnInterval);
+    }
 }

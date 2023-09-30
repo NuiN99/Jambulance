@@ -1,128 +1,126 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathCreation;
 
-namespace Cai
+public class Enemy : MonoBehaviour
 {
-    public class Enemy : MonoBehaviour
+    Car car;
+
+    public Lane currentLane;
+
+    [SerializeField] float targetOffset = 2.5f;
+
+    [SerializeField] float fwdCheckDist, horizontalCheckDist;
+
+    public RoadData roadData;
+
+    [SerializeField] float minActionTime = 2.5f;
+    [SerializeField] float maxActionTime = 10f;
+
+    [SerializeField] float reactiveTurnDivider = 4f;
+
+    [SerializeField] AudioClip honkSound;
+
+    private void Awake()
     {
-        Car car;
+        car = GetComponent<Car>();
+    }
 
-        public PathCreator lane;
+    private void Start()
+    {
+        car.moveSpeed = Random.Range(car.moveSpeed - 30f, car.moveSpeed + 30f);
 
-        [SerializeField] float targetOffset = 2.5f;
+        StartCoroutine(AttemptActionAfterDelay());
+    }
 
-        [SerializeField] float fwdCheckDist, horizontalCheckDist;
+    private void FixedUpdate()
+    {
+        MoveTowardsRoadUpwards();
+    }
 
-        public RoadData roadData;
+    void MoveTowardsRoadUpwards()
+    {
+        RaycastHit2D hitFwd = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.up, fwdCheckDist);
+        RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
+        RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
 
-        [SerializeField] float minActionTime = 2.5f;
-        [SerializeField] float maxActionTime = 10f;
+        Vector3 leftOrigin = (transform.position + -transform.right * horizontalCheckDist);
+        Vector3 rightOrigin = (transform.position + transform.right * horizontalCheckDist);
+        Vector3 fwdOrigin = transform.position + transform.up * (fwdCheckDist - transform.localScale.y / 2);
 
-        [SerializeField] float reactiveTurnDivider = 4f;
+        ExtDebug.DrawBoxCastBox(leftOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitLeft));
+        ExtDebug.DrawBoxCastBox(rightOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitRight));
+        ExtDebug.DrawBoxCastBox(fwdOrigin, new Vector3(transform.localScale.x, fwdCheckDist) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitFwd));
 
-        [SerializeField] AudioClip honkSound;
+        TurnTowardsLane(hitLeft, hitRight);
+        MoveForwardIfFree(hitFwd);
+    }
 
-        private void Awake()
+    void TurnTowardsLane(bool hitLeft, bool hitRight)
+    {
+        //float dist = currentLane.path.GetClosestDistanceAlongPath(transform.position);
+        //Vector3 targetPoint = currentLane.path.GetPointAtDistance(dist + targetOffset);
+
+        Vector3 closestPoint = currentLane.GetClosestPoint(transform.position, out int index);
+        Vector3 intersection = currentLane.CalculateHorizontalIntersection(closestPoint, index, transform.position);
+        Vector3 targetPoint = intersection + new Vector3(0, 3f);
+
+        Debug.DrawLine(transform.position, targetPoint);
+
+        if (!hitLeft && !hitRight)
         {
-            car = GetComponent<Car>();
+            if (Vector3.Distance(transform.position, targetPoint) > 0.025f)
+                car.RotateToDirection(targetPoint, car.turnSpeed);
         }
-
-        private void Start()
+        else if (hitRight && !hitLeft)
         {
-            car.moveSpeed = Random.Range(car.moveSpeed - 30f, car.moveSpeed + 30f);
+            //AudioController.Instance.PlaySpatialSound(honkSound, 0.05f);
 
-            StartCoroutine(AttemptActionAfterDelay());
+            car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
         }
-
-        private void FixedUpdate()
+        else if (hitLeft && !hitRight)
         {
-            MoveTowardsRoadUpwards();
+            car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
         }
+    }
 
-        void MoveTowardsRoadUpwards()
+    void MoveForwardIfFree(RaycastHit2D hitFwd)
+    {
+        float moveSpeed = car.moveSpeed;
+        if (hitFwd)
         {
-            RaycastHit2D hitFwd = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.up, fwdCheckDist);
-            RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
-            RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
+            float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
+            moveSpeed *= speedMult;
 
-            Vector3 leftOrigin = (transform.position + -transform.right * horizontalCheckDist);
-            Vector3 rightOrigin = (transform.position + transform.right * horizontalCheckDist);
-            Vector3 fwdOrigin = transform.position + transform.up * (fwdCheckDist - transform.localScale.y / 2);
+            if (speedMult <= 0.25f)
+                moveSpeed = 0f;
 
-            ExtDebug.DrawBoxCastBox(leftOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitLeft));
-            ExtDebug.DrawBoxCastBox(rightOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitRight));
-            ExtDebug.DrawBoxCastBox(fwdOrigin, new Vector3(transform.localScale.x, fwdCheckDist) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitFwd));
-
-            TurnTowardsLane(hitLeft, hitRight);
-            MoveForwardIfFree(hitFwd);
+            car.MoveInDirection(transform.up, moveSpeed);
         }
-
-        void TurnTowardsLane(bool hitLeft, bool hitRight)
+        else
         {
-            float dist = lane.path.GetClosestDistanceAlongPath(transform.position);
-            Vector3 targetPoint = lane.path.GetPointAtDistance(dist + targetOffset);
-
-            Debug.DrawLine(transform.position, targetPoint);
-
-            if (!hitLeft && !hitRight)
-            {
-                Vector3 directTarget = lane.path.GetPointAtDistance(dist);
-
-                if (Vector3.Distance(transform.position, directTarget) > 0.025f)
-                    car.RotateToDirection(targetPoint, car.turnSpeed);
-            }
-            else if (hitRight && !hitLeft)
-            {
-                //AudioController.Instance.PlaySpatialSound(honkSound, 0.05f);
-
-                car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
-            }
-            else if (hitLeft && !hitRight)
-            {
-                car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
-            }
+            car.MoveInDirection(transform.up, car.moveSpeed);
         }
+    }
 
-        void MoveForwardIfFree(RaycastHit2D hitFwd)
-        {
-            float moveSpeed = car.moveSpeed;
-            if (hitFwd)
-            {
-                float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
-                moveSpeed *= speedMult;
+    // either change lane, accelerate?
+    IEnumerator AttemptActionAfterDelay()
+    {
+        yield return new WaitForSeconds(Random.Range(minActionTime, maxActionTime));
+        currentLane = roadData.ChangeLaneRandom(currentLane);
+        StartCoroutine(AttemptActionAfterDelay());
+    }
 
-                if (speedMult <= 0.25f)
-                    moveSpeed = 0f;
+    void DrawCheck(RaycastHit2D hit, Vector3 targetPos)
+    {
+        Debug.DrawLine(transform.position, targetPos, GetCheckColor(hit));
+    }
 
-                car.MoveInDirection(transform.up, moveSpeed);
-            }
-            else
-            {
-                car.MoveInDirection(transform.up, car.moveSpeed);
-            }
-        }
-
-        // either change lane, accelerate?
-        IEnumerator AttemptActionAfterDelay()
-        {
-            yield return new WaitForSeconds(Random.Range(minActionTime, maxActionTime));
-            lane = roadData.ChangeLaneRandom(lane);
-            StartCoroutine(AttemptActionAfterDelay());
-        }
-
-        void DrawCheck(RaycastHit2D hit, Vector3 targetPos)
-        {
-            Debug.DrawLine(transform.position, targetPos, GetCheckColor(hit));
-        }
-
-        Color GetCheckColor(bool hit)
-        {
-            if (hit)
-                return Color.red;
-            else
-                return Color.yellow;
-        }
+    Color GetCheckColor(bool hit)
+    {
+        if (hit)
+            return Color.red;
+        else
+            return Color.yellow;
     }
 }
