@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
         car.moveSpeed = Random.Range(car.moveSpeed - 30f, car.moveSpeed + 30f);
 
         StartCoroutine(AttemptActionAfterDelay());
+
+        InvokeRepeating(nameof(DestroyIfFarAway), 3f, 3f);
     }
 
     private void FixedUpdate()
@@ -79,15 +81,22 @@ public class Enemy : MonoBehaviour
         }
         else if (hitRight && !hitLeft)
         {
-            if(!inLane)
+            if (!inLane)
+            {
+                car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
                 car.targetSpeed = car.moveSpeed / 4;
+            }
+                
 
             car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
         }
         else if (hitLeft && !hitRight)
         {
             if (!inLane)
+            {
+                car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
                 car.targetSpeed = car.moveSpeed / 4;
+            }
 
             car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
         }
@@ -148,5 +157,13 @@ public class Enemy : MonoBehaviour
             return Color.red;
         else
             return Color.yellow;
+    }
+
+    void DestroyIfFarAway()
+    {
+        if(Vector2.Distance((Vector2)Camera.main.transform.position, transform.position) >= 15f)
+        {
+            Destroy(gameObject);
+        }
     }
 }

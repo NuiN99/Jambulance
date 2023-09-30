@@ -76,6 +76,10 @@ public class Lane : MonoBehaviour
         Vector3 startPoint = points[points.Count - 1];
         Vector3 increment = new(Random.Range(minHorizontal, maxHorizontal), Random.Range(minVertical, maxVertical));
         Vector3 newEndPoint = startPoint + increment;
+
+        if (Vector2.Distance((Vector2)Camera.main.transform.position, newEndPoint) > 50f)
+            return;
+
         points.Add(newEndPoint);
 
         Vector3 midPos = startPoint + (newEndPoint - startPoint) / 2;
