@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
 public class Lane : MonoBehaviour
@@ -18,7 +17,7 @@ public class Lane : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(AddNewLanePoint), 0, generationSpeed);
+        //InvokeRepeating(nameof(AddNewLanePoint), 0, generationSpeed);
     }
 
     public Vector3 GetClosestPoint(Vector3 startPos, out int index)
@@ -92,5 +91,13 @@ public class Lane : MonoBehaviour
         line.transform.eulerAngles = new(0, 0, angle);
         float dist = Vector3.Distance(startPoint, newEndPoint);
         line.transform.localScale = new Vector3(.1f, dist, 1);
+    }
+
+    void SetPoints(Transform[] transforms)
+    {
+        foreach(var pos in transforms)
+        {
+            points.Add(pos.position);
+        }
     }
 }
