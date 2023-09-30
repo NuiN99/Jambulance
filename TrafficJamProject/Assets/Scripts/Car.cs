@@ -1,6 +1,7 @@
 using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,7 +9,7 @@ namespace Cai
 {
     public class Car : MonoBehaviour
     {
-        Rigidbody2D rb;
+        public Rigidbody2D rb;
 
         [SerializeField] public float moveSpeed;
         [SerializeField] public float turnSpeed;
@@ -16,6 +17,10 @@ namespace Cai
         [SerializeField] float drag;
         [SerializeField] float angularDrag;
         [SerializeField] float mass;
+
+        [SerializeField] float recoveryTime;
+
+        public bool colliding;
 
         private void Awake()
         {
@@ -56,17 +61,48 @@ namespace Cai
             float dirAngle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
             dirAngle -= 90;
 
-            // Calculate the angle between the current rotation and the target angle
             float angleDifference = Mathf.DeltaAngle(transform.eulerAngles.z, dirAngle);
 
-            // Determine the direction to rotate based on the angle difference
-            int dir = angleDifference < 0 ? 1 : -1;
+            int dir = angleDifference < 1f ? -1 : 1;
 
-            // Calculate the target angle
-            float targetAngle = transform.eulerAngles.z + (speed * rb.velocity.magnitude * -dir);
+            float targetAngle = transform.eulerAngles.z + (speed * rb.velocity.magnitude * dir);
 
-            // Move towards the target angle
             rb.MoveRotation(targetAngle);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            colliding = true;
+
+            float collisionForce = collision.relativeVelocity.magnitude * 2.5f;
+
+            if (GetComponent<Player>() && collision.gameObject.TryGetComponent(out Car car))
+            {
+                Vector2 collisionDir = ((Vector2)collision.transform.position - collision.GetContact(0).point).normalized;
+
+                rb.velocity = collision.relativeVelocity;
+                car.rb.AddForce(collisionDir * collisionForce, ForceMode2D.Impulse);
+                return;
+            }
+        }
+
+        Coroutine currentRoutine;
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if(gameObject.activeSelf)
+            {
+                if (currentRoutine != null) 
+                    StopCoroutine(currentRoutine);
+
+                currentRoutine = StartCoroutine(StopCollidingAfterDelay(recoveryTime));
+            }
+                
+        }
+
+        IEnumerator StopCollidingAfterDelay(float time)
+        {
+            yield return new WaitForSeconds(time);
+            colliding = false;
         }
     }
 
