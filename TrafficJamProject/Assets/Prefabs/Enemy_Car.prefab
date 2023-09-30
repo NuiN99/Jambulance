@@ -51,6 +51,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   moveSpeed: 60
   turnSpeed: 0.5
+  targetSpeed: 0
   brakeStrength: 2
   drag: 10
   angularDrag: 7.5
@@ -78,9 +79,9 @@ MonoBehaviour:
   fwdCheckDist: 2
   horizontalCheckDist: 0.5
   roadData: {fileID: 0}
-  minActionTime: 10
-  maxActionTime: 20
-  reactiveTurnDivider: 4
+  minActionTime: 2
+  maxActionTime: 4
+  reactiveTurnDivider: 6
   honkSound: {fileID: 8300000, guid: a6ccc363d1dca6f4dba7efa27a823d10, type: 3}
 --- !u!212 &3581320163345931021
 SpriteRenderer:

@@ -171,9 +171,9 @@ MonoBehaviour:
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
   generationSpeed: 0.5
-  minHorizontal: -0.5
-  maxHorizontal: 0.5
-  minVertical: 1
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
   maxVertical: 10
   roadScale: 1
 --- !u!1 &815603409
@@ -220,6 +220,112 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &840843645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 840843646}
+  - component: {fileID: 840843647}
+  m_Layer: 0
+  m_Name: Lane_6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &840843646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840843645}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -4.642769, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659196827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &840843647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840843645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1aa5bc99342b3741984b784a9e59c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
+  roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
+  generationSpeed: 0.5
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
+  maxVertical: 10
+  roadScale: 1
+--- !u!1 &868918772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868918773}
+  - component: {fileID: 868918774}
+  m_Layer: 0
+  m_Name: Lane_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &868918773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868918772}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.25, y: -4.642769, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659196827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &868918774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868918772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1aa5bc99342b3741984b784a9e59c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
+  roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
+  generationSpeed: 0.5
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
+  maxVertical: 10
+  roadScale: 1
 --- !u!1 &1017182474
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,9 +374,9 @@ MonoBehaviour:
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
   generationSpeed: 0.5
-  minHorizontal: -0.5
-  maxHorizontal: 0.5
-  minVertical: 1
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
   maxVertical: 10
   roadScale: 1
 --- !u!1 &1167468594
@@ -321,9 +427,9 @@ MonoBehaviour:
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
   generationSpeed: 0.5
-  minHorizontal: -0.5
-  maxHorizontal: 0.5
-  minVertical: 1
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
   maxVertical: 10
   roadScale: 1
 --- !u!1 &1217616672
@@ -357,8 +463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadData: {fileID: 1659196828}
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
-  startSpawnMult: 10
-  spawnInterval: 1
+  startSpawnMult: 0
+  spawnInterval: 0.1
 --- !u!4 &1217616674
 Transform:
   m_ObjectHideFlags: 0
@@ -374,6 +480,112 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1403670509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1403670510}
+  - component: {fileID: 1403670511}
+  m_Layer: 0
+  m_Name: Lane_9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1403670510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403670509}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.25, y: -4.642769, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659196827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1403670511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403670509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1aa5bc99342b3741984b784a9e59c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
+  roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
+  generationSpeed: 0.5
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
+  maxVertical: 10
+  roadScale: 1
+--- !u!1 &1479030060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1479030061}
+  - component: {fileID: 1479030062}
+  m_Layer: 0
+  m_Name: Lane_7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1479030061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479030060}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.25, y: -4.642769, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659196827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1479030062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479030060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1aa5bc99342b3741984b784a9e59c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
+  roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
+  generationSpeed: 0.5
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
+  maxVertical: 10
+  roadScale: 1
 --- !u!1 &1659196826
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +620,11 @@ Transform:
   - {fileID: 1167468595}
   - {fileID: 2000180946}
   - {fileID: 224173290}
+  - {fileID: 868918773}
+  - {fileID: 840843646}
+  - {fileID: 1479030061}
+  - {fileID: 1815875331}
+  - {fileID: 1403670510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1659196828
@@ -423,6 +640,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lanes: []
+--- !u!1 &1815875330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815875331}
+  - component: {fileID: 1815875332}
+  m_Layer: 0
+  m_Name: Lane_8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1815875331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815875330}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.25, y: -4.642769, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659196827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1815875332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815875330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1aa5bc99342b3741984b784a9e59c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
+  roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
+  generationSpeed: 0.5
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
+  maxVertical: 10
+  roadScale: 1
 --- !u!1 &1846426511
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,9 +1163,9 @@ MonoBehaviour:
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
   generationSpeed: 0.5
-  minHorizontal: -0.5
-  maxHorizontal: 0.5
-  minVertical: 1
+  minHorizontal: 0
+  maxHorizontal: 0
+  minVertical: 10
   maxVertical: 10
   roadScale: 1
 --- !u!1001 &484187478085450450
@@ -912,7 +1182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 687543372394766788, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -9.25
       objectReference: {fileID: 0}
     - target: {fileID: 687543372394766788, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
       propertyPath: m_LocalPosition.z

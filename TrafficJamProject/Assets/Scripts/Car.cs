@@ -12,6 +12,8 @@ public class Car : MonoBehaviour
     [SerializeField] public float moveSpeed;
     [SerializeField] public float turnSpeed;
 
+    public float targetSpeed;
+
     [SerializeField] float brakeStrength = 2f;
 
     [SerializeField] float drag;

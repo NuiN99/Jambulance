@@ -15,8 +15,13 @@ public class EnemySpawner : MonoBehaviour
     {
         var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
 
+        float randomPosUp = Random.Range(10f, 15f);
+        float randomPosDown = Random.Range(-15f, -10f);
+        float randY = Random.Range(0, 2) == 0? randomPosDown : randomPosUp;
+
         Vector3 closestPoint = lane.GetClosestPoint(Camera.main.transform.position, out int index);
-        Vector3 randomYPos = closestPoint + new Vector3(0, Random.Range(10, 30));
+        Vector3 randomYPos = closestPoint + new Vector3(0, randY);
+
         Vector3 spawnPoint = lane.CalculateHorizontalIntersection(closestPoint, index, randomYPos);
 
         Enemy enemy = Instantiate(enemyPrefab, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
