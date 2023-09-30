@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
     Car car;
     public PathCreator lane;
+    [SerializeField] float targetOffset = 2.5f;
 
     private void Awake()
     {
@@ -16,14 +17,14 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(car.colliding) return;
+
+        float dist = lane.path.GetClosestDistanceAlongPath(transform.position);
+        Vector3 targetPoint = lane.path.GetPointAtDistance(dist + targetOffset);
+
+        Debug.DrawLine(transform.position, targetPoint);
+        if (car.colliding) return;
 
         car.MoveInDirection(transform.up);
-
-        Vector3 closestPoint = lane.path.GetClosestPointOnPath(transform.position);
-        Vector3 targetPoint = lane.path.GetPointAtDistance(Vector3.Distance(lane.path.GetPoint(0), closestPoint) + 2);
-        Debug.DrawLine(transform.position, targetPoint);
-
         car.RotateToDirection(targetPoint, car.turnSpeed);
     }
 }

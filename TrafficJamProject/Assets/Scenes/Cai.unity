@@ -1113,8 +1113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadData: {fileID: 1659196828}
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
-  startSpawnMult: 15
-  spawnInterval: 0.1
+  startSpawnMult: 1
+  spawnInterval: 2
 --- !u!4 &1217616674
 Transform:
   m_ObjectHideFlags: 0
@@ -1717,7 +1717,7 @@ SpriteRenderer:
   m_SortingOrder: -99
   m_Sprite: {fileID: 21300000, guid: 5e257557bbfddc84fa69ad6abba52384, type: 3}
   m_Color: {r: 0.24532752, g: 0.3490566, b: 0.2647675, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 2
   m_Size: {x: 1, y: 1}
