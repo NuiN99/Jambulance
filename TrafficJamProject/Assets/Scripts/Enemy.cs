@@ -20,6 +20,8 @@ namespace Cai
         [SerializeField] float minActionTime = 2.5f;
         [SerializeField] float maxActionTime = 10f;
 
+        [SerializeField] AudioClip honkSound;
+
         private void Awake()
         {
             car = GetComponent<Car>();
@@ -71,6 +73,8 @@ namespace Cai
             }
             else if (hitRight && !hitLeft)
             {
+                AudioController.Instance.PlaySpatialSound(honkSound, 0.05f);
+
                 car.RotateToDirection(transform.position - transform.right, car.turnSpeed / 2);
             }
             else if (hitLeft && !hitRight)
