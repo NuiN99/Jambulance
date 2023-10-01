@@ -863,6 +863,83 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &981069554
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3581320163345931021, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed7e431b0a7b19b4c8e583fe29b8bbc7, type: 3}
+    - target: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190063141439511011, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190063141439511011, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190063141439511011, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190063141439511011, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.2076015
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.608986
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956210785178599709, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
 --- !u!1 &1017182474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,7 +2256,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.25, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 747129299835354103}
@@ -2228,7 +2305,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &4660524254177490967
 MonoBehaviour:
@@ -2496,3 +2573,4 @@ SceneRoots:
   - {fileID: 867305174}
   - {fileID: 633581970}
   - {fileID: 793243532}
+  - {fileID: 981069554}

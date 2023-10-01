@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName="CarStats", menuName ="ScriptableObjects/Cars/Stats")]
 public class CarStatsSO : ScriptableObject
 {
-    [SerializeField] Sprite possibleSprite;
+    public Sprite[] possibleSprites;
 
     public float moveSpeed;
     public float turnSpeed;

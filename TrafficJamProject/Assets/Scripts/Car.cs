@@ -26,6 +26,11 @@ public class Car : MonoBehaviour
 
     void Start()
     {
+        if(TryGetComponent(out SpriteRenderer sr))
+        {
+            sr.sprite = stats.possibleSprites[Random.Range(0, stats.possibleSprites.Length)];
+        }
+
         rb.drag = stats.drag;
         rb.angularDrag = stats.angularDrag;
         rb.mass = stats.mass;

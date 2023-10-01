@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb90431055508245b9b7c43632b4f4a, type: 3}
   m_Name: PlayerCar
   m_EditorClassIdentifier: 
+  possibleSprites:
+  - {fileID: 21300000, guid: add96ac86c3c993498ea8c2d4d829ac4, type: 3}
+  - {fileID: 21300000, guid: 89a23ceefe88672468da384bb4a4be2e, type: 3}
+  - {fileID: 21300000, guid: c659000649502784eaf3d216f65cf3d6, type: 3}
+  - {fileID: 21300000, guid: b102e663726a037478fe87ee318cc4c3, type: 3}
+  - {fileID: 21300000, guid: 0cf135a1b2c91ac4c85aca9c0defb0e7, type: 3}
+  - {fileID: 21300000, guid: dfa52c7027622d447afc62b437a579e3, type: 3}
+  - {fileID: 21300000, guid: cd04b9d56c208c94fa2b2dcf09249706, type: 3}
+  - {fileID: 21300000, guid: 4560d0b7c0e956142b721115fa6b090c, type: 3}
+  - {fileID: 21300000, guid: 280cadf7a4ebc38448a0ef04f18b509c, type: 3}
+  - {fileID: 21300000, guid: ed7e431b0a7b19b4c8e583fe29b8bbc7, type: 3}
+  - {fileID: 21300000, guid: c3f82151ca1e6d94eab45f63e46be916, type: 3}
   moveSpeed: 25
   turnSpeed: 0.75
   brakeStrength: 2
