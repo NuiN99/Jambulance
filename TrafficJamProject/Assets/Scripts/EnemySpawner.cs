@@ -16,9 +16,17 @@ public class EnemySpawner : MonoBehaviour
 
     CarsController carsController;
 
+    [SerializeField] float spawnIntervalMin;
+    [SerializeField] float spawnIntervalMax;
+
+    [SerializeField] float rampTime;
+    float startTime;
+    float lastSpawnTime = 0f;
+
     private void Awake()
     {
         carsController = FindObjectOfType<CarsController>();
+        startTime = Time.time;
     }
 
     Enemy SpawnEnemy()
@@ -72,9 +80,17 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-
         SpawnStartEnemies();
-        InvokeRepeating(nameof(SpawnEnemy), spawnInterval, spawnInterval);
+        //InvokeRepeating(nameof(SpawnEnemy), spawnInterval, spawnInterval);
+    }
+
+    private void Update()
+    {
+        if ((Time.time - lastSpawnTime) > CurrSpawnInterval())
+        {
+            SpawnEnemy();
+            lastSpawnTime = Time.time;
+        }
     }
 
     void SpawnStartEnemies()
@@ -116,5 +132,18 @@ public class EnemySpawner : MonoBehaviour
             float dirAngle = (Mathf.Atan2(roadData.direction.y, roadData.direction.x) * Mathf.Rad2Deg) - 90;
             enemy.transform.eulerAngles = new Vector3(0, 0, dirAngle);
         }
+    }
+
+    //Returns the spawn interval given current ramp up time
+    float CurrSpawnInterval()
+    {
+        return spawnIntervalMin * (1 - RampMultiplier()) + spawnIntervalMax * RampMultiplier();
+    }
+
+    //Returns the ramp multiplier [0, 1] based on how long we are along the ramp time
+    float RampMultiplier()
+    {
+        float currTime = Time.time;
+        return Mathf.Min((currTime - startTime) / rampTime, 1f);
     }
 }
