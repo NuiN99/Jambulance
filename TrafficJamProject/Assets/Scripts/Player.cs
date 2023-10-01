@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         else
         {
             print("not moving");
-            car.currentAcceleration -= Time.fixedDeltaTime * 10;
+            car.curAccel -= Time.fixedDeltaTime * 15 * car.stats.accelSpeed;
         }
 
         car.RotateInDirection(rotateAxis * moveAxis, car.stats.turnSpeed);

@@ -52,9 +52,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   startSpeed: 0
   targetSpeed: 0
-  currentAcceleration: 0
-  maxAcceleration: 100
   colliding: 0
+  curAccel: 0
 --- !u!114 &2007510244600866465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,12 +67,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLane: {fileID: 0}
-  targetOffset: 2.5
   fwdCheckDist: 2
   horizontalCheckDist: 0.25
   roadData: {fileID: 0}
   minActionTime: 10
-  maxActionTime: 20
+  maxActionTime: 70
   reactiveTurnDivider: 6
   honkSound: {fileID: 8300000, guid: a6ccc363d1dca6f4dba7efa27a823d10, type: 3}
 --- !u!212 &3581320163345931021

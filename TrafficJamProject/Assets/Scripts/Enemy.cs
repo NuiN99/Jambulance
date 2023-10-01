@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     public Lane currentLane;
 
-    [SerializeField] float targetOffset = 2.5f;
+    //[SerializeField] float targetOffset = 2.5f;
 
     [SerializeField] float fwdCheckDist, horizontalCheckDist;
 
@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
             if (!inLane)
             {
                 car.RotateToDirection(transform.position + transform.right, car.stats.turnSpeed / reactiveTurnDivider);
-                car.targetSpeed = car.startSpeed / 4;
+                //car.targetSpeed = car.startSpeed / 4;
             }
                 
 
@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
             if (!inLane)
             {
                 car.RotateToDirection(transform.position - transform.right, car.stats.turnSpeed / reactiveTurnDivider);
-                car.targetSpeed = car.startSpeed / 4;
+                //car.targetSpeed = car.startSpeed / 4;
             }
 
             car.RotateToDirection(transform.position + transform.right, car.stats.turnSpeed / reactiveTurnDivider);
@@ -116,7 +116,12 @@ public class Enemy : MonoBehaviour
     void MoveForwardIfFree(RaycastHit2D hitFwd)
     {
         if (hitFwd)
-            car.Brake();
+        {
+            //car.Brake();
+            float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
+            car.targetSpeed = car.startSpeed * speedMult;
+        }
+            
         else
             car.UnBrake();
 

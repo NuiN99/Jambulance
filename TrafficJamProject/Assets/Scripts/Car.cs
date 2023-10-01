@@ -11,12 +11,11 @@ public class Car : MonoBehaviour
     public float startSpeed;
     public float targetSpeed;
 
-    public float currentAcceleration = 0;
-    public float maxAcceleration;
-
     public bool colliding;
 
     bool braking = false;
+
+    public float curAccel;
 
     private void Awake()
     {
@@ -33,32 +32,28 @@ public class Car : MonoBehaviour
 
     private void Update()
     {
-        if (currentAcceleration < 0)
+        if (curAccel < 0)
         {
-            currentAcceleration = 0;
+            curAccel = 0;
         }
             
 
-        if(currentAcceleration > maxAcceleration)
+        if(curAccel > stats.maxAcceleration)
         {
-            currentAcceleration = maxAcceleration;
+            curAccel = stats.maxAcceleration;
         }
             
     }
 
     public void MoveInDirection(Vector2 dir, float speed)
     {
-        if (!braking)
+
+        curAccel += (Time.fixedDeltaTime / 3f) * stats.accelSpeed;
+        rb.AddForce(dir * speed * curAccel);
+        if(braking)
         {
-            currentAcceleration += Time.fixedDeltaTime / 3f;
-            rb.AddForce(dir * speed * currentAcceleration);
+            curAccel -= Time.deltaTime * 15 * stats.accelSpeed;
         }
-        else
-        {
-            currentAcceleration -= Time.deltaTime * 10;
-        }
-        if(GetComponent<Player>())
-            print(currentAcceleration);
     }
 
     public void RotateInDirection(float dir)
@@ -97,12 +92,12 @@ public class Car : MonoBehaviour
     public void Brake()
     {
         braking = true;
-        rb.drag = stats.brakeDrag;
+        //rb.drag = stats.brakeDrag;
     }
     public void UnBrake()
     {
         braking = false;
-        rb.drag = stats.drag;
+        //rb.drag = stats.drag;
     }
 
 
@@ -115,12 +110,18 @@ public class Car : MonoBehaviour
         float collisionForce = collision.relativeVelocity.magnitude;
         Vector2 collisionDir = ((Vector2)collision.transform.position - collisionPoint).normalized;
 
-        if (collision.gameObject.TryGetComponent(out Car car))
+        print(collisionForce);
+        if (GetComponent<Player>() && collisionForce > 2f && collision.gameObject.TryGetComponent(out Car car))
         {
             //rb.velocity = collision.relativeVelocity;
-            car.rb.AddForceAtPosition(collisionDir * collisionForce, collisionPoint, ForceMode2D.Impulse);
+            car.rb.AddForceAtPosition(collisionDir * collisionForce * 2, collisionPoint, ForceMode2D.Impulse);
+            car.rb.angularVelocity += collisionForce * 50 * Random.Range(-1f, 1f);
             car.rb.angularDrag = 0f;
             car.Brake();
+            car.rb.drag = car.stats.drag / 2f;
+            car.colliding = true;
+
+            curAccel -= stats.maxAcceleration / 1.25f;
         }
 
         stats.health -= collisionForce * (collisionForce >= stats.heavyImpactForceThreshold ? stats.heavyImpactMultiplier : 1);
@@ -129,7 +130,7 @@ public class Car : MonoBehaviour
             //Destroy car
         }
 
-        currentAcceleration -= collisionForce / 20;
+        curAccel -= collisionForce / 50;
     }
 
     Coroutine currentRoutine;
@@ -147,8 +148,11 @@ public class Car : MonoBehaviour
 
     IEnumerator StopCollidingAfterDelay(float time)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         colliding = false;
+
+        rb.angularDrag = stats.angularDrag;
+        rb.drag = stats.drag;
     }
 }
 

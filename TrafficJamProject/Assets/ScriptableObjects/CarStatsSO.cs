@@ -19,8 +19,12 @@ public class CarStatsSO : ScriptableObject
     public float aggression;
 
     public float recoveryTime;
+
     
     public float health;
+
+    public float accelSpeed = 1f;
+    public float maxAcceleration = 5;
 
     public float heavyImpactForceThreshold = 4f;
     public float heavyImpactMultiplier = 2f;
