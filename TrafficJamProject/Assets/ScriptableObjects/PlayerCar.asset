@@ -15,7 +15,7 @@ MonoBehaviour:
   possibleSprites:
   - {fileID: 21300000, guid: 45e8abafca09e6b4cba6baf9e9ed5cae, type: 3}
   moveSpeed: 25
-  turnSpeed: 0.75
+  turnSpeed: 0.5
   brakeStrength: 2
   drag: 6
   brakeDrag: 5
@@ -23,7 +23,7 @@ MonoBehaviour:
   mass: 1
   aggression: 0
   recoveryTime: 0.75
-  health: -22709.654
+  health: -23006.803
   accelSpeed: 10
   maxAcceleration: 2
   heavyImpactForceThreshold: 4
