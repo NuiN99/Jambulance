@@ -31,12 +31,12 @@ public class Car : MonoBehaviour
 
     public void MoveInDirection(Vector3 dir)
     {
-        if(!braking)
+        //if(!braking)
             rb.AddForce(stats.moveSpeed * dir);
     }
     public void MoveInDirection(Vector3 dir, float speed)
     {
-        if(!braking)
+        //if(!braking)
             rb.AddForce(speed * dir);
     }
 
