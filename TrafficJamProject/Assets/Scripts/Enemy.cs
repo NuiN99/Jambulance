@@ -190,7 +190,7 @@ public class Enemy : MonoBehaviour
             {
                 currentLane = startLane;
             }
-        }   
+        }
 
         StartCoroutine(AttemptActionAfterDelay());
     }

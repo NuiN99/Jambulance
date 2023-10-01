@@ -21,6 +21,8 @@ public class Car : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+            rb = GetComponentInChildren<Rigidbody2D>();
     }
 
 
@@ -111,7 +113,7 @@ public class Car : MonoBehaviour
 
         if (GetComponent<Player>() && collision.gameObject.TryGetComponent(out Car car))
         {
-            if (car.rb.velocity.magnitude > rb.velocity.magnitude && collisionForce > 1)
+            if (car.rb.velocity.magnitude * car.rb.mass > rb.velocity.magnitude * rb.mass && collisionForce > 3)
             {
                 rb.AddForceAtPosition(-collisionDir * collisionForce, collisionPoint, ForceMode2D.Impulse);
                 rb.angularVelocity += collisionForce * 2.5f * Random.Range(-1f, 1f);
