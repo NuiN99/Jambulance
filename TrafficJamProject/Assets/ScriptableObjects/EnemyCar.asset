@@ -21,6 +21,6 @@ MonoBehaviour:
   mass: 2
   aggression: 0
   recoveryTime: 1
-  health: 100
+  health: -74415.305
   heavyImpactForceThreshold: 4
   heavyImpactMultiplier: 2

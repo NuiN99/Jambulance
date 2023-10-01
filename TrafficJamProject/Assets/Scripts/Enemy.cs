@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
                     break;
                 }
             }
-            currentLane = roadData.lanes[0];
+            currentLane = roadData.lanes[2];
         }
 
         StartCoroutine(AttemptActionAfterDelay());

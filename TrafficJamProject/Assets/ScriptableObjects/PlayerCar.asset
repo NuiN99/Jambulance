@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: PlayerCar
   m_EditorClassIdentifier: 
   moveSpeed: 50
-  turnSpeed: 0.5
+  turnSpeed: 0.75
   brakeStrength: 2
-  drag: 7.5
-  brakeDrag: 7.5
-  angularDrag: 1
+  drag: 6
+  brakeDrag: 5
+  angularDrag: 1.5
   mass: 1
   aggression: 0
   recoveryTime: 0
-  health: 0
+  health: -6905.0557
   heavyImpactForceThreshold: 4
   heavyImpactMultiplier: 2

@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ba1a7733bf5e049a0e75a76bdbdcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  started: 0
 --- !u!4 &815603411
 Transform:
   m_ObjectHideFlags: 0
@@ -1214,10 +1215,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadData: {fileID: 1659196828}
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
-  startSpawnMult: 0
-  spawnInterval: 0.1
-  minSpeedIncrement: 5
-  maxSpeedIncrement: 10
+  startSpawnCount: 0
+  spawnInterval: 0.05
+  minSpeedIncrement: 0
+  maxSpeedIncrement: 20
 --- !u!4 &1217616674
 Transform:
   m_ObjectHideFlags: 0
@@ -1316,7 +1317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadData: {fileID: 1489372395}
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
-  startSpawnMult: 0
+  startSpawnCount: 0
   spawnInterval: 0.25
   minSpeedIncrement: 100
   maxSpeedIncrement: 150
@@ -2366,7 +2367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df78dec89da612428fa8647b25f3a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: bc4e2147ac83786459a3530858855d2b, type: 2}
+  stats: {fileID: 11400000, guid: 2c2691df92d587349bbdea9ffc110a46, type: 2}
   rb: {fileID: 0}
   startSpeed: 0
   targetSpeed: 0
