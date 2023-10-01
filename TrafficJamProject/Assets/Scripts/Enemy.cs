@@ -30,6 +30,20 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        if (roadData == null)
+        {
+            RoadData[] roadDatas = FindObjectsOfType<RoadData>();
+            foreach(RoadData road in roadDatas)
+            {
+                if(road.direction == Vector2.up)
+                {
+                    roadData = road;
+                    break;
+                }
+            }
+            currentLane = roadData.lanes[0];
+        }
+
         StartCoroutine(AttemptActionAfterDelay());
 
         InvokeRepeating(nameof(DestroyIfFarAway), 3f, 3f);
@@ -72,30 +86,30 @@ public class Enemy : MonoBehaviour
 
         if (!hitLeft && !hitRight)
         {
-            car.targetSpeed = car.moveSpeed;
+            car.targetSpeed = car.startSpeed;
             if (Vector3.Distance(transform.position, targetPoint) > 0.025f)
-                car.RotateToDirection(targetPoint, car.turnSpeed);
+                car.RotateToDirection(targetPoint, car.stats.turnSpeed);
         }
         else if (hitRight && !hitLeft)
         {
             if (!inLane)
             {
-                car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
-                car.targetSpeed = car.moveSpeed / 4;
+                car.RotateToDirection(transform.position + transform.right, car.stats.turnSpeed / reactiveTurnDivider);
+                car.targetSpeed = car.startSpeed / 4;
             }
                 
 
-            car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
+            car.RotateToDirection(transform.position - transform.right, car.stats.turnSpeed / reactiveTurnDivider);
         }
         else if (hitLeft && !hitRight)
         {
             if (!inLane)
             {
-                car.RotateToDirection(transform.position - transform.right, car.turnSpeed / reactiveTurnDivider);
-                car.targetSpeed = car.moveSpeed / 4;
+                car.RotateToDirection(transform.position - transform.right, car.stats.turnSpeed / reactiveTurnDivider);
+                car.targetSpeed = car.startSpeed / 4;
             }
 
-            car.RotateToDirection(transform.position + transform.right, car.turnSpeed / reactiveTurnDivider);
+            car.RotateToDirection(transform.position + transform.right, car.stats.turnSpeed / reactiveTurnDivider);
         }
     }
 

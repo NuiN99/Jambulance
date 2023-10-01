@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df78dec89da612428fa8647b25f3a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 2c2691df92d587349bbdea9ffc110a46, type: 2}
   rb: {fileID: 0}
   moveSpeed: 10
   turnSpeed: 0.5

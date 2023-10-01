@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb90431055508245b9b7c43632b4f4a, type: 3}
+  m_Name: PlayerCar
+  m_EditorClassIdentifier: 
+  moveSpeed: 50
+  turnSpeed: 0.5
+  brakeStrength: 2
+  drag: 7.5
+  brakeDrag: 7.5
+  angularDrag: 1
+  mass: 1
+  aggression: 0
+  recoveryTime: 0
+  health: 0
+  heavyImpactForceThreshold: 4
+  heavyImpactMultiplier: 2

@@ -8,13 +8,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] RoadData roadData;
     [SerializeField] GameObject enemyPrefab;
 
-    [SerializeField] float startSpawnMult = 30f;
+    [SerializeField] float startSpawnCount = 25;
     [SerializeField] float spawnInterval;
 
     [SerializeField] float minSpeedIncrement = 0f;
     [SerializeField] float maxSpeedIncrement = 0f;
 
-    void SpawnEnemy()
+    Enemy SpawnEnemy()
     {
         var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
 
@@ -36,17 +36,56 @@ public class EnemySpawner : MonoBehaviour
 
         if(enemy.TryGetComponent(out Car enemyCar))
         {
-            enemyCar.moveSpeed += Random.Range(minSpeedIncrement, maxSpeedIncrement);
+            enemyCar.startSpeed = enemyCar.stats.moveSpeed;
+            enemyCar.startSpeed += Random.Range(minSpeedIncrement, maxSpeedIncrement);
+            enemyCar.targetSpeed = enemyCar.startSpeed;
         }
+        return enemy;
     }
 
     private void Start()
     {
-        for (int i = 0; i < roadData.lanes.Count * startSpawnMult; i++)
-        {
-            SpawnEnemy();
-        }
 
+        SpawnStartEnemies();
         InvokeRepeating(nameof(SpawnEnemy), spawnInterval, spawnInterval);
+    }
+
+    void SpawnStartEnemies()
+    {
+        for (int i = 0; i < startSpawnCount; i++)
+        {
+            Enemy enemy = SpawnEnemy();
+            if (enemy.roadData.direction != Vector2.up)
+            {
+                Destroy(enemy.gameObject);
+            }
+
+            Vector2 camPos = Camera.main.transform.position;
+            Vector2 randomPosInView = new Vector2(Random.Range(camPos.x - 4, camPos.x + 4), Random.Range(camPos.y - 10, camPos.y + 10));
+            enemy.transform.position = randomPosInView;
+
+            if (Vector3.Distance(enemy.transform.position, camPos) < 1.5f)
+            {
+                Destroy(enemy.gameObject);
+                return;
+            }
+
+            float dist = 999;
+            foreach (Lane lane in FindObjectsOfType<Lane>())
+            {
+                if (lane.road.direction != Vector2.up)
+                    continue;
+
+                float newDist = Vector3.Distance(lane.GetClosestPoint(enemy.transform.position, out _), enemy.transform.position);
+                if (newDist < dist)
+                {
+                    dist = newDist;
+                    enemy.currentLane = lane;
+                }
+            }
+
+            float dirAngle = (Mathf.Atan2(roadData.direction.y, roadData.direction.x) * Mathf.Rad2Deg) - 90;
+            enemy.transform.eulerAngles = new Vector3(0, 0, dirAngle);
+        }
     }
 }

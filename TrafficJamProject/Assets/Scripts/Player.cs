@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,6 +12,16 @@ public class Player : MonoBehaviour
         car = GetComponent<Car>();
     }
 
+    private void Start()
+    {
+        CarsController carsController = FindObjectOfType<CarsController>();
+    }
+
+    private void Update()
+    {
+        
+    }
+
     private void FixedUpdate()
     {
         float moveAxis = Input.GetAxis("Vertical");
@@ -18,11 +29,11 @@ public class Player : MonoBehaviour
 
         if (moveAxis != 0f)
         {
-
-            car.MoveInDirection(transform.up * moveAxis, car.moveSpeed);
+            car.MoveInDirection(transform.up * moveAxis, car.targetSpeed);
+            print(car.targetSpeed);
         }
 
-        car.RotateInDirection(rotateAxis * moveAxis, car.turnSpeed);
+        car.RotateInDirection(rotateAxis * moveAxis, car.stats.turnSpeed);
 
         car.UnBrake();
     }
@@ -30,5 +41,11 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Debug.DrawLine(transform.position, transform.position + transform.up * 2f, Color.green);
+    }
+
+    private void OnEnable()
+    {
+        car.startSpeed = car.stats.moveSpeed;
+        car.targetSpeed = car.stats.moveSpeed;
     }
 }

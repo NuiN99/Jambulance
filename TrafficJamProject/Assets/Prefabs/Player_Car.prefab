@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 687543372394766788}
-  - component: {fileID: 5732619192200864758}
   - component: {fileID: 812414581723466732}
   - component: {fileID: 4944061792116407031}
   - component: {fileID: 7774565551002062422}
@@ -37,18 +36,6 @@ Transform:
   - {fileID: 1881281916882384515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5732619192200864758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726835168676337297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c9d71a268c4c6442a3cd6ce8524092c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &812414581723466732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,21 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df78dec89da612428fa8647b25f3a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: bc4e2147ac83786459a3530858855d2b, type: 2}
   rb: {fileID: 0}
-  moveSpeed: 50
-  turnSpeed: 0.5
+  startSpeed: 0
   targetSpeed: 0
-  brakeStrength: 2
-  drag: 7.5
-  brakeDrag: 7.5
-  angularDrag: 1
-  mass: 1
-  aggression: 0
-  recoveryTime: 0
   colliding: 0
-  health: 0
-  heavyImpactForceThreshold: 4
-  heavyImpactMultiplier: 2
 --- !u!50 &4944061792116407031
 Rigidbody2D:
   serializedVersion: 4
