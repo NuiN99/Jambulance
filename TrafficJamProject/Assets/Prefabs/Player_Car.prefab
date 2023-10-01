@@ -52,6 +52,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   startSpeed: 0
   targetSpeed: 0
+  currentAcceleration: 0
+  maxAcceleration: 100
   colliding: 0
 --- !u!50 &4944061792116407031
 Rigidbody2D:

@@ -50,20 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 2c2691df92d587349bbdea9ffc110a46, type: 2}
   rb: {fileID: 0}
-  moveSpeed: 10
-  turnSpeed: 0.5
+  startSpeed: 0
   targetSpeed: 0
-  brakeStrength: 1.1
-  drag: 3
-  brakeDrag: 4
-  angularDrag: 2
-  mass: 2
-  aggression: 0
-  recoveryTime: 1
+  currentAcceleration: 0
+  maxAcceleration: 100
   colliding: 0
-  health: 0
-  heavyImpactForceThreshold: 4
-  heavyImpactMultiplier: 2
 --- !u!114 &2007510244600866465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +70,7 @@ MonoBehaviour:
   currentLane: {fileID: 0}
   targetOffset: 2.5
   fwdCheckDist: 2
-  horizontalCheckDist: 0.5
+  horizontalCheckDist: 0.25
   roadData: {fileID: 0}
   minActionTime: 10
   maxActionTime: 20

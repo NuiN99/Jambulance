@@ -11,6 +11,9 @@ public class Car : MonoBehaviour
     public float startSpeed;
     public float targetSpeed;
 
+    public float currentAcceleration = 0;
+    public float maxAcceleration;
+
     public bool colliding;
 
     bool braking = false;
@@ -27,17 +30,35 @@ public class Car : MonoBehaviour
         rb.angularDrag = stats.angularDrag;
         rb.mass = stats.mass;
     }
-       
 
-    public void MoveInDirection(Vector3 dir)
+    private void Update()
     {
-        //if(!braking)
-            rb.AddForce(stats.moveSpeed * dir);
+        if (currentAcceleration < 0)
+        {
+            currentAcceleration = 0;
+        }
+            
+
+        if(currentAcceleration > maxAcceleration)
+        {
+            currentAcceleration = maxAcceleration;
+        }
+            
     }
-    public void MoveInDirection(Vector3 dir, float speed)
+
+    public void MoveInDirection(Vector2 dir, float speed)
     {
-        //if(!braking)
-            rb.AddForce(speed * dir);
+        if (!braking)
+        {
+            currentAcceleration += Time.fixedDeltaTime / 3f;
+            rb.AddForce(dir * speed * currentAcceleration);
+        }
+        else
+        {
+            currentAcceleration -= Time.deltaTime * 10;
+        }
+        if(GetComponent<Player>())
+            print(currentAcceleration);
     }
 
     public void RotateInDirection(float dir)
@@ -107,6 +128,8 @@ public class Car : MonoBehaviour
         {
             //Destroy car
         }
+
+        currentAcceleration -= collisionForce / 20;
     }
 
     Coroutine currentRoutine;

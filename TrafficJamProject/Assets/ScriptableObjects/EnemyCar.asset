@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb90431055508245b9b7c43632b4f4a, type: 3}
   m_Name: EnemyCar
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 20
   turnSpeed: 0.5
   brakeStrength: 1.1
   drag: 3
-  brakeDrag: 5
+  brakeDrag: 3
   angularDrag: 2
   mass: 2
   aggression: 0
   recoveryTime: 1
-  health: -105617.98
+  health: -182779.98
   heavyImpactForceThreshold: 4
   heavyImpactMultiplier: 2

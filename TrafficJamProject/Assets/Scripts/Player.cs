@@ -17,11 +17,6 @@ public class Player : MonoBehaviour
         CarsController carsController = FindObjectOfType<CarsController>();
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         float moveAxis = Input.GetAxis("Vertical");
@@ -30,7 +25,11 @@ public class Player : MonoBehaviour
         if (moveAxis != 0f)
         {
             car.MoveInDirection(transform.up * moveAxis, car.targetSpeed);
-            print(car.targetSpeed);
+        }
+        else
+        {
+            print("not moving");
+            car.currentAcceleration -= Time.fixedDeltaTime * 10;
         }
 
         car.RotateInDirection(rotateAxis * moveAxis, car.stats.turnSpeed);

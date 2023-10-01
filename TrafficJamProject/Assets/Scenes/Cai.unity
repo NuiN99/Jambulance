@@ -1216,7 +1216,7 @@ MonoBehaviour:
   roadData: {fileID: 1659196828}
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
   startSpawnCount: 0
-  spawnInterval: 0.075
+  spawnInterval: 0.05
   minSpeedIncrement: 0
   maxSpeedIncrement: 20
 --- !u!4 &1217616674
@@ -2371,6 +2371,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   startSpeed: 0
   targetSpeed: 0
+  currentAcceleration: 0
+  maxAcceleration: 5
   colliding: 0
 --- !u!114 &6548390494961736608
 MonoBehaviour:
