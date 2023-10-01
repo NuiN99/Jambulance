@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(target.position.x, target.position.y + verticalOffset, transform.position.z);
+        transform.rotation = Quaternion.identity;
+        //transform.position = new Vector3(target.position.x, target.position.y + verticalOffset, transform.position.z);
     }
 }

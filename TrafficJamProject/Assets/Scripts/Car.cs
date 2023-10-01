@@ -8,6 +8,7 @@ public class Car : MonoBehaviour
 {
     public CarStatsSO stats;
     public Rigidbody2D rb;
+    public ScreenShake sc;
 
     public float startSpeed;
     public float targetSpeed;
@@ -23,6 +24,8 @@ public class Car : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
             rb = GetComponentInChildren<Rigidbody2D>();
+        if (sc == null)
+           sc = Camera.main.TryGetComponent<ScreenShake>(out ScreenShake camSc) ? camSc : null;
     }
 
 
@@ -134,12 +137,10 @@ public class Car : MonoBehaviour
 
                 curAccel -= stats.maxAcceleration / 1.25f;
             }
-        }
 
-        stats.health -= collisionForce * (collisionForce >= stats.heavyImpactForceThreshold ? stats.heavyImpactMultiplier : 1);
-        if (stats.health < 0)
-        {
-            //Destroy car
+            //screen shake
+            sc.StartCoroutine("ShakeScreenNormal", (.25f,collisionForce));
+
         }
 
         curAccel -= collisionForce / 50;

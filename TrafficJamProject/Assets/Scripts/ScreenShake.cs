@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class ScreenShake : MonoBehaviour
 {
+    
     float currentStrength;
     [SerializeField] float maxStrength = 10f;
     [SerializeField] float strengthMultiplier = 10f;
     [SerializeField] float duration = .25f;
     [SerializeField] AnimationCurve curve;
+    [SerializeField] Vector3 anchorPos;
 
-    public static ScreenShake instance;
-
-    private void Awake()
+    private void Start()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
+        anchorPos = transform.localPosition;
     }
-
     public IEnumerator AddStrength(float strength)
     {
         if(strength > maxStrength)
@@ -57,13 +53,15 @@ public class ScreenShake : MonoBehaviour
         }
     }
 
-    public IEnumerator ShakeScreenNormal(float shakeDur, float strength)
+    public IEnumerator ShakeScreenNormal( (float,float) values)
     {
+        float shakeDur = values.Item1;
+        float strength = values.Item2;
         float elapsedTime = 0f;
 
         while (elapsedTime < shakeDur)
         {
-            Vector3 startPos = Camera.main.transform.position;
+            //Vector3 startPos = transform.position;
             float shakeMult = 1f;
             /*
             if (ES3.KeyExists("ScreenShake"))
@@ -71,10 +69,12 @@ public class ScreenShake : MonoBehaviour
             */
             elapsedTime += Time.deltaTime;
             float curveStrength = curve.Evaluate(elapsedTime / shakeDur);
-            transform.position = startPos + strength * curveStrength * shakeMult * strengthMultiplier * Time.deltaTime * Random.insideUnitSphere;
+            transform.localPosition = anchorPos + strength * curveStrength * shakeMult * strengthMultiplier * Time.deltaTime * Random.insideUnitSphere;
 
             yield return null;
-            transform.position = startPos;
+            transform.localPosition = anchorPos;
         }
+
+        transform.localPosition = anchorPos;
     }
 }
