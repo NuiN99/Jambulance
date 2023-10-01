@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lane : MonoBehaviour
 {
-    public List<Vector2> points = new();
+    public List<RoadPoint> points = new();
 
     [SerializeField] GameObject roadIndicatorPrefab;
     [SerializeField] GameObject roadLinePrefab;
@@ -25,6 +25,7 @@ public class Lane : MonoBehaviour
     private void Start()
     {
         InvokeRepeating(nameof(AddNewLanePoint), 0, generationSpeed);
+        InvokeRepeating(nameof(CullFarPoints), 5, 5);
     }
 
     public Vector3 GetClosestPoint(Vector3 startPos, out int index)
@@ -35,19 +36,19 @@ public class Lane : MonoBehaviour
             return Vector3.zero;
         }
 
-        Vector3 closestPoint = points[0];
-        float closestDistance = Vector3.Distance(points[0], startPos);
+        Vector3 closestPoint = points[0].transform.position;
+        float closestDistance = Vector3.Distance(points[0].transform.position, startPos);
 
         int newIndex = 0;
         for (int i = 0; i < points.Count - 1; i++)
         {
-            float distance = Vector3.Distance(points[i], startPos);
+            float distance = Vector3.Distance(points[i].transform.position, startPos);
 
             if (distance < closestDistance)
             {
                 newIndex = i;
 
-                closestPoint = points[i];
+                closestPoint = points[i].transform.position;
                 closestDistance = distance;
             }
         }
@@ -60,12 +61,12 @@ public class Lane : MonoBehaviour
         if(pointBIndex == 0 && points.Count <= 0)
             return Vector3.zero;
 
-        if (pointA.y != points[pointBIndex].y)
+        if (pointA.y != points[pointBIndex].transform.position.y)
         {
             return Vector3.zero;
         }
 
-        float intersectionX = Mathf.Clamp(originPoint.x, Mathf.Min(pointA.x, points[pointBIndex].x), Mathf.Max(pointA.x, points[pointBIndex].x));
+        float intersectionX = Mathf.Clamp(originPoint.x, Mathf.Min(pointA.x, points[pointBIndex].transform.position.x), Mathf.Max(pointA.x, points[pointBIndex].transform.position.x));
         Vector3 intersectionPoint = new Vector3(intersectionX, originPoint.y, 0f);
 
         return intersectionPoint;
@@ -75,36 +76,38 @@ public class Lane : MonoBehaviour
     {
         if(points.Count <= 0)
         {
-            points.Add(transform.position);
+            points.Add(Instantiate(roadIndicatorPrefab, transform.position, Quaternion.identity, transform).GetComponent<RoadPoint>());
             return;
         }
 
-        Vector3 startPoint = points[points.Count - 1];
+        Vector3 startPoint = points[points.Count - 1].transform.position;
         Vector3 increment = new(Random.Range(minHorizontal, maxHorizontal), Random.Range(minVertical, maxVertical));
         Vector3 newEndPoint = startPoint + increment;
 
         if (Vector2.Distance((Vector2)Camera.main.transform.position, newEndPoint) > 50f)
             return;
 
-        points.Add(newEndPoint);
+        points.Add(Instantiate(roadIndicatorPrefab, newEndPoint, Quaternion.identity, transform).GetComponent<RoadPoint>());
 
+        /*Vector3 newEndPointDir = (newEndPoint - startPoint).normalized;
         Vector3 midPos = startPoint + (newEndPoint - startPoint) / 2;
-
-        Instantiate(roadIndicatorPrefab, newEndPoint, Quaternion.identity, transform);
-
-        Vector3 newEndPointDir = (newEndPoint - startPoint).normalized;
         float angle = (Mathf.Atan2(newEndPointDir.y, newEndPointDir.x) * Mathf.Rad2Deg) - 90;
         GameObject line = Instantiate(roadLinePrefab, midPos, Quaternion.identity, transform);
         line.transform.eulerAngles = new(0, 0, angle);
         float dist = Vector3.Distance(startPoint, newEndPoint);
-        line.transform.localScale = new Vector3(.1f, dist, 1);
+        line.transform.localScale = new Vector3(.1f, dist, 1);*/
     }
 
-    void SetPoints(Transform[] transforms)
+    void CullFarPoints()
     {
-        foreach(var pos in transforms)
+        for(int i = points.Count - 1; i >= 0; i--)
         {
-            points.Add(pos.position);
+            Transform point = points[i].transform;
+            if(Camera.main.transform.position.y - point.position.y >= 20)
+            {
+                Destroy(point.gameObject);
+                points.RemoveAt(i);
+            }
         }
     }
 }

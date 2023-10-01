@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour
 
     bool inLane;
 
+    [SerializeField] LayerMask obstacleMask;
+
+    Obstacle detectedObstacle;
+
     private void Awake()
     {
         car = GetComponent<Car>();
@@ -57,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     void MoveTowardsRoadUpwards()
     {
-        RaycastHit2D[] hitFwdAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.up, fwdCheckDist);
+        RaycastHit2D[] hitFwdAll = Physics2D.BoxCastAll(transform.position, new Vector3(0.5f, 1f), transform.eulerAngles.z, transform.up, fwdCheckDist);
         RaycastHit2D[] hitLeftAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
         RaycastHit2D[] hitRightAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
         RaycastHit2D[] hitBackAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.up, fwdCheckDist);
@@ -66,6 +70,8 @@ public class Enemy : MonoBehaviour
         RaycastHit2D hitLeft = new();
         RaycastHit2D hitRight = new();
         RaycastHit2D hitBack = new();
+
+        RaycastHit2D hitFwdObstacle = Physics2D.Raycast(transform.position, Vector2.up, fwdCheckDist * 5, obstacleMask);
 
         foreach (var hit in hitFwdAll)
         {
@@ -95,9 +101,16 @@ public class Enemy : MonoBehaviour
 
         ExtDebug.DrawBoxCastBox(leftOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitLeft));
         ExtDebug.DrawBoxCastBox(rightOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitRight));
-        ExtDebug.DrawBoxCastBox(fwdOrigin, new Vector3(transform.localScale.x, fwdCheckDist) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitFwd));
+        ExtDebug.DrawBoxCastBox(fwdOrigin, new Vector3(0.5f, fwdCheckDist) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitFwd));
         ExtDebug.DrawBoxCastBox(backOrigin, new Vector3(transform.localScale.x, fwdCheckDist / 1.5f) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitBack));
 
+
+        if (hitFwdObstacle && hitFwdObstacle.collider.TryGetComponent(out Obstacle obstacle))
+        {
+            Debug.DrawLine(transform.position, hitFwdObstacle.point, Color.yellow);
+            ReactToObstacle(obstacle);
+        }
+        
         TurnTowardsLane(hitLeft, hitRight);
         MoveForwardIfFree(hitFwd, hitBack);
     }
@@ -164,6 +177,13 @@ public class Enemy : MonoBehaviour
             car.UnBrake();
 
         car.MoveInDirection(transform.up, car.targetSpeed);
+    }
+
+    void ReactToObstacle(Obstacle obstacle)
+    {
+        if (detectedObstacle == obstacle) return;
+        detectedObstacle = obstacle;
+        roadData.ChangeLaneRandom(currentLane);
     }
 
     // either change lane, accelerate?

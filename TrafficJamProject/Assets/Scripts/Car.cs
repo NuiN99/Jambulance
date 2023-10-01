@@ -105,7 +105,7 @@ public class Car : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(GetComponent<Rigidbody2D>().velocity.magnitude);
+        //print(GetComponent<Rigidbody2D>().velocity.magnitude);
 
         Vector2 collisionPoint = collision.GetContact(0).point;
         float collisionForce = collision.relativeVelocity.magnitude;

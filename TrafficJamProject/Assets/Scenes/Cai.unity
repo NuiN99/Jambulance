@@ -281,8 +281,8 @@ MonoBehaviour:
   generationSpeed: 0.5
   minHorizontal: 0
   maxHorizontal: 0
-  minVertical: 10
-  maxVertical: 10
+  minVertical: 5
+  maxVertical: 20
   roadScale: 1
   road: {fileID: 0}
 --- !u!212 &224173292
@@ -644,8 +644,8 @@ MonoBehaviour:
   generationSpeed: 0.5
   minHorizontal: 0
   maxHorizontal: 0
-  minVertical: 10
-  maxVertical: 10
+  minVertical: 5
+  maxVertical: 20
   roadScale: 1
   road: {fileID: 0}
 --- !u!212 &840843648
@@ -808,8 +808,8 @@ MonoBehaviour:
   generationSpeed: 0.5
   minHorizontal: 0
   maxHorizontal: 0
-  minVertical: 10
-  maxVertical: 10
+  minVertical: 5
+  maxVertical: 20
   roadScale: 1
   road: {fileID: 0}
 --- !u!212 &868918775
@@ -915,8 +915,8 @@ MonoBehaviour:
   generationSpeed: 0.5
   minHorizontal: 0
   maxHorizontal: 0
-  minVertical: 10
-  maxVertical: 10
+  minVertical: 5
+  maxVertical: 20
   roadScale: 1
   road: {fileID: 0}
 --- !u!212 &1017182477
@@ -1022,8 +1022,8 @@ MonoBehaviour:
   generationSpeed: 0.5
   minHorizontal: 0
   maxHorizontal: 0
-  minVertical: 10
-  maxVertical: 10
+  minVertical: 5
+  maxVertical: 20
   roadScale: 1
   road: {fileID: 0}
 --- !u!212 &1167468597
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   roadData: {fileID: 1659196828}
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
   startSpawnCount: 0
-  spawnInterval: 0.05
+  spawnInterval: 0.03
   minSpeedIncrement: 0
   maxSpeedIncrement: 10
 --- !u!4 &1217616674
@@ -1834,6 +1834,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1855077577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1855077579}
+  - component: {fileID: 1855077578}
+  m_Layer: 0
+  m_Name: ObstacleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1855077578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855077577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea56bcba984391149b81e2af84f268c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadData: {fileID: 1659196828}
+  obstaclePrefabs:
+  - {fileID: 663178374432665144, guid: b6c599c6bba23ca47bc305286a9442d5, type: 3}
+  minInterval: 1
+  maxInterval: 2
+--- !u!4 &1855077579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855077577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894489513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1992,8 +2041,8 @@ MonoBehaviour:
   generationSpeed: 0.5
   minHorizontal: 0
   maxHorizontal: 0
-  minVertical: 10
-  maxVertical: 10
+  minVertical: 5
+  maxVertical: 20
   roadScale: 1
   road: {fileID: 0}
 --- !u!212 &2000180948
@@ -2178,10 +2227,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1895372673060649449, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
-      propertyPath: m_Name
-      value: Sprite
-      objectReference: {fileID: 0}
     - target: {fileID: 3939468437024965962, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
       propertyPath: m_Name
       value: Player_Car
@@ -2382,3 +2427,4 @@ SceneRoots:
   - {fileID: 867305174}
   - {fileID: 633581970}
   - {fileID: 793243532}
+  - {fileID: 1855077579}
