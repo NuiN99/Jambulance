@@ -1,6 +1,7 @@
 using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class Car : MonoBehaviour
@@ -49,7 +50,8 @@ public class Car : MonoBehaviour
     {
 
         curAccel += (Time.fixedDeltaTime / 3f) * stats.accelSpeed;
-        rb.AddForce(dir * speed * curAccel);
+        Vector2 force = curAccel * speed * dir;
+        rb.AddForce(force);
         if(braking)
         {
             curAccel -= Time.deltaTime * 15 * stats.accelSpeed;
@@ -110,7 +112,6 @@ public class Car : MonoBehaviour
         float collisionForce = collision.relativeVelocity.magnitude;
         Vector2 collisionDir = ((Vector2)collision.transform.position - collisionPoint).normalized;
 
-        print(collisionForce);
         if (GetComponent<Player>() && collisionForce > 2f && collision.gameObject.TryGetComponent(out Car car))
         {
             //rb.velocity = collision.relativeVelocity;

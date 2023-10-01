@@ -10,7 +10,8 @@ public class Enemy : MonoBehaviour
 
     //[SerializeField] float targetOffset = 2.5f;
 
-    [SerializeField] float fwdCheckDist, horizontalCheckDist;
+    [SerializeField] float fwdCheckDist = 2; 
+    [SerializeField] float horizontalCheckDist = 0.25f;
 
     public RoadData roadData;
 
@@ -56,9 +57,29 @@ public class Enemy : MonoBehaviour
 
     void MoveTowardsRoadUpwards()
     {
-        RaycastHit2D hitFwd = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.up, fwdCheckDist);
-        RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
-        RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
+        RaycastHit2D[] hitFwdAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.up, fwdCheckDist);
+        RaycastHit2D[] hitLeftAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
+        RaycastHit2D[] hitRightAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
+
+        RaycastHit2D hitFwd = new();
+        RaycastHit2D hitLeft = new();
+        RaycastHit2D hitRight = new();
+
+        foreach (var hit in hitFwdAll)
+        {
+            if (hit.collider.gameObject != gameObject)
+                hitFwd = hit;
+        }
+        foreach (var hit in hitLeftAll)
+        {
+            if (hit.collider.gameObject != gameObject)
+                hitLeft = hit;
+        }
+        foreach (var hit in hitRightAll)
+        {
+            if (hit.collider.gameObject != gameObject)
+                hitRight = hit;
+        }
 
         Vector3 leftOrigin = (transform.position + -transform.right * horizontalCheckDist);
         Vector3 rightOrigin = (transform.position + transform.right * horizontalCheckDist);
@@ -120,6 +141,8 @@ public class Enemy : MonoBehaviour
             //car.Brake();
             float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
             car.targetSpeed = car.startSpeed * speedMult;
+            if (speedMult <= 0.3f)
+                car.targetSpeed = 0f;
         }
             
         else

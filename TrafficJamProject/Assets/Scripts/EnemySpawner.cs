@@ -27,6 +27,16 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 spawnPoint = lane.CalculateHorizontalIntersection(closestPoint, index, randomYPos);
 
+        Physics2D.queriesStartInColliders = true;
+        RaycastHit2D spawnHit = Physics2D.CircleCast(spawnPoint, .75f, Vector3.forward);
+        if (spawnHit)
+        {
+            print("Enemy will spawn in collider, cancelling spawn");
+            return null;
+        }
+        Physics2D.queriesStartInColliders = false;
+
+
         Enemy enemy = Instantiate(enemyPrefab, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
         enemy.currentLane = lane;
         enemy.roadData = roadData;
@@ -55,6 +65,8 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < startSpawnCount; i++)
         {
             Enemy enemy = SpawnEnemy();
+            if (enemy == null)
+                continue;
             if (enemy.roadData.direction != Vector2.up)
             {
                 Destroy(enemy.gameObject);
