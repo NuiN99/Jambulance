@@ -60,10 +60,12 @@ public class Enemy : MonoBehaviour
         RaycastHit2D[] hitFwdAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.up, fwdCheckDist);
         RaycastHit2D[] hitLeftAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
         RaycastHit2D[] hitRightAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
+        RaycastHit2D[] hitBackAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.up, fwdCheckDist);
 
         RaycastHit2D hitFwd = new();
         RaycastHit2D hitLeft = new();
         RaycastHit2D hitRight = new();
+        RaycastHit2D hitBack = new();
 
         foreach (var hit in hitFwdAll)
         {
@@ -80,17 +82,24 @@ public class Enemy : MonoBehaviour
             if (hit.collider.gameObject != gameObject)
                 hitRight = hit;
         }
+        foreach (var hit in hitBackAll)
+        {
+            if (hit.collider.gameObject != gameObject)
+                hitBack = hit;
+        }
 
         Vector3 leftOrigin = (transform.position + -transform.right * horizontalCheckDist);
         Vector3 rightOrigin = (transform.position + transform.right * horizontalCheckDist);
         Vector3 fwdOrigin = transform.position + transform.up * (fwdCheckDist - transform.localScale.y / 2);
+        Vector3 backOrigin = transform.position - transform.up * (fwdCheckDist / 1.5f - transform.localScale.y / 2);
 
         ExtDebug.DrawBoxCastBox(leftOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitLeft));
         ExtDebug.DrawBoxCastBox(rightOrigin, transform.localScale / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitRight));
         ExtDebug.DrawBoxCastBox(fwdOrigin, new Vector3(transform.localScale.x, fwdCheckDist) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitFwd));
+        ExtDebug.DrawBoxCastBox(backOrigin, new Vector3(transform.localScale.x, fwdCheckDist / 1.5f) / 2, transform.rotation, Vector3.zero, 0, GetCheckColor(hitBack));
 
         TurnTowardsLane(hitLeft, hitRight);
-        MoveForwardIfFree(hitFwd);
+        MoveForwardIfFree(hitFwd, hitBack);
     }
 
     void TurnTowardsLane(bool hitLeft, bool hitRight)
@@ -100,8 +109,8 @@ public class Enemy : MonoBehaviour
         Vector2 targetPoint = intersection + (currentLane.road.direction * 3f);
 
         inLane = Vector3.Distance(intersection, transform.position) <= 0.5f;
-        Color laneColor = inLane ? Color.green : Color.red;
-        GetComponent<SpriteRenderer>().color = laneColor;
+        //Color laneColor = inLane ? Color.blue : Color.yellow;
+        //GetComponent<SpriteRenderer>().color = laneColor;
 
         Debug.DrawLine(transform.position, targetPoint);
 
@@ -134,15 +143,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void MoveForwardIfFree(RaycastHit2D hitFwd)
+    void MoveForwardIfFree(RaycastHit2D hitFwd, RaycastHit2D hitBack)
     {
         if (hitFwd)
         {
-            //car.Brake();
-            float speedMult = (Vector3.Distance(transform.position, hitFwd.point) / fwdCheckDist) / 1.5f;
-            car.targetSpeed = car.startSpeed * speedMult;
-            if (speedMult <= 0.3f)
-                car.targetSpeed = 0f;
+            car.Brake();
+            float distToHit = (Vector3.Distance(transform.position, hitFwd.point));
+            //car.targetSpeed = (car.startSpeed * speedMult) + 5f;
+            //if (distToHit <= 0.3f)
+                //car.targetSpeed = -0.75f;
+            
+
+
+            //if (hitBack) car.targetSpeed = 0;
+
+            //car.curAccel -= Time.deltaTime
         }
             
         else

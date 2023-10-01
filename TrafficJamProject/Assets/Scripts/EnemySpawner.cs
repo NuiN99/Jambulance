@@ -22,6 +22,11 @@ public class EnemySpawner : MonoBehaviour
         float randomPosDown = Random.Range(-15f, -10f);
         float randY = Random.Range(0, 2) == 0? randomPosDown : randomPosUp;
 
+        if(roadData.direction == Vector2.down && randY == randomPosDown)
+        {
+            return null;
+        }
+
         Vector3 closestPoint = lane.GetClosestPoint(Camera.main.transform.position, out int index);
         Vector3 randomYPos = closestPoint + new Vector3(0, randY);
 
@@ -49,6 +54,7 @@ public class EnemySpawner : MonoBehaviour
             enemyCar.startSpeed = enemyCar.stats.moveSpeed;
             enemyCar.startSpeed += Random.Range(minSpeedIncrement, maxSpeedIncrement);
             enemyCar.targetSpeed = enemyCar.startSpeed;
+            enemyCar.curAccel = enemyCar.stats.maxAcceleration;
         }
         return enemy;
     }

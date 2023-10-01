@@ -1216,9 +1216,9 @@ MonoBehaviour:
   roadData: {fileID: 1659196828}
   enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
   startSpawnCount: 0
-  spawnInterval: 0.1
+  spawnInterval: 0.05
   minSpeedIncrement: 0
-  maxSpeedIncrement: 20
+  maxSpeedIncrement: 10
 --- !u!4 &1217616674
 Transform:
   m_ObjectHideFlags: 0

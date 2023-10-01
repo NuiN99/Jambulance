@@ -21,8 +21,8 @@ MonoBehaviour:
   mass: 2
   aggression: 0
   recoveryTime: 1
-  health: -194236.62
-  accelSpeed: 0.75
+  health: -222294.84
+  accelSpeed: 5
   maxAcceleration: 1.25
   heavyImpactForceThreshold: 4
   heavyImpactMultiplier: 2

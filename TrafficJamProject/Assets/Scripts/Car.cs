@@ -54,7 +54,7 @@ public class Car : MonoBehaviour
         rb.AddForce(force);
         if(braking)
         {
-            curAccel -= Time.deltaTime * 15 * stats.accelSpeed;
+            curAccel -= Time.fixedDeltaTime * stats.accelSpeed / 2;
         }
     }
 
@@ -149,7 +149,7 @@ public class Car : MonoBehaviour
 
     IEnumerator StopCollidingAfterDelay(float time)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         colliding = false;
 
         rb.angularDrag = stats.angularDrag;
