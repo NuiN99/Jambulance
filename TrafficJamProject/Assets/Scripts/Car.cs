@@ -26,7 +26,7 @@ public class Car : MonoBehaviour
 
     void Start()
     {
-        if(TryGetComponent(out SpriteRenderer sr))
+        if(!GetComponent<Player>() && TryGetComponent(out SpriteRenderer sr))
         {
             sr.sprite = stats.possibleSprites[Random.Range(0, stats.possibleSprites.Length)];
         }
@@ -81,19 +81,8 @@ public class Car : MonoBehaviour
             Brake();
             return;
         }
-
         Vector3 targetDir = (target - transform.position).normalized;
-        float dirAngle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-        dirAngle -= 90;
-
-        float angleDifference = Mathf.DeltaAngle(transform.eulerAngles.z, dirAngle);
-
-        int dir = angleDifference < 0 ? -1 : 1;
-
-        float targetAngle = transform.eulerAngles.z + (speed * rb.velocity.magnitude * dir);
-
-        if (angleDifference >= 1.5f || angleDifference <= -1.5f)
-            rb.MoveRotation(targetAngle);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.forward, targetDir), stats.turnSpeed * rb.velocity.magnitude);
     }
 
     public void Brake()
