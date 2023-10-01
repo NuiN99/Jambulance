@@ -33,7 +33,7 @@ MonoBehaviour:
   mass: 2
   aggression: 0
   recoveryTime: 1.5
-  health: -238416.64
+  health: 100
   accelSpeed: 5
   maxAcceleration: 1.25
   heavyImpactForceThreshold: 4

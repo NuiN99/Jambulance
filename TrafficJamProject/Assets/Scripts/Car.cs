@@ -143,6 +143,7 @@ public class Car : MonoBehaviour
         }
 
         curAccel -= collisionForce / 50;
+
     }
 
     Coroutine currentRoutine;
