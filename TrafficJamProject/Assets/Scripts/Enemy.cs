@@ -177,19 +177,17 @@ public class Enemy : MonoBehaviour
 
         if(randomDir == -1)
         {
-            RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist * 2f);
+            RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist * 5f);
             if (hitLeft)
             {
-                print("hitleft, cancelled merge");
                 currentLane = startLane;
             }
         }
         else if(randomDir == 1)
         {
-            RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist * 2f);
+            RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist * 5f);
             if (hitRight)
             {
-                print("hitright, cancelled merge");
                 currentLane = startLane;
             }
         }   

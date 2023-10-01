@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
         }
         else
         {
-            print("not moving");
             car.curAccel -= Time.fixedDeltaTime * 15 * car.stats.accelSpeed;
         }
 

@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bdb90431055508245b9b7c43632b4f4a, type: 3}
-  m_Name: PlayerCar
+  m_Name: CopCar
   m_EditorClassIdentifier: 
   possibleSprites:
-  - {fileID: 21300000, guid: 45e8abafca09e6b4cba6baf9e9ed5cae, type: 3}
-  moveSpeed: 25
-  turnSpeed: 0.75
-  brakeStrength: 2
-  drag: 6
+  - {fileID: 21300000, guid: bdd0e0a6f1d549b46979b0f8b230b1d4, type: 3}
+  moveSpeed: 100
+  turnSpeed: 0.5
+  brakeStrength: 1.1
+  drag: 5
   brakeDrag: 5
-  angularDrag: 1.5
-  mass: 1
+  angularDrag: 2
+  mass: 2
   aggression: 0
-  recoveryTime: 0.75
-  health: -22709.654
-  accelSpeed: 10
-  maxAcceleration: 2
+  recoveryTime: 1.5
+  health: -7857.0767
+  accelSpeed: 5
+  maxAcceleration: 1.25
   heavyImpactForceThreshold: 4
   heavyImpactMultiplier: 2

@@ -532,6 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: bc4e2147ac83786459a3530858855d2b, type: 2}
   enemyStats: {fileID: 11400000, guid: 2c2691df92d587349bbdea9ffc110a46, type: 2}
+  copStats: {fileID: 11400000, guid: 3ca946f733f3e054e93ac6255089515f, type: 2}
 --- !u!4 &793243532
 Transform:
   m_ObjectHideFlags: 0
@@ -1320,7 +1321,7 @@ MonoBehaviour:
   startSpawnCount: 0
   spawnInterval: 0.25
   minSpeedIncrement: 100
-  maxSpeedIncrement: 150
+  maxSpeedIncrement: 10
 --- !u!4 &1585014607
 Transform:
   m_ObjectHideFlags: 0

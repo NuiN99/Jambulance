@@ -14,6 +14,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float minSpeedIncrement = 0f;
     [SerializeField] float maxSpeedIncrement = 0f;
 
+    CarsController carsController;
+
+    private void Awake()
+    {
+        carsController = FindObjectOfType<CarsController>();
+    }
+
     Enemy SpawnEnemy()
     {
         var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
@@ -23,9 +30,7 @@ public class EnemySpawner : MonoBehaviour
         float randY = Random.Range(0, 2) == 0? randomPosDown : randomPosUp;
 
         if(roadData.direction == Vector2.down && randY == randomPosDown)
-        {
             return null;
-        }
 
         Vector3 closestPoint = lane.GetClosestPoint(Camera.main.transform.position, out int index);
         Vector3 randomYPos = closestPoint + new Vector3(0, randY);
@@ -36,7 +41,6 @@ public class EnemySpawner : MonoBehaviour
         RaycastHit2D spawnHit = Physics2D.CircleCast(spawnPoint, .75f, Vector3.forward);
         if (spawnHit)
         {
-            print("Enemy will spawn in collider, cancelling spawn");
             return null;
         }
         Physics2D.queriesStartInColliders = false;
@@ -55,6 +59,13 @@ public class EnemySpawner : MonoBehaviour
             enemyCar.startSpeed += Random.Range(minSpeedIncrement, maxSpeedIncrement);
             enemyCar.targetSpeed = enemyCar.startSpeed;
             enemyCar.curAccel = enemyCar.stats.maxAcceleration;
+
+            if(roadData.direction == Vector2.down)
+            {
+                carsController.SwitchStats(enemyCar, carsController.copStats);
+                carsController.ResetSpriteSelection(enemyCar);
+            }
+                
         }
         return enemy;
     }
