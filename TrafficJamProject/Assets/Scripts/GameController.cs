@@ -58,8 +58,6 @@ public class GameController : MonoBehaviour
         player.gameObject.AddComponent<Enemy>();
 
         timeRemaining = startTime;
-
-        
     }
 
     private void OnEnable()
@@ -82,7 +80,7 @@ public class GameController : MonoBehaviour
                 print("RAN OUT OF TIME");
             }
         }
-        if (!started && Input.anyKeyDown)
+        if (!started && Input.anyKeyDown && FindObjectOfType<OverUI>().overUI == false)
         {
             started = true;
             CarsController carsController = FindObjectOfType<CarsController>();
@@ -120,6 +118,10 @@ public class GameController : MonoBehaviour
             won = true;
             OnPlayerWon?.Invoke();
             print("YOU WON GOOD JOB");
+
+
+            int score = ((int)startTime - (int)timeRemaining);
+            StartCoroutine(FindObjectOfType<Leaderboard>().SubmitScoreRoutine(score));
         }
     }
 
