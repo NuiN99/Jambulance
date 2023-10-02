@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    Transform target;
+    Transform player;
+    public float verticalOffset;
+    ScreenShake sc;
 
-    [SerializeField] float verticalOffset;
+    public Vector3 targetPos;
 
     private void Awake()
     {
-        target = FindObjectOfType<Player>(true).transform;   
+        sc = GetComponent<ScreenShake>();
+        player = FindObjectOfType<Player>(true).transform;   
     }
 
     private void LateUpdate()
     {
-        transform.rotation = Quaternion.identity;
-        //transform.position = new Vector3(target.position.x, target.position.y + verticalOffset, transform.position.z);
+        targetPos = player.position + Vector3.up * verticalOffset;
+
+        if(!sc.shaking)
+            transform.position = new Vector3(targetPos.x, targetPos.y, transform.position.z);
     }
 }

@@ -2392,6 +2392,7 @@ GameObject:
   - component: {fileID: 6000120272750467402}
   - component: {fileID: 4660524254177490967}
   - component: {fileID: 8845450878359435952}
+  - component: {fileID: 8845450878359435953}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2412,6 +2413,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalOffset: 2
+--- !u!114 &8845450878359435953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8845450878359435951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05edd77ccc108e3479dde2ce427cf791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionShakeDuration: 0.2
+  strengthMultiplier: 25
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1
+      value: 0.2
+      inSlope: -0.46794337
+      outSlope: -0.46794337
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.17223948
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.05830569
+      outSlope: -0.05830569
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24247494
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shaking: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

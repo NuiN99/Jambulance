@@ -128,7 +128,7 @@ public class Car : MonoBehaviour
 
             else if (collisionForce > 2f)
             {
-                car.rb.AddForceAtPosition(collisionDir * collisionForce * 2, collisionPoint, ForceMode2D.Impulse);
+                car.rb.AddForceAtPosition(2 * collisionForce * collisionDir, collisionPoint, ForceMode2D.Impulse);
                 car.rb.angularVelocity += collisionForce * 50 * Random.Range(-1f, 1f);
                 car.rb.angularDrag = 0f;
                 car.Brake();
@@ -139,12 +139,10 @@ public class Car : MonoBehaviour
             }
 
             //screen shake
-            sc.StartCoroutine("ShakeScreenNormal", (.25f,collisionForce));
-
+            sc.StartCoroutine(sc.ShakeScreen(collisionForce));
         }
 
         curAccel -= collisionForce / 50;
-
     }
 
     Coroutine currentRoutine;
