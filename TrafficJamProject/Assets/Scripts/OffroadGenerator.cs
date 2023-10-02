@@ -76,6 +76,8 @@ public class OffroadGenerator : MonoBehaviour
     void AddSegmentToStart()
     {
         int nextIndex = startOfSegmentIndex - 1;
+        if (nextIndex <= 0) return;
+
         Vector3 nextPosition = startPosition + transform.up * segmentLength * nextIndex;
         GameObject nextSegment = InstantiateSegment(nextPosition, nextIndex);
         activeSegments.AddFirst(nextSegment);

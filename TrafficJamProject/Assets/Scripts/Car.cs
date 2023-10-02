@@ -2,13 +2,15 @@ using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Car : MonoBehaviour
+public class Car : MonoBehaviour, IDestructable
 {
     public CarStatsSO stats;
     public Rigidbody2D rb;
     public ScreenShake sc;
+    SpriteRenderer sr;
 
     public float startSpeed;
     public float targetSpeed;
@@ -19,19 +21,30 @@ public class Car : MonoBehaviour
 
     public float curAccel;
 
+    bool dead = false;
+
+    [SerializeField] GameObject explosionEffect;
+    [SerializeField] GameObject smokeEffect;
+
+    [SerializeField] AudioClip[] crashSounds;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
             rb = GetComponentInChildren<Rigidbody2D>();
-        if (sc == null)
-           sc = Camera.main.TryGetComponent<ScreenShake>(out ScreenShake camSc) ? camSc : null;
+
+        sc = Camera.main.GetComponent<ScreenShake>();
+
+        sr = GetComponent<SpriteRenderer>();
+        if(sr == null)
+            sr = GetComponentInChildren<SpriteRenderer>();
     }
 
 
     void Start()
     {
-        if(!GetComponent<Player>() && TryGetComponent(out SpriteRenderer sr))
+        if(!GetComponent<Player>())
         {
             sr.sprite = stats.possibleSprites[Random.Range(0, stats.possibleSprites.Length)];
         }
@@ -58,7 +71,7 @@ public class Car : MonoBehaviour
 
     public void MoveInDirection(Vector2 dir, float speed)
     {
-        if (colliding) return;
+        if (colliding || dead) return;
 
         curAccel += (Time.fixedDeltaTime / 3f) * stats.accelSpeed;
         Vector2 force = curAccel * speed * dir;
@@ -70,7 +83,7 @@ public class Car : MonoBehaviour
     }
     public void RotateInDirection(float dir, float speed)
     {
-        if (colliding)
+        if (colliding || dead)
             return;
            
         float targetAngle = transform.eulerAngles.z + (-dir * 5);
@@ -85,7 +98,7 @@ public class Car : MonoBehaviour
 
     public void RotateToDirection(Vector3 target, float speed)
     {
-        if (colliding)
+        if (colliding || dead)
         {
             Brake();
             return;
@@ -114,6 +127,8 @@ public class Car : MonoBehaviour
         float collisionForce = collision.relativeVelocity.magnitude;
         Vector2 collisionDir = ((Vector2)collision.transform.position - collisionPoint).normalized;
 
+        PlayCrashSoundsBasedOnForce(collisionForce);
+
         if (GetComponent<Player>() && collision.gameObject.TryGetComponent(out Car car))
         {
             if (car.rb.velocity.magnitude * car.rb.mass > rb.velocity.magnitude * rb.mass && collisionForce > 3)
@@ -128,7 +143,7 @@ public class Car : MonoBehaviour
 
             else if (collisionForce > 2f)
             {
-                car.rb.AddForceAtPosition(collisionDir * collisionForce * 2, collisionPoint, ForceMode2D.Impulse);
+                car.rb.AddForceAtPosition(2 * collisionForce * collisionDir, collisionPoint, ForceMode2D.Impulse);
                 car.rb.angularVelocity += collisionForce * 50 * Random.Range(-1f, 1f);
                 car.rb.angularDrag = 0f;
                 car.Brake();
@@ -139,12 +154,25 @@ public class Car : MonoBehaviour
             }
 
             //screen shake
-            sc.StartCoroutine("ShakeScreenNormal", (.25f,collisionForce));
-
+            sc.StartCoroutine(sc.ShakeScreen(collisionForce));
         }
 
         curAccel -= collisionForce / 50;
+    }
 
+    void PlayCrashSoundsBasedOnForce(float force)
+    {
+        float distFromCam = Vector2.Distance(Camera.main.transform.position, transform.position);
+        if (distFromCam > 12.5f) return;
+
+        if (force >= 7.5f)
+            AudioController.Instance.PlaySpatialSound(crashSounds[0], transform.position, (0.2f * force) / distFromCam);
+        else if (force >= 5f)
+            AudioController.Instance.PlaySpatialSound(crashSounds[1], transform.position, (0.1f * force) / distFromCam);
+        else if (force >= 2.5f)
+            AudioController.Instance.PlaySpatialSound(crashSounds[2], transform.position, (0.1f * force) / distFromCam);
+        else
+            AudioController.Instance.PlaySpatialSound(crashSounds[3], transform.position, (0.1f * force) / distFromCam);
     }
 
     Coroutine currentRoutine;
@@ -167,6 +195,28 @@ public class Car : MonoBehaviour
 
         rb.angularDrag = stats.angularDrag;
         rb.drag = stats.drag;
+    }
+
+    void IDestructable.Destroy()
+    {
+        if (dead) return;
+
+        dead = true;
+        Tween.Color(sr, sr.color, new Color(.1f, .1f, .1f, 1f), .5f, Ease.OutCubic);
+        var effect = Instantiate(explosionEffect, transform.position, Random.rotation);
+        
+        effect.AddComponent<MoveToTarget>().target = transform;
+
+        Invoke(nameof(SpawnSmokeDelayed), 2f);
+
+        Destroy(effect, 2f);
+    }
+
+    void SpawnSmokeDelayed()
+    {
+        var smoke = Instantiate(smokeEffect, transform.position, Quaternion.identity);
+        smoke.AddComponent<MoveToTarget>().target = transform;
+        Destroy(smoke, 30f);
     }
 }
 

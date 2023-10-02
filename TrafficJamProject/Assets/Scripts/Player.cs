@@ -45,5 +45,7 @@ public class Player : MonoBehaviour
     {
         car.startSpeed = car.stats.moveSpeed;
         car.targetSpeed = car.stats.moveSpeed;
+
+        GetComponent<Health>().ResetStatsToCarDefault();
     }
 }

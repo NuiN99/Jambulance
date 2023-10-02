@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip honkSound;
 
     bool inLane;
+    public bool merging = false;
 
     [SerializeField] LayerMask obstacleMask;
 
@@ -121,9 +122,10 @@ public class Enemy : MonoBehaviour
         Vector2 intersection = currentLane.CalculateHorizontalIntersection(closestPoint, index, transform.position);
         Vector2 targetPoint = intersection + (currentLane.road.direction * 3f);
 
+        if (Vector3.Distance(intersection, transform.position) <= 0.3f)
+            merging = false;
+
         inLane = Vector3.Distance(intersection, transform.position) <= 0.5f;
-        //Color laneColor = inLane ? Color.blue : Color.yellow;
-        //GetComponent<SpriteRenderer>().color = laneColor;
 
         Debug.DrawLine(transform.position, targetPoint);
 
@@ -210,6 +212,11 @@ public class Enemy : MonoBehaviour
             {
                 currentLane = startLane;
             }
+        }
+
+        if(currentLane != startLane)
+        {
+            merging = true;
         }
 
         StartCoroutine(AttemptActionAfterDelay());

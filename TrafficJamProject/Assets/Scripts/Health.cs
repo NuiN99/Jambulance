@@ -10,15 +10,22 @@ public class Health : MonoBehaviour
     [SerializeField] float heavyImpactForceThreshold;
     [SerializeField] float heavyImpactMultiplier;
 
+    bool dead = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        ResetStatsToCarDefault();
+    }
+
+    public void ResetStatsToCarDefault()
+    {
         //if it's a car use car stats
-        if(TryGetComponent<Car>(out Car car))
+        if (TryGetComponent<Car>(out Car car))
         {
-             health = car.stats.health;
-             heavyImpactForceThreshold = car.stats.heavyImpactForceThreshold;
-             heavyImpactMultiplier = car.stats.heavyImpactMultiplier;
+            health = car.stats.health;
+            heavyImpactForceThreshold = car.stats.heavyImpactForceThreshold;
+            heavyImpactMultiplier = car.stats.heavyImpactMultiplier;
         }
     }
 
@@ -27,9 +34,10 @@ public class Health : MonoBehaviour
         float collisionForce = collision.relativeVelocity.magnitude;
 
         health -= collisionForce * (collisionForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
-        if (health < 0)
+        if (!dead && health < 0 && TryGetComponent(out IDestructable destructable))
         {
-            //Destroy self
+            dead = true;
+            destructable.Destroy();
         }
     }
 }
