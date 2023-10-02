@@ -299,6 +299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundGenerator_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1319894534691927765, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2239487639185819594, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: maxSegments
       value: 6
@@ -317,7 +321,7 @@ PrefabInstance:
       objectReference: {fileID: 4999193948135436373, guid: af961b59e7805484c849569d2005930f, type: 3}
     - target: {fileID: 7819005621339823482, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 7819005621339823482, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1437,6 +1441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 1319894534691927765, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2239487639185819594, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: maxSegments
       value: 6
@@ -1455,7 +1463,7 @@ PrefabInstance:
       objectReference: {fileID: 4999193948135436373, guid: af961b59e7805484c849569d2005930f, type: 3}
     - target: {fileID: 7819005621339823482, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7819005621339823482, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1974,6 +1982,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundGenerator_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1319894534691927765, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2239487639185819594, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: maxSegments
       value: 6
@@ -1992,7 +2004,7 @@ PrefabInstance:
       objectReference: {fileID: 4999193948135436373, guid: af961b59e7805484c849569d2005930f, type: 3}
     - target: {fileID: 7819005621339823482, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 23.5
       objectReference: {fileID: 0}
     - target: {fileID: 7819005621339823482, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
       propertyPath: m_LocalPosition.y
