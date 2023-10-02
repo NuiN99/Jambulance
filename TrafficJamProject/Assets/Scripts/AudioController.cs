@@ -86,4 +86,11 @@ public class AudioController : MonoBehaviour
     {
         Tween.AudioVolume(musicSource, 0, 3, Ease.InOutSine);
     }
+
+    public void UpdateVolume(float value)
+    {
+        generalSource.volume = value;
+        musicSource.volume = value;
+    }
+
 }

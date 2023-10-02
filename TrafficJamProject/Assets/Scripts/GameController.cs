@@ -95,6 +95,7 @@ public class GameController : MonoBehaviour
         {
             QuitGame();
         }
+       
     }
 
     private void LateUpdate()
@@ -120,5 +121,8 @@ public class GameController : MonoBehaviour
     {
         Application.Quit();
     }
+
+
+   
 }
 
