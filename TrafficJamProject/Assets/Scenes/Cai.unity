@@ -528,7 +528,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1268038669
   m_SortingOrder: 0
@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadData: {fileID: 1659196828}
-  enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+  enemyPrefabs: []
   startSpawnCount: 0
   spawnInterval: 0.03
   minSpeedIncrement: 0
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadData: {fileID: 1489372395}
-  enemyPrefab: {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
+  enemyPrefabs: []
   startSpawnCount: 0
   spawnInterval: 0.25
   minSpeedIncrement: 100
