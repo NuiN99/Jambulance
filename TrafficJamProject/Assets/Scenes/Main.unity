@@ -2212,10 +2212,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Car
       objectReference: {fileID: 0}
-    - target: {fileID: 4244452985497480623, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
-      propertyPath: sirenSource
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8271714200262299485, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.25
