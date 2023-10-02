@@ -129,7 +129,7 @@ public class PlayerHUD : MonoBehaviour
         DisableAll();
         winGameFadeSprite.SetActive(true);
 
-        Tween.Alpha(winGameFadeSprite.GetComponent<SpriteRenderer>(), 1f, 5f, Ease.Linear);
+        Tween.Alpha(winGameFadeSprite.GetComponent<SpriteRenderer>(), 1f, 3f, Ease.Linear);
     }
 
     void ShowGameOverItems()
