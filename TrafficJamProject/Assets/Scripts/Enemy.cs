@@ -29,6 +29,14 @@ public class Enemy : MonoBehaviour
 
     Obstacle detectedObstacle;
 
+    [SerializeField] AudioClip[] honkSounds;
+    [SerializeField] float honkDelay;
+    float timeSinceLastHonk = 0;
+
+    [SerializeField] AudioClip[] screechSounds;
+    [SerializeField] float screechDelay;
+    float timeSinceLastScreech = 0;
+
     private void Awake()
     {
         car = GetComponent<Car>();
@@ -58,7 +66,24 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         MoveTowardsRoadUpwards();
+        TryBrakeSounds();
     }
+
+    void TryBrakeSounds()
+    {
+        float distFromCam = Vector2.Distance(Camera.main.transform.position, transform.position);
+        if (car.braking && Time.time - timeSinceLastHonk > honkDelay)
+        {
+            timeSinceLastHonk = Time.time;
+            AudioController.Instance.PlaySpatialSound(honkSounds[Random.Range(0, honkSounds.Length)], transform.position, 1f);
+        }
+        if (car.braking && Time.time - timeSinceLastScreech > screechDelay)
+        {
+            timeSinceLastScreech = Time.time;
+            AudioController.Instance.PlaySpatialSound(screechSounds[Random.Range(0, screechSounds.Length)], transform.position, 1f);
+        }
+    }
+
 
     void MoveTowardsRoadUpwards()
     {

@@ -1,6 +1,7 @@
 using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class Car : MonoBehaviour, IDestructable
 
     public bool colliding;
 
-    bool braking = false;
+    public bool braking = false;
 
     public float curAccel;
 

@@ -54,6 +54,7 @@ MonoBehaviour:
   startSpeed: 0
   targetSpeed: 0
   colliding: 0
+  braking: 0
   curAccel: 0
   smokeEmissionMax: 20
   explosionEffect: {fileID: 6189802597587429948, guid: bba201105fa09b04092a80a04e869da7, type: 3}
@@ -87,6 +88,21 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1024
+  honkSounds:
+  - {fileID: 8300000, guid: cb4bc0b08578b884a8865836a84133cb, type: 3}
+  - {fileID: 8300000, guid: a6ccc363d1dca6f4dba7efa27a823d10, type: 3}
+  - {fileID: 8300000, guid: da8b29bc979256d409934a8e20d568e9, type: 3}
+  - {fileID: 8300000, guid: e5b5360bc30471f46ba3e5c588964643, type: 3}
+  - {fileID: 8300000, guid: 4789e93f33ec61640b545921e49ffc91, type: 3}
+  honkDelay: 3
+  screechSounds:
+  - {fileID: 8300000, guid: 36b876c1ddaf1e641acb91400060a827, type: 3}
+  - {fileID: 8300000, guid: d0621338e9cf90d44ac2135adbd4e6e6, type: 3}
+  - {fileID: 8300000, guid: d6fc6401f1859f44e95b030d9c748564, type: 3}
+  - {fileID: 8300000, guid: e144c69d7d3839048bb13e33a186929a, type: 3}
+  - {fileID: 8300000, guid: e50073d7cad42d74caa83c3ef743b859, type: 3}
+  - {fileID: 8300000, guid: 2a6d2311f4917b4469e204b2c7062de8, type: 3}
+  screechDelay: 10
 --- !u!114 &-640577423546280042
 MonoBehaviour:
   m_ObjectHideFlags: 0
