@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     Car car;
 
+
     private void Awake()
     {
         car = GetComponent<Car>();
