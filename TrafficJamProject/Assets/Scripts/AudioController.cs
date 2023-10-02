@@ -2,6 +2,9 @@ using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class AudioController : MonoBehaviour
 {
@@ -14,9 +17,13 @@ public class AudioController : MonoBehaviour
 
     [SerializeField] AudioClip music;
 
-    public float masterVolume;
+    public float masterVolume = 1;
+    [SerializeField] AudioMixer mixer;
+
+    [SerializeField] GameObject volSlider;
 
     public static AudioController Instance { get; private set; }
+
 
     private void Awake()
     {
@@ -48,27 +55,33 @@ public class AudioController : MonoBehaviour
         Tween.AudioVolume(generalSource, 0, generalSource.volume, 1f, Ease.InQuart);
         Tween.AudioVolume(musicSource, 0, musicSource.volume, 1f, Ease.InQuart);
 
-        if(ES3.KeyExists("Volume"))
+        if (ES3.KeyExists("Volume")) 
+        {
             masterVolume = ES3.Load<float>("Volume");
+            volSlider.GetComponent<UnityEngine.UI.Slider>().value = masterVolume;
+        }
+            
+    }
+
+    public void SetVolume(float vol)
+    {
+        masterVolume = vol;
+        ES3.Save("Volume", masterVolume);
+        mixer.SetFloat("MasterVolume", Mathf.Log10(vol) * 20);
     }
 
     public void PlaySound(AudioClip clip, float volume)
     {
-        generalSource.PlayOneShot(clip, volume);
+        generalSource.PlayOneShot(clip, volume * 3);
     }
 
     public void PlaySpatialSound(AudioClip clip, Vector3 pos, float volume)
     {
         GameObject spatial = Instantiate(spatialSource, pos, Quaternion.identity, transform);
         AudioSource source = spatial.GetComponent<AudioSource>();
-        source.PlayOneShot(clip, volume);
+        source.PlayOneShot(clip, volume * 3);
 
         Destroy(spatial, 3f);
-    }
-
-    public void PlayMusic(AudioClip clip, float volume)
-    {
-        musicSource.PlayOneShot(clip, volume);
     }
 
     void PlayGameOverSound()
@@ -77,7 +90,11 @@ public class AudioController : MonoBehaviour
         Tween.AudioVolume(musicSource, 0, 1.5f, Ease.InOutSine)
         .OnComplete(() =>
         {
-            Tween.AudioVolume(generalSource, 0, 2f, Ease.InOutSine);
+            Tween.Custom(masterVolume, 0, 2f, (val) =>
+            {
+                mixer.SetFloat("MasterVolume", Mathf.Log10(val) * 20);
+            });
+
             musicSource.clip = gameOverSound;
             musicSource.Play();
             Tween.AudioVolume(musicSource, startVol, 1, Ease.InOutSine);
