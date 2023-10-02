@@ -1,7 +1,9 @@
 using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -20,6 +22,9 @@ public class GameController : MonoBehaviour
     public float timeRemaining;
 
     public static GameController Instance;
+
+    public delegate void GameStarted();
+    public static event GameStarted OnGameStarted;
 
     public delegate void PlayerWon();
     public static event PlayerWon OnPlayerWon;
@@ -79,11 +84,17 @@ public class GameController : MonoBehaviour
             endPosY += startYPos;
 
             Instantiate(hospitalPrefab, new Vector2(3.25f, endPosY), Quaternion.identity);
+
+            OnGameStarted?.Invoke();
         }
         if (gameOver && !triggeredGameOver)
         {
             triggeredGameOver = true;
             OnPlayerDeath?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
         }
     }
 
@@ -99,6 +110,16 @@ public class GameController : MonoBehaviour
             OnPlayerWon?.Invoke();
             print("YOU WON GOOD JOB");
         }
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
 

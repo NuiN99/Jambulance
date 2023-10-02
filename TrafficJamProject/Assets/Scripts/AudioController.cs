@@ -9,7 +9,9 @@ public class AudioController : MonoBehaviour
     [SerializeField] AudioSource musicSource;
 
     [SerializeField] AudioClip gameOverSound;
-    
+
+    [SerializeField] AudioClip music;
+
     public static AudioController Instance { get; private set; }
 
     private void Awake()
@@ -27,10 +29,14 @@ public class AudioController : MonoBehaviour
     private void OnEnable()
     {
         GameController.OnPlayerDeath += PlayGameOverSound;
+        GameController.OnGameStarted += OnGameStart;
+        GameController.OnPlayerWon += OnGameWin;
     }
     private void OnDisable()
     {
         GameController.OnPlayerDeath -= PlayGameOverSound;
+        GameController.OnGameStarted -= OnGameStart;
+        GameController.OnPlayerWon += OnGameWin;
     }
 
     private void Start()
@@ -65,5 +71,15 @@ public class AudioController : MonoBehaviour
             musicSource.Play();
             Tween.AudioVolume(musicSource, startVol, 2, Ease.InOutSine);
         });
+    }
+
+    void OnGameStart()
+    {
+        musicSource.Play();
+    }
+
+    void OnGameWin()
+    {
+        Tween.AudioVolume(musicSource, 0, 3, Ease.InOutSine);
     }
 }

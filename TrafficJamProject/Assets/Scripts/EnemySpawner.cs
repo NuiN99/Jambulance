@@ -86,7 +86,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if ((Time.time - lastSpawnTime) > CurrSpawnInterval())
+        if (GameController.Instance.started && (Time.time - lastSpawnTime) > CurrSpawnInterval())
         {
             SpawnEnemy();
             lastSpawnTime = Time.time;
@@ -143,7 +143,7 @@ public class EnemySpawner : MonoBehaviour
     //Returns the ramp multiplier [0, 1] based on how long we are along the ramp time
     float RampMultiplier()
     {
-        float currTime = Time.time;
+        float currTime = GameController.Instance.startTime - GameController.Instance.timeRemaining;
         return Mathf.Min((currTime - startTime) / rampTime, 1f);
     }
 }
