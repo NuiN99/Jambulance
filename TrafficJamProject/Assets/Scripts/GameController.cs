@@ -1,3 +1,4 @@
+using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,15 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject hospitalPrefab;
 
-    [SerializeField] float startTime = 90f;
+    public float startTime = 90f;
     public float timeRemaining;
 
     public static GameController Instance;
+
+    public delegate void PlayerWon();
+    public static event PlayerWon OnPlayerWon;
+
+    bool won = false;
 
     private void Awake()
     {
@@ -76,8 +82,10 @@ public class GameController : MonoBehaviour
         progress01 = 1 - (distToEnd / endPosY);
         progress01 = Mathf.Clamp01(progress01);
 
-        if(progress01 >= 1)
+        if(!won && progress01 >= 1)
         {
+            won = true;
+            OnPlayerWon?.Invoke();
             print("YOU WON GOOD JOB");
         }
     }

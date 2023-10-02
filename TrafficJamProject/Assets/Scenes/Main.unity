@@ -2591,10 +2591,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4700381344855282008, guid: 9977019e899a9b944acd5a701cafdb40, type: 3}
-      propertyPath: hospitalPrefab
-      value: 
-      objectReference: {fileID: 2891205242064319198, guid: d33e9c148875d7f40bdeda830597a0b5, type: 3}
     - target: {fileID: 5681507809342234658, guid: 9977019e899a9b944acd5a701cafdb40, type: 3}
       propertyPath: m_Name
       value: GameController
