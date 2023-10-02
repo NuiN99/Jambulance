@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 3070981906066037793, guid: 8a4607b076cc7a24f87f94cab57aacab, type: 3}
   - {fileID: 3070981906066037793, guid: 73ce1204269c58049a2fe1d6cb011b35, type: 3}
   - {fileID: 3070981906066037793, guid: cc69b20f968fe634cb14e7bda029a659, type: 3}
+  - {fileID: 3070981906066037793, guid: 4fb8f0def38d7a548981219fcf136e8e, type: 3}
   segmentLength: 10
   maxSegments: 6
   spawnDistance: 10
