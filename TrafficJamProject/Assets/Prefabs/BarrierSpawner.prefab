@@ -48,4 +48,4 @@ MonoBehaviour:
   barrierChance: 0.6
   barrierLength: 2.5
   maxBarriers: 20
-  spawnDistance: 5
+  spawnDistance: 15
