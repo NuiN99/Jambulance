@@ -81,6 +81,7 @@ public class AudioController : MonoBehaviour
 
     void OnGameStart()
     {
+        musicSource.clip = null;
         musicSource.PlayOneShot(musicClip);
     }
 
