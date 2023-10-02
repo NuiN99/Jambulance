@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4056222342450514849}
   - component: {fileID: -4822784560074684489}
   m_Layer: 0
-  m_Name: SmokeEffect
+  m_Name: SmokeEffect_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,8 +223,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.3137255}
-      maxColor: {r: 0, g: 0, b: 0, a: 0.3137255}
+      minColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.78431374}
+      maxColor: {r: 0, g: 0, b: 0, a: 0.78431374}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -870,9 +870,9 @@ ParticleSystem:
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 7
-      minScalar: 4
+      minMaxState: 0
+      scalar: 0
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
