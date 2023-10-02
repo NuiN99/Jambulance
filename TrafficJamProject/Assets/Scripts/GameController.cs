@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
 
     public float startYPos;
 
+    [SerializeField] GameObject hospitalPrefab;
+
     [SerializeField] float startTime = 90f;
     public float timeRemaining;
 
@@ -63,6 +65,8 @@ public class GameController : MonoBehaviour
 
             startYPos = player.transform.position.y;
             endPosY += startYPos;
+
+            Instantiate(hospitalPrefab, new Vector2(3.25f, endPosY), Quaternion.identity);
         }
     }
 
