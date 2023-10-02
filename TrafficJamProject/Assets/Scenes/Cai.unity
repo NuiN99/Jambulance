@@ -2470,7 +2470,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalOffset: 2
+  smoothSpeed: 2
   targetPos: {x: 0, y: 0, z: 0}
+  minCamSize: 4
+  maxCamSize: 7
+  cameraScaleExponent: 2
 --- !u!114 &8845450878359435953
 MonoBehaviour:
   m_ObjectHideFlags: 0
