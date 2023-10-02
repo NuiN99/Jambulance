@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
 
     public float startYPos;
 
-    [SerializeField] float startTime = 90f;
+    public float startTime = 90f;
     public float timeRemaining;
 
     public static GameController Instance;
