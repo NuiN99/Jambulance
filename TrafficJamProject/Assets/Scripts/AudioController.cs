@@ -52,7 +52,9 @@ public class AudioController : MonoBehaviour
 
     public void PlaySpatialSound(AudioClip clip, Vector3 pos, float volume)
     {
-        AudioSource.PlayClipAtPoint(clip, pos, volume);
+        GameObject spatial = Instantiate(spatialSource, pos, Quaternion.identity, transform);
+        AudioSource source = spatial.GetComponent<AudioSource>();
+        source.PlayOneShot(clip, volume);
     }
 
     public void PlayMusic(AudioClip clip, float volume)
