@@ -58,6 +58,17 @@ public class GameController : MonoBehaviour
         player.gameObject.AddComponent<Enemy>();
 
         timeRemaining = startTime;
+
+        
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
+    {
+        
     }
 
     private void Update()

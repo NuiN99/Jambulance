@@ -25,6 +25,8 @@ public class PlayerHUD : MonoBehaviour
 
     [SerializeField] GameObject winGameFadeSprite;
 
+    [SerializeField] GameObject highScoreText;
+
     private void OnEnable()
     {
         GameController.OnGameStarted += OnGameStarted;
@@ -52,6 +54,7 @@ public class PlayerHUD : MonoBehaviour
 
         titleText.gameObject.SetActive(true);
         instructionsText.gameObject.SetActive(true);
+        highScoreText.gameObject.SetActive(true);
     }
 
     private void LateUpdate()
@@ -96,7 +99,9 @@ public class PlayerHUD : MonoBehaviour
         gameOverFadeSprite.SetActive(false);
 
         resetButton.gameObject.SetActive(false);
-        quitButton.gameObject.SetActive(false); 
+        quitButton.gameObject.SetActive(false);
+
+        highScoreText.gameObject.SetActive(false);
     }
 
     void OnGameStarted()
@@ -105,6 +110,11 @@ public class PlayerHUD : MonoBehaviour
 
         progressionSlider.gameObject.SetActive(true);
         timeRemainingText.gameObject.SetActive(true);
+
+        Tween.Custom(0, 1, .2f, (val) => val = 1).OnComplete(() =>
+        {
+            Tween.Scale(timeRemainingText.transform, 1.25f, .25f, Ease.OutElastic, -1, CycleMode.Yoyo, 0.75f);
+        });
     }
 
     void OnGameOver()
