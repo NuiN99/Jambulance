@@ -24,7 +24,13 @@ public class GameController : MonoBehaviour
     public delegate void PlayerWon();
     public static event PlayerWon OnPlayerWon;
 
-    bool won = false;
+    public delegate void PlayerDied();
+    public static event PlayerDied OnPlayerDeath;
+
+    public bool won = false;
+
+    public bool gameOver = false;
+    bool triggeredGameOver = false;
 
     private void Awake()
     {
@@ -73,6 +79,11 @@ public class GameController : MonoBehaviour
             endPosY += startYPos;
 
             Instantiate(hospitalPrefab, new Vector2(3.25f, endPosY), Quaternion.identity);
+        }
+        if (gameOver && !triggeredGameOver)
+        {
+            triggeredGameOver = true;
+            OnPlayerDeath?.Invoke();
         }
     }
 

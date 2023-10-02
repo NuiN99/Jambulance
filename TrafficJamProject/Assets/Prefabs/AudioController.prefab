@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generalSource: {fileID: 4221864944145825214}
   musicSource: {fileID: 5882427274558181743}
+  gameOverSound: {fileID: 8300000, guid: 4c0a6e092a7e77442aa67d6e18e88e73, type: 3}
 --- !u!82 &4221864944145825214
 AudioSource:
   m_ObjectHideFlags: 0
