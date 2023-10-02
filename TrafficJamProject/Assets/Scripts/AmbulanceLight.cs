@@ -15,17 +15,35 @@ public class AmbulanceLight : MonoBehaviour
 
     private void Start()
     {
+        leftLight.SetActive(false);
+        rightLight.SetActive(false);
+
         health = GetComponent<Health>();
+    }
+
+    private void OnEnable()
+    {
+        GameController.OnGameStarted += RenableLights;   
+    }
+    private void OnDisable()
+    {
+        GameController.OnGameStarted -= RenableLights;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - lastBlink > blinkRate)
+        if (GameController.Instance.started && Time.time - lastBlink > blinkRate)
         {
             lastBlink = Time.time;
             SwapLights();
         }
+    }
+
+    void RenableLights()
+    {
+        leftLight.SetActive(true);
+        rightLight.SetActive(true);
     }
 
     void SwapLights()
