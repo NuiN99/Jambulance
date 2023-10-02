@@ -30,4 +30,6 @@ public class CarStatsSO : ScriptableObject
 
     public float heavyImpactForceThreshold = 4f;
     public float heavyImpactMultiplier = 2f;
+
+    public float explosionForce = 5f;
 }

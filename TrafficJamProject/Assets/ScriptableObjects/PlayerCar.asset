@@ -28,3 +28,4 @@ MonoBehaviour:
   maxAcceleration: 2
   heavyImpactForceThreshold: 4
   heavyImpactMultiplier: 2
+  explosionForce: 17

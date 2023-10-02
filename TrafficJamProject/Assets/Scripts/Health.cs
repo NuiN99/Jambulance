@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] float health;
+    public float health;
     [SerializeField] float heavyImpactForceThreshold;
     [SerializeField] float heavyImpactMultiplier;
 

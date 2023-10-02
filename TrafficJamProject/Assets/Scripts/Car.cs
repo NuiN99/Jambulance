@@ -9,7 +9,6 @@ public class Car : MonoBehaviour, IDestructable
 {
     public CarStatsSO stats;
     public Rigidbody2D rb;
-    public ScreenShake sc;
     SpriteRenderer sr;
 
     public float startSpeed;
@@ -26,6 +25,8 @@ public class Car : MonoBehaviour, IDestructable
     [SerializeField] GameObject explosionEffect;
     [SerializeField] GameObject smokeEffect;
 
+    ParticleSystem currentSmokeEffect;
+
     [SerializeField] AudioClip[] crashSounds;
 
     private void Awake()
@@ -34,7 +35,6 @@ public class Car : MonoBehaviour, IDestructable
         if (rb == null)
             rb = GetComponentInChildren<Rigidbody2D>();
 
-        sc = Camera.main.GetComponent<ScreenShake>();
 
         sr = GetComponent<SpriteRenderer>();
         if(sr == null)
@@ -48,6 +48,9 @@ public class Car : MonoBehaviour, IDestructable
         {
             sr.sprite = stats.possibleSprites[Random.Range(0, stats.possibleSprites.Length)];
         }
+
+        currentSmokeEffect = Instantiate(smokeEffect).GetComponent<ParticleSystem>();
+        currentSmokeEffect.GetComponent<MoveToTarget>().target = transform;
 
         rb.drag = stats.drag;
         rb.angularDrag = stats.angularDrag;
@@ -66,7 +69,10 @@ public class Car : MonoBehaviour, IDestructable
         {
             curAccel = stats.maxAcceleration;
         }
-            
+
+        var emission = currentSmokeEffect.emission;
+        float lerpFactor = 1 - ((GetComponent<Health>().health / stats.health));
+        emission.rateOverTime = Mathf.Lerp(0, 20, lerpFactor);
     }
 
     public void MoveInDirection(Vector2 dir, float speed)
@@ -153,8 +159,7 @@ public class Car : MonoBehaviour, IDestructable
                 curAccel -= stats.maxAcceleration / 1.25f;
             }
 
-            //screen shake
-            sc.StartCoroutine(sc.ShakeScreen(collisionForce));
+            ScreenShake.Instance.ShakeScreen(collisionForce, .25f);
         }
 
         curAccel -= collisionForce / 50;
@@ -201,8 +206,10 @@ public class Car : MonoBehaviour, IDestructable
     {
         if (dead) return;
 
+        Destroy(gameObject, 30f);
+
         dead = true;
-        Tween.Color(sr, sr.color, new Color(.1f, .1f, .1f, 1f), .5f, Ease.OutCubic);
+        Tween.Color(sr, sr.color, new Color(.2f, .2f, .2f, 2f), 2f, Ease.OutCubic);
         var effect = Instantiate(explosionEffect, transform.position, Random.rotation);
         
         effect.AddComponent<MoveToTarget>().target = transform;
@@ -210,6 +217,26 @@ public class Car : MonoBehaviour, IDestructable
         Invoke(nameof(SpawnSmokeDelayed), 2f);
 
         Destroy(effect, 2f);
+
+        float distFromCam = Vector2.Distance((Vector2)Camera.main.transform.position, (Vector2)transform.position);
+        ScreenShake.Instance.ShakeScreen(10f / distFromCam, 0.25f);
+
+        AddForceToCarsHitByExplosion();   
+    }
+
+    void AddForceToCarsHitByExplosion()
+    {
+        RaycastHit2D[] circleCast = Physics2D.CircleCastAll(transform.position, 4f, Vector3.zero, 0);
+        foreach (var hit in circleCast)
+        {
+            if (hit.collider.gameObject == gameObject) continue;
+            if (hit.collider.TryGetComponent(out Car car)/* && !car.GetComponent<Player>()*/)
+            {
+                Vector2 forceDir = (hit.point - (Vector2)transform.position).normalized;
+                float forceDist = (Vector2.Distance(transform.position, hit.point));
+                car.rb.AddForce((stats.explosionForce / forceDist) * forceDir, ForceMode2D.Impulse);
+            }
+        }
     }
 
     void SpawnSmokeDelayed()
