@@ -27,6 +27,8 @@ public class PlayerHUD : MonoBehaviour
 
     [SerializeField] GameObject highScoreText;
 
+    [SerializeField] GameObject winScreen;
+
     private void OnEnable()
     {
         GameController.OnGameStarted += OnGameStarted;
@@ -50,6 +52,8 @@ public class PlayerHUD : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1f;
+
         DisableAll();
 
         titleText.gameObject.SetActive(true);
@@ -59,7 +63,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameController.Instance.started)
+        if (GameController.Instance.started && !GameController.Instance.won)
         {
             progressionSlider.UpdateValue(GameController.Instance.progress01);
 
@@ -98,10 +102,14 @@ public class PlayerHUD : MonoBehaviour
         gameOverText.SetActive(false);
         gameOverFadeSprite.SetActive(false);
 
+        pauseMenu.gameObject.SetActive(false);
+
         resetButton.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
 
         highScoreText.gameObject.SetActive(false);
+
+        winScreen.SetActive(false);
     }
 
     void OnGameStarted()
@@ -130,6 +138,8 @@ public class PlayerHUD : MonoBehaviour
         winGameFadeSprite.SetActive(true);
 
         Tween.Alpha(winGameFadeSprite.GetComponent<SpriteRenderer>(), 1f, 3f, Ease.Linear);
+
+        Invoke("ShowWinScreen", 4f);
     }
 
     void ShowGameOverItems()
@@ -142,17 +152,19 @@ public class PlayerHUD : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0;
-        TogglePauseMenu();
+        pauseMenu.SetActive(true);
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
-        TogglePauseMenu();
+        pauseMenu.SetActive(false);
     }
 
-    public void TogglePauseMenu()
+    void ShowWinScreen()
     {
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        Time.timeScale = 0;
+
+        winScreen.SetActive(true);
     }
 }
