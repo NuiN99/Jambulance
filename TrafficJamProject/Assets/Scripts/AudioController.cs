@@ -60,7 +60,7 @@ public class AudioController : MonoBehaviour
             masterVolume = ES3.Load<float>("Volume");
             volSlider.GetComponent<UnityEngine.UI.Slider>().value = masterVolume;
         }
-            
+        mixer.SetFloat("MasterVolume", Mathf.Log10(masterVolume) * 20);
     }
 
     public void SetVolume(float vol)
