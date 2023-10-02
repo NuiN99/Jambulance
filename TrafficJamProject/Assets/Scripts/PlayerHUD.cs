@@ -65,7 +65,7 @@ public class PlayerHUD : MonoBehaviour
 
             int minutes = Mathf.FloorToInt(GameController.Instance.timeRemaining / 60);
             int seconds = Mathf.FloorToInt(GameController.Instance.timeRemaining % 60);
-            timeRemainingText.text = string.Format("{0:0}:{1:00}:0:00", minutes, seconds);
+            timeRemainingText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
         }
     }
 
@@ -110,6 +110,11 @@ public class PlayerHUD : MonoBehaviour
 
         progressionSlider.gameObject.SetActive(true);
         timeRemainingText.gameObject.SetActive(true);
+
+        Tween.Custom(0, 1, .2f, (val) => val = 1).OnComplete(() =>
+        {
+            Tween.Scale(timeRemainingText.transform, 1.25f, .25f, Ease.OutElastic, -1, CycleMode.Yoyo, 0.75f);
+        });
     }
 
     void OnGameOver()
