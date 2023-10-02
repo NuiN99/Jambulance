@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4059410046566777640}
   - component: {fileID: 6190063141439511011}
   m_Layer: 0
-  m_Name: Enemy_Car
+  m_Name: Enemy_Car_Wide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 2c2691df92d587349bbdea9ffc110a46, type: 2}
   rb: {fileID: 0}
-  sc: {fileID: 0}
   startSpeed: 0
   targetSpeed: 0
   colliding: 0
@@ -224,5 +223,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 0.55, y: 1}
   m_EdgeRadius: 0

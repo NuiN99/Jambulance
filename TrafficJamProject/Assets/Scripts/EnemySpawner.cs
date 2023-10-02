@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] RoadData roadData;
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] List<GameObject> enemyPrefabs;
 
     [SerializeField] float startSpawnCount = 25;
     [SerializeField] float spawnInterval;
@@ -53,8 +53,8 @@ public class EnemySpawner : MonoBehaviour
         }
         Physics2D.queriesStartInColliders = false;
 
-
-        Enemy enemy = Instantiate(enemyPrefab, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+        GameObject chosenPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        Enemy enemy = Instantiate(chosenPrefab, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
         enemy.currentLane = lane;
         enemy.roadData = roadData;
 
