@@ -24,6 +24,8 @@ public class PlayerHUD : MonoBehaviour
 
     [SerializeField] GameObject winGameFadeSprite;
 
+    [SerializeField] GameObject highScoreText;
+
     private void OnEnable()
     {
         GameController.OnGameStarted += OnGameStarted;
@@ -51,6 +53,7 @@ public class PlayerHUD : MonoBehaviour
 
         titleText.gameObject.SetActive(true);
         instructionsText.gameObject.SetActive(true);
+        highScoreText.gameObject.SetActive(true);
     }
 
     private void LateUpdate()
@@ -61,7 +64,7 @@ public class PlayerHUD : MonoBehaviour
 
             int minutes = Mathf.FloorToInt(GameController.Instance.timeRemaining / 60);
             int seconds = Mathf.FloorToInt(GameController.Instance.timeRemaining % 60);
-            timeRemainingText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+            timeRemainingText.text = string.Format("{0:0}:{1:00}:0:00", minutes, seconds);
         }
     }
 
@@ -77,7 +80,9 @@ public class PlayerHUD : MonoBehaviour
         gameOverFadeSprite.SetActive(false);
 
         resetButton.gameObject.SetActive(false);
-        quitButton.gameObject.SetActive(false); 
+        quitButton.gameObject.SetActive(false);
+
+        highScoreText.gameObject.SetActive(false);
     }
 
     void OnGameStarted()
