@@ -6,8 +6,7 @@ public class Player : MonoBehaviour
 {
     Car car;
 
-    public AudioSource sirenSource;
-
+  
     private void Awake()
     {
         car = GetComponent<Car>();
@@ -49,24 +48,6 @@ public class Player : MonoBehaviour
         car.targetSpeed = car.stats.moveSpeed;
 
         GetComponent<Health>().ResetStatsToCarDefault();
-
-        GameController.OnPlayerDeath += ToggleSiren;
-        GameController.OnGameStarted += PlaySiren;
     }
 
-    private void OnDisable()
-    { 
-        GameController.OnGameStarted -= PlaySiren;
-        GameController.OnPlayerDeath -= ToggleSiren;
-    }
-
-    void PlaySiren()
-    {
-        sirenSource.Play();
-    }
-
-    void ToggleSiren()
-    {
-        sirenSource.Pause();
-    }
 }
