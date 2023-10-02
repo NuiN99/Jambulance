@@ -2469,12 +2469,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4171735f9a303fa4cba0eec4aa7a73a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalOffset: 2
+  verticalOffset: 0.5
   smoothSpeed: 2
   targetPos: {x: 0, y: 0, z: 0}
   minCamSize: 4
   maxCamSize: 7
   cameraScaleExponent: 2
+  speedFactor: 1
 --- !u!114 &8845450878359435953
 MonoBehaviour:
   m_ObjectHideFlags: 0
