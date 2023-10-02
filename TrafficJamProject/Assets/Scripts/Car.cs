@@ -22,6 +22,8 @@ public class Car : MonoBehaviour, IDestructable
 
     bool dead = false;
 
+    [SerializeField] float smokeEmissionMax = 20f;
+
     [SerializeField] GameObject explosionEffect;
     [SerializeField] GameObject smokeEffect;
 
@@ -70,9 +72,14 @@ public class Car : MonoBehaviour, IDestructable
             curAccel = stats.maxAcceleration;
         }
 
-        var emission = currentSmokeEffect.emission;
-        float lerpFactor = 1 - ((GetComponent<Health>().health / stats.health));
-        emission.rateOverTime = Mathf.Lerp(0, 20, lerpFactor);
+        if(TryGetComponent(out Health health) && health.health <= stats.health / 2)
+        {
+            var emission = currentSmokeEffect.emission;
+            float lerpFactor = 1 - ((health.health + (stats.health / 2)) / stats.health);
+
+            emission.rateOverTime = Mathf.Lerp(0, smokeEmissionMax, lerpFactor);
+        }
+        
     }
 
     public void MoveInDirection(Vector2 dir, float speed)
