@@ -130,8 +130,6 @@ public class PlayerHUD : MonoBehaviour
         winGameFadeSprite.SetActive(true);
 
         Tween.Alpha(winGameFadeSprite.GetComponent<SpriteRenderer>(), 1f, 5f, Ease.Linear);
-
-        Invoke("ShowWinGameScreen", 5f);
     }
 
     void ShowGameOverItems()
@@ -139,11 +137,6 @@ public class PlayerHUD : MonoBehaviour
         gameOverText.SetActive(true);
         resetButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
-    }
-
-    void ShowWinGameScreen()
-    {
-        SceneManager.LoadScene("WinnerWinner");
     }
 
     public void PauseGame()
