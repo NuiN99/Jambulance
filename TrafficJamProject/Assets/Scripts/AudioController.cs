@@ -55,6 +55,8 @@ public class AudioController : MonoBehaviour
         GameObject spatial = Instantiate(spatialSource, pos, Quaternion.identity, transform);
         AudioSource source = spatial.GetComponent<AudioSource>();
         source.PlayOneShot(clip, volume);
+
+        Destroy(spatial, 3f);
     }
 
     public void PlayMusic(AudioClip clip, float volume)
@@ -65,7 +67,7 @@ public class AudioController : MonoBehaviour
     void PlayGameOverSound()
     {
         float startVol = musicSource.volume;
-        Tween.AudioVolume(musicSource, 0, 3f, Ease.InOutSine)
+        Tween.AudioVolume(musicSource, 0, 1.5f, Ease.InOutSine)
         .OnComplete(() =>
         {
             Tween.AudioVolume(generalSource, 0, 2f, Ease.InOutSine);
