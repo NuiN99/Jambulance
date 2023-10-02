@@ -213,7 +213,8 @@ public class Car : MonoBehaviour, IDestructable
     {
         if (dead) return;
 
-        Destroy(gameObject, 30f);
+        if(!GetComponent<Player>())
+            Destroy(gameObject, 30f);
 
         dead = true;
         Tween.Color(sr, sr.color, new Color(.2f, .2f, .2f, 2f), 2f, Ease.OutCubic);
@@ -250,7 +251,9 @@ public class Car : MonoBehaviour, IDestructable
     {
         var smoke = Instantiate(smokeEffect, transform.position, Quaternion.identity);
         smoke.AddComponent<MoveToTarget>().target = transform;
-        Destroy(smoke, 30f);
+
+        if (!GetComponent<Player>())
+            Destroy(smoke, 30f);
     }
 }
 
