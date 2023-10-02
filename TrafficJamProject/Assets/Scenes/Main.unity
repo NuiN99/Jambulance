@@ -2641,7 +2641,7 @@ MonoBehaviour:
   maxSpeedIncrement: 100
   spawnIntervalMin: 1
   spawnIntervalMax: 0.05
-  rampTime: 90
+  rampTime: 50
 --- !u!4 &1585014607
 Transform:
   m_ObjectHideFlags: 0
