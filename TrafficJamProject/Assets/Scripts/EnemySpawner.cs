@@ -8,7 +8,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] RoadData roadData;
     [SerializeField] List<GameObject> enemyPrefabs;
 
-    [SerializeField] float startSpawnCount = 25;
     [SerializeField] float spawnInterval;
 
     [SerializeField] float minSpeedIncrement = 0f;
