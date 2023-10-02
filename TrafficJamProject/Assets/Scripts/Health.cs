@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 
@@ -32,7 +31,8 @@ public class Health : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         float collisionForce = collision.relativeVelocity.magnitude;
-        if(collisionForce > 1f)
+
+        if(collisionForce > 1.5f)
             health -= collisionForce * (collisionForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
         if (!dead && health < 0 && TryGetComponent(out IDestructable destructable))
         {

@@ -1,3 +1,4 @@
+using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,12 @@ public class AudioController : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
+        Tween.AudioVolume(generalSource, 0, generalSource.volume, 1f, Ease.InQuart);
+        Tween.AudioVolume(musicSource, 0, musicSource.volume, 1f, Ease.InQuart);
     }
 
     public void PlaySound(AudioClip clip, float volume)

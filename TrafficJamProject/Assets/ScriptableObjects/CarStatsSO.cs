@@ -6,6 +6,7 @@ using UnityEngine;
 public class CarStatsSO : ScriptableObject
 {
     public Sprite[] possibleSprites;
+    public AudioClip[] possibleDrivingLoopClips;
 
     public float moveSpeed;
     public float turnSpeed;

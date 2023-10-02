@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -38,7 +37,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         player.enabled = false;
-        player.AddComponent<Enemy>();
+        player.gameObject.AddComponent<Enemy>();
 
         timeRemaining = startTime;
     }

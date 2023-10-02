@@ -1748,8 +1748,8 @@ MonoBehaviour:
   spawnInterval: 0.25
   minSpeedIncrement: 100
   maxSpeedIncrement: 10
-  spawnIntervalMin: 3
-  spawnIntervalMax: 0.5
+  spawnIntervalMin: 1
+  spawnIntervalMax: 0.05
   rampTime: 90
 --- !u!4 &1585014607
 Transform:
