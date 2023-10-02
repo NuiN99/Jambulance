@@ -99,8 +99,11 @@ public class GameController : MonoBehaviour
         }
         if (gameOver && !triggeredGameOver)
         {
-            triggeredGameOver = true;
-            OnPlayerDeath?.Invoke();
+            if (!won)
+            {
+                triggeredGameOver = true;
+                OnPlayerDeath?.Invoke();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {

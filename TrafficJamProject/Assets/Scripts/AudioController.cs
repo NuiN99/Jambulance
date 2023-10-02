@@ -38,7 +38,7 @@ public class AudioController : MonoBehaviour
     {
         GameController.OnPlayerDeath -= PlayGameOverSound;
         GameController.OnGameStarted -= OnGameStart;
-        GameController.OnPlayerWon += OnGameWin;
+        GameController.OnPlayerWon -= OnGameWin;
     }
 
     private void Start()
@@ -88,6 +88,7 @@ public class AudioController : MonoBehaviour
     void OnGameWin()
     {
         Tween.AudioVolume(musicSource, 0, 3, Ease.InOutSine);
+        Tween.AudioVolume(generalSource, 0, 3, Ease.InOutSine);
     }
 
     public void UpdateVolume(float value)
