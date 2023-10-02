@@ -31,6 +31,8 @@ public class Car : MonoBehaviour, IDestructable
 
     [SerializeField] AudioClip[] crashSounds;
 
+    AudioSource source;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,6 +43,8 @@ public class Car : MonoBehaviour, IDestructable
         sr = GetComponent<SpriteRenderer>();
         if(sr == null)
             sr = GetComponentInChildren<SpriteRenderer>();
+
+        source = GetComponent<AudioSource>();
     }
 
 
@@ -50,6 +54,9 @@ public class Car : MonoBehaviour, IDestructable
         {
             sr.sprite = stats.possibleSprites[Random.Range(0, stats.possibleSprites.Length)];
         }
+
+        source.clip = stats.possibleDrivingLoopClips[Random.Range(0, stats.possibleDrivingLoopClips.Length)];
+        source.Play();
 
         currentSmokeEffect = Instantiate(smokeEffect).GetComponent<ParticleSystem>();
         currentSmokeEffect.GetComponent<MoveToTarget>().target = transform;
@@ -65,7 +72,9 @@ public class Car : MonoBehaviour, IDestructable
         {
             curAccel = 0;
         }
-            
+
+        source.pitch = rb.velocity.magnitude / 2;
+        source.pitch = Mathf.Clamp(source.pitch, 0, 3);
 
         if(curAccel > stats.maxAcceleration)
         {

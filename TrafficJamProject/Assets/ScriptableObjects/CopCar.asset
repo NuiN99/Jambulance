@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleSprites:
   - {fileID: 21300000, guid: bdd0e0a6f1d549b46979b0f8b230b1d4, type: 3}
+  possibleDrivingLoopClips:
+  - {fileID: 8300000, guid: 9732ce4eafb8d8349933f2d89514919c, type: 3}
+  - {fileID: 8300000, guid: b004a45f08554724a8ada0b679989d45, type: 3}
+  - {fileID: 8300000, guid: c69d0dc197e6b824e96e31acf8ab95c6, type: 3}
+  - {fileID: 8300000, guid: f252a4906fac8144a8dc31b0b2b8c7d2, type: 3}
+  - {fileID: 8300000, guid: dc23980a71c5a0a49bf1adbbbac6dc79, type: 3}
+  - {fileID: 8300000, guid: 8b17c3831d479134c9b3baeadf7ff675, type: 3}
   moveSpeed: 100
   turnSpeed: 0.5
   brakeStrength: 1.1
@@ -28,3 +35,4 @@ MonoBehaviour:
   maxAcceleration: 1.25
   heavyImpactForceThreshold: 4
   heavyImpactMultiplier: 2
+  explosionForce: 5
