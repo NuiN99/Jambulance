@@ -7,6 +7,12 @@ public class GameController : MonoBehaviour
 {
     Player player;
     public bool started = false;
+
+    public float endPosY;
+    public float distToEnd;
+    public float progress01;
+
+
     private void Awake()
     {
         Physics2D.queriesStartInColliders = false;
@@ -28,9 +34,13 @@ public class GameController : MonoBehaviour
             carsController.SwitchStats(player.GetComponent<Car>(), carsController.playerStats);
             Destroy(player.GetComponent<Enemy>());
             player.enabled = true;
-
-
         }
+    }
+
+    private void LateUpdate()
+    {
+        distToEnd = endPosY - player.transform.position.y;
+        progress01 = 1 - (distToEnd / endPosY);
     }
 }
 

@@ -692,6 +692,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   started: 0
+  endPosY: 250
+  distToEnd: 0
+  progress01: 0
 --- !u!4 &815603411
 Transform:
   m_ObjectHideFlags: 0
@@ -1334,6 +1337,9 @@ MonoBehaviour:
   spawnInterval: 0.03
   minSpeedIncrement: 0
   maxSpeedIncrement: 10
+  spawnIntervalMin: 0
+  spawnIntervalMax: 0
+  rampTime: 0
 --- !u!4 &1217616674
 Transform:
   m_ObjectHideFlags: 0
@@ -1436,6 +1442,9 @@ MonoBehaviour:
   spawnInterval: 0.25
   minSpeedIncrement: 100
   maxSpeedIncrement: 10
+  spawnIntervalMin: 5
+  spawnIntervalMax: 0.25
+  rampTime: 90
 --- !u!4 &1585014607
 Transform:
   m_ObjectHideFlags: 0
@@ -2253,7 +2262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8271714200262299485, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8271714200262299485, guid: d3fa33d29e5109644a1894e22ce00a30, type: 3}
       propertyPath: m_LocalPosition.z
