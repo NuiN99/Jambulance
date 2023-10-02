@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour
             startYPos = player.transform.position.y;
             endPosY += startYPos;
 
-            Instantiate(hospitalPrefab, new Vector2(3.25f, endPosY), Quaternion.identity);
+            Instantiate(hospitalPrefab, new Vector2(3.25f, endPosY+30), Quaternion.identity);
 
             OnGameStarted?.Invoke();
         }
