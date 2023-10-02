@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
     {
         distToEnd = endPosY - player.transform.position.y;
         progress01 = 1 - (distToEnd / endPosY);
+        progress01 = Mathf.Clamp01(progress01);
     }
 }
 
