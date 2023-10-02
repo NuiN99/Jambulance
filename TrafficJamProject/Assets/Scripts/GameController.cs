@@ -103,11 +103,6 @@ public class GameController : MonoBehaviour
                 OnPlayerDeath?.Invoke();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            QuitGame();
-        }
-       
     }
 
     private void LateUpdate()

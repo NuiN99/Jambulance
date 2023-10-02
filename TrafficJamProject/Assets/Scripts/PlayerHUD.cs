@@ -74,7 +74,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && GameController.Instance.started)
+        if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab)) && GameController.Instance.started)
         {
             if(Time.timeScale == 0)
             {
