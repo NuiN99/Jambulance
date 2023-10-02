@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dc23980a71c5a0a49bf1adbbbac6dc79, type: 3}
   - {fileID: 8300000, guid: 8b17c3831d479134c9b3baeadf7ff675, type: 3}
   moveSpeed: 100
-  turnSpeed: 0.5
+  turnSpeed: 0.01
   brakeStrength: 1.1
   drag: 5
   brakeDrag: 5
@@ -30,7 +30,7 @@ MonoBehaviour:
   mass: 2
   aggression: 0
   recoveryTime: 1.5
-  health: -7857.0767
+  health: 1
   accelSpeed: 5
   maxAcceleration: 1.25
   heavyImpactForceThreshold: 4

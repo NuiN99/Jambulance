@@ -75,12 +75,12 @@ public class Enemy : MonoBehaviour
         if (car.braking && Time.time - timeSinceLastHonk > honkDelay)
         {
             timeSinceLastHonk = Time.time;
-            AudioController.Instance.PlaySpatialSound(honkSounds[Random.Range(0, honkSounds.Length)], transform.position, 1f);
+            AudioController.Instance.PlaySpatialSound(honkSounds[Random.Range(0, honkSounds.Length)], transform.position, (1f / distFromCam) / 4);
         }
         if (car.braking && Time.time - timeSinceLastScreech > screechDelay)
         {
             timeSinceLastScreech = Time.time;
-            AudioController.Instance.PlaySpatialSound(screechSounds[Random.Range(0, screechSounds.Length)], transform.position, 1f);
+            AudioController.Instance.PlaySpatialSound(screechSounds[Random.Range(0, screechSounds.Length)], transform.position, (1f / distFromCam) / 4);
         }
     }
 

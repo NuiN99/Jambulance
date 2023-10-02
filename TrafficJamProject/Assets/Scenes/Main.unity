@@ -1746,8 +1746,8 @@ MonoBehaviour:
   - {fileID: 3846811093400722195, guid: f837d5eabd8522140a34b1e47112641a, type: 3}
   startSpawnCount: 0
   spawnInterval: 0.25
-  minSpeedIncrement: 100
-  maxSpeedIncrement: 10
+  minSpeedIncrement: 75
+  maxSpeedIncrement: 100
   spawnIntervalMin: 1
   spawnIntervalMax: 0.05
   rampTime: 90
@@ -2375,6 +2375,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5882427274558181743, guid: 81a7bea78d845d84986055915e0473a3, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 68e9ff24c53f3774cbd04a7ce540af76, type: 3}
     - target: {fileID: 6360454519987821909, guid: 81a7bea78d845d84986055915e0473a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

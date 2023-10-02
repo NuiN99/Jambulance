@@ -223,8 +223,10 @@ public class Car : MonoBehaviour, IDestructable
     {
         if (dead) return;
 
-        if(!GetComponent<Player>())
+        if (!GetComponent<Player>())
             Destroy(gameObject, 30f);
+        else
+            GameController.Instance.gameOver = true;
 
         dead = true;
         Tween.Color(sr, sr.color, new Color(.2f, .2f, .2f, 2f), 2f, Ease.OutCubic);

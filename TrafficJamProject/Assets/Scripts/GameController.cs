@@ -1,3 +1,4 @@
+using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +14,23 @@ public class GameController : MonoBehaviour
 
     public float startYPos;
 
+    [SerializeField] GameObject hospitalPrefab;
+
     public float startTime = 90f;
     public float timeRemaining;
 
     public static GameController Instance;
+
+    public delegate void PlayerWon();
+    public static event PlayerWon OnPlayerWon;
+
+    public delegate void PlayerDied();
+    public static event PlayerDied OnPlayerDeath;
+
+    public bool won = false;
+
+    public bool gameOver = false;
+    bool triggeredGameOver = false;
 
     private void Awake()
     {
@@ -63,6 +77,13 @@ public class GameController : MonoBehaviour
 
             startYPos = player.transform.position.y;
             endPosY += startYPos;
+
+            Instantiate(hospitalPrefab, new Vector2(3.25f, endPosY), Quaternion.identity);
+        }
+        if (gameOver && !triggeredGameOver)
+        {
+            triggeredGameOver = true;
+            OnPlayerDeath?.Invoke();
         }
     }
 
@@ -72,8 +93,10 @@ public class GameController : MonoBehaviour
         progress01 = 1 - (distToEnd / endPosY);
         progress01 = Mathf.Clamp01(progress01);
 
-        if(progress01 >= 1)
+        if(!won && progress01 >= 1)
         {
+            won = true;
+            OnPlayerWon?.Invoke();
             print("YOU WON GOOD JOB");
         }
     }
