@@ -1,3 +1,4 @@
+using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,27 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] float speedFactor;
 
+    float targetZoom = 5f;
+
     private void Awake()
     {
         cam = Camera.main;
         sc = GetComponent<ScreenShake>();
         player = FindObjectOfType<Player>(true).transform;   
+    }
+
+    private void OnEnable()
+    {
+        GameController.OnGameStarted += ZoomOut;
+    }
+    private void OnDisable()
+    {
+        GameController.OnGameStarted -= ZoomOut;
+    }
+
+    void ZoomOut() 
+    {
+        Tween.CameraOrthographicSize(cam, targetZoom, 1f, Ease.InOutQuad);
     }
 
     private void LateUpdate()
