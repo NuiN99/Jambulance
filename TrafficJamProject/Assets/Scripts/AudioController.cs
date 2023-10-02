@@ -10,6 +10,8 @@ public class AudioController : MonoBehaviour
     [SerializeField] GameObject spatialSource;
     [SerializeField] AudioClip gameOverSound;
 
+    [SerializeField] AudioClip musicClip;
+
     [SerializeField] AudioClip music;
 
     public static AudioController Instance { get; private set; }
@@ -79,7 +81,7 @@ public class AudioController : MonoBehaviour
 
     void OnGameStart()
     {
-        musicSource.Play();
+        musicSource.PlayOneShot(musicClip);
     }
 
     void OnGameWin()
