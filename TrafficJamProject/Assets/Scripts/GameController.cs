@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
             Instance = this;
         }
 
-
+        PrimeTweenConfig.warnTweenOnDisabledTarget = false;
         Physics2D.queriesStartInColliders = false;
         player = FindObjectOfType<Player>();
     }

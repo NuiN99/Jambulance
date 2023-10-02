@@ -63,7 +63,7 @@ public class AudioController : MonoBehaviour
     void PlayGameOverSound()
     {
         float startVol = musicSource.volume;
-        Tween.AudioVolume(musicSource, 0, 5, Ease.InOutSine)
+        Tween.AudioVolume(musicSource, 0, 3f, Ease.InOutSine)
         .OnComplete(() =>
         {
             Tween.AudioVolume(generalSource, 0, 2f, Ease.InOutSine);
