@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
             if(timeRemaining <= 0)
             {
                 timeRemaining = 0;
-                print("RAN OUT OF TIME");
+                player.GetComponent<IDestructable>().Destroy();
             }
         }
         if (!started && Input.anyKeyDown && FindObjectOfType<OverUI>().overUI == false)
