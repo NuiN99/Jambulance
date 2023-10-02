@@ -28,6 +28,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] GameObject highScoreText;
 
     [SerializeField] GameObject winScreen;
+    [SerializeField] TextMeshProUGUI timeLeftAfterWin;
 
     private void OnEnable()
     {
@@ -67,9 +68,7 @@ public class PlayerHUD : MonoBehaviour
         {
             progressionSlider.UpdateValue(GameController.Instance.progress01);
 
-            int minutes = Mathf.FloorToInt(GameController.Instance.timeRemaining / 60);
-            int seconds = Mathf.FloorToInt(GameController.Instance.timeRemaining % 60);
-            timeRemainingText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+            timeRemainingText.text = TimeRemainingText();
         }
     }
 
@@ -165,6 +164,15 @@ public class PlayerHUD : MonoBehaviour
     {
         Time.timeScale = 0;
 
+        timeLeftAfterWin.text = TimeRemainingText() + "s";
+
         winScreen.SetActive(true);
+    }
+
+    string TimeRemainingText()
+    {
+        int minutes = Mathf.FloorToInt(GameController.Instance.timeRemaining / 60);
+        int seconds = Mathf.FloorToInt(GameController.Instance.timeRemaining % 60);
+        return string.Format("{0:0}:{1:00}", minutes, seconds);
     }
 }
