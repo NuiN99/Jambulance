@@ -7,7 +7,7 @@ public class AudioController : MonoBehaviour
 {
     [SerializeField] AudioSource generalSource;
     [SerializeField] AudioSource musicSource;
-
+    [SerializeField] GameObject spatialSource;
     [SerializeField] AudioClip gameOverSound;
 
     [SerializeField] AudioClip music;
