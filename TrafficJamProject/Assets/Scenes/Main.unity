@@ -524,63 +524,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc62eb086d78ff144a9411b72f6b2d19, type: 3}
---- !u!1001 &417783588
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.8804405
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 15.819903
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780503964411284918, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189802597587429948, guid: bba201105fa09b04092a80a04e869da7, type: 3}
-      propertyPath: m_Name
-      value: ExplosionEffect
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bba201105fa09b04092a80a04e869da7, type: 3}
 --- !u!114 &484592194 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3284312501852837198, guid: 81a7bea78d845d84986055915e0473a3, type: 3}
@@ -1327,7 +1270,6 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 3846811093400722195, guid: f837d5eabd8522140a34b1e47112641a, type: 3}
   - {fileID: 3846811093400722195, guid: b3d8ea3d4b2eddd4b9a7fe61fa38016f, type: 3}
-  startSpawnCount: 0
   spawnInterval: 0.03
   minSpeedIncrement: 0
   maxSpeedIncrement: 10
@@ -1578,7 +1520,6 @@ MonoBehaviour:
   roadData: {fileID: 1489372395}
   enemyPrefabs:
   - {fileID: 3846811093400722195, guid: f837d5eabd8522140a34b1e47112641a, type: 3}
-  startSpawnCount: 0
   spawnInterval: 0.25
   minSpeedIncrement: 75
   maxSpeedIncrement: 100
@@ -1706,55 +1647,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lanes: []
   direction: {x: 0, y: 1}
---- !u!1 &1855077577
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1855077579}
-  - component: {fileID: 1855077578}
-  m_Layer: 0
-  m_Name: ObstacleSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1855077578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855077577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea56bcba984391149b81e2af84f268c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roadData: {fileID: 1659196828}
-  obstaclePrefabs:
-  - {fileID: 663178374432665144, guid: b6c599c6bba23ca47bc305286a9442d5, type: 3}
-  minInterval: 1
-  maxInterval: 2
---- !u!4 &1855077579
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855077577}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894489513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2520,9 +2412,7 @@ SceneRoots:
   - {fileID: 867305174}
   - {fileID: 633581970}
   - {fileID: 2475516576279627667}
-  - {fileID: 1855077579}
   - {fileID: 128161850}
-  - {fileID: 417783588}
   - {fileID: 369065430}
   - {fileID: 1405584651}
   - {fileID: 309600729}

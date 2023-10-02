@@ -95,6 +95,6 @@ public class EnemySpawner : MonoBehaviour
     float RampMultiplier()
     {
         float currTime = GameController.Instance.startTime - GameController.Instance.timeRemaining;
-        return Mathf.Min((currTime - startTime) / rampTime, 1f);
+        return Mathf.Min(currTime / rampTime, 1f);
     }
 }
