@@ -75,14 +75,14 @@ public class AudioController : MonoBehaviour
             Tween.AudioVolume(generalSource, 0, 2f, Ease.InOutSine);
             musicSource.clip = gameOverSound;
             musicSource.Play();
-            Tween.AudioVolume(musicSource, startVol, 2, Ease.InOutSine);
+            Tween.AudioVolume(musicSource, startVol, 1, Ease.InOutSine);
         });
     }
 
     void OnGameStart()
     {
-        musicSource.clip = null;
-        musicSource.PlayOneShot(musicClip);
+        musicSource.clip = musicClip;
+        musicSource.Play();
     }
 
     void OnGameWin()
