@@ -136,6 +136,8 @@ public class PlayerHUD : MonoBehaviour
         DisableAll();
         winGameFadeSprite.SetActive(true);
 
+        timeLeftAfterWin.text = TimeRemainingText() + "s";
+
         Tween.Alpha(winGameFadeSprite.GetComponent<SpriteRenderer>(), 1f, 3f, Ease.Linear);
 
         Invoke("ShowWinScreen", 4f);
@@ -163,8 +165,6 @@ public class PlayerHUD : MonoBehaviour
     void ShowWinScreen()
     {
         Time.timeScale = 0;
-
-        timeLeftAfterWin.text = TimeRemainingText() + "s";
 
         winScreen.SetActive(true);
     }
