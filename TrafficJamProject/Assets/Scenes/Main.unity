@@ -1331,9 +1331,9 @@ MonoBehaviour:
   spawnInterval: 0.03
   minSpeedIncrement: 0
   maxSpeedIncrement: 10
-  spawnIntervalMin: 0.05
+  spawnIntervalMin: 0.025
   spawnIntervalMax: 0.001
-  rampTime: 90
+  rampTime: 60
 --- !u!4 &1217616674
 Transform:
   m_ObjectHideFlags: 0
@@ -1582,9 +1582,9 @@ MonoBehaviour:
   spawnInterval: 0.25
   minSpeedIncrement: 75
   maxSpeedIncrement: 100
-  spawnIntervalMin: 1
-  spawnIntervalMax: 0.05
-  rampTime: 50
+  spawnIntervalMin: 0.75
+  spawnIntervalMax: 0.2
+  rampTime: 45
 --- !u!4 &1585014607
 Transform:
   m_ObjectHideFlags: 0

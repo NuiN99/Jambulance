@@ -224,6 +224,9 @@ public class Car : MonoBehaviour, IDestructable
         else
             GameController.Instance.gameOver = true;
 
+        AudioClip clip = stats.explosionSounds[Random.Range(0, stats.explosionSounds.Length)];
+        AudioController.Instance.PlaySpatialSound(clip, transform.position, 0.35f);
+
         dead = true;
         Tween.Color(sr, sr.color, new Color(.2f, .2f, .2f, 2f), 2f, Ease.OutCubic);
         var effect = Instantiate(explosionEffect, transform.position, Random.rotation);

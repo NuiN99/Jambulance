@@ -7,6 +7,7 @@ public class CarStatsSO : ScriptableObject
 {
     public Sprite[] possibleSprites;
     public AudioClip[] possibleDrivingLoopClips;
+    public AudioClip[] explosionSounds;
 
     public float moveSpeed;
     public float turnSpeed;

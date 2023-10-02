@@ -16,6 +16,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 45e8abafca09e6b4cba6baf9e9ed5cae, type: 3}
   possibleDrivingLoopClips:
   - {fileID: 8300000, guid: c69d0dc197e6b824e96e31acf8ab95c6, type: 3}
+  explosionSounds:
+  - {fileID: 8300000, guid: db1e101c7327aa64e983f27f46afb25f, type: 3}
+  - {fileID: 8300000, guid: ac59a1b2a7364fc4c980fb1c3a52e3a9, type: 3}
+  - {fileID: 8300000, guid: 421d6a6b92694094f99baa1dee80e51c, type: 3}
   moveSpeed: 25
   turnSpeed: 0.5
   brakeStrength: 2
