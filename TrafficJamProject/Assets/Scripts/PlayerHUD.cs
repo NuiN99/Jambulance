@@ -18,6 +18,7 @@ public class PlayerHUD : MonoBehaviour
 
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject gameOverFadeSprite;
+    [SerializeField] GameObject pauseMenu;
 
     [SerializeField] Button resetButton;
     [SerializeField] Button quitButton;
@@ -65,6 +66,24 @@ public class PlayerHUD : MonoBehaviour
             int minutes = Mathf.FloorToInt(GameController.Instance.timeRemaining / 60);
             int seconds = Mathf.FloorToInt(GameController.Instance.timeRemaining % 60);
             timeRemainingText.text = string.Format("{0:0}:{1:00}:0:00", minutes, seconds);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if(Time.timeScale == 0)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+
+            }
+            
+           
         }
     }
 
@@ -123,5 +142,22 @@ public class PlayerHUD : MonoBehaviour
     void ShowWinGameScreen()
     {
         SceneManager.LoadScene("WinnerWinner");
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        TogglePauseMenu();
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        TogglePauseMenu();
+    }
+
+    public void TogglePauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
     }
 }

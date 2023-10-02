@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * I have copied and pasted this code so many times for this Jam. Dave Thomas and
+ * Andy Hunt are looking down upon me with disdain.
+ */
+
 public class InfiniteRoad : MonoBehaviour
 {
     Player player;
