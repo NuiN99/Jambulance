@@ -178,7 +178,7 @@ public class Car : MonoBehaviour, IDestructable
         if (distFromCam > 12.5f) return;
 
         if (force >= 7.5f)
-            AudioController.Instance.PlaySpatialSound(crashSounds[0], transform.position, (0.2f * force) / distFromCam);
+            AudioController.Instance.PlaySpatialSound(crashSounds[0], transform.position, (0.1f * force) / distFromCam);
         else if (force >= 5f)
             AudioController.Instance.PlaySpatialSound(crashSounds[1], transform.position, (0.1f * force) / distFromCam);
         else if (force >= 2.5f)

@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b102e663726a037478fe87ee318cc4c3, type: 3}
   - {fileID: 21300000, guid: 0cf135a1b2c91ac4c85aca9c0defb0e7, type: 3}
   - {fileID: 21300000, guid: dfa52c7027622d447afc62b437a579e3, type: 3}
-  moveSpeed: 10
+  moveSpeed: 5
   turnSpeed: 0.5
   brakeStrength: 1.1
   drag: 5

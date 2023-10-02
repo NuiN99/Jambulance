@@ -528,7 +528,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1268038669
   m_SortingOrder: 0
@@ -1574,8 +1574,8 @@ MonoBehaviour:
   spawnInterval: 0.03
   minSpeedIncrement: 0
   maxSpeedIncrement: 10
-  spawnIntervalMin: 1
-  spawnIntervalMax: 0.05
+  spawnIntervalMin: 0.05
+  spawnIntervalMax: 0.001
   rampTime: 90
 --- !u!4 &1217616674
 Transform:

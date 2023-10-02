@@ -32,8 +32,8 @@ public class Health : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         float collisionForce = collision.relativeVelocity.magnitude;
-
-        health -= collisionForce * (collisionForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
+        if(collisionForce > 1f)
+            health -= collisionForce * (collisionForce >= heavyImpactForceThreshold ? heavyImpactMultiplier : 1);
         if (!dead && health < 0 && TryGetComponent(out IDestructable destructable))
         {
             dead = true;
