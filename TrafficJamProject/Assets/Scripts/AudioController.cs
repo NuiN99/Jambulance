@@ -14,6 +14,8 @@ public class AudioController : MonoBehaviour
 
     [SerializeField] AudioClip music;
 
+    public float masterVolume;
+
     public static AudioController Instance { get; private set; }
 
     private void Awake()
@@ -45,6 +47,9 @@ public class AudioController : MonoBehaviour
     {
         Tween.AudioVolume(generalSource, 0, generalSource.volume, 1f, Ease.InQuart);
         Tween.AudioVolume(musicSource, 0, musicSource.volume, 1f, Ease.InQuart);
+
+        if(ES3.KeyExists("Volume"))
+            masterVolume = ES3.Load<float>("Volume");
     }
 
     public void PlaySound(AudioClip clip, float volume)
