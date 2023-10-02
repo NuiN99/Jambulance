@@ -5,7 +5,6 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     [SerializeField] AudioSource generalSource;
-    [SerializeField] AudioSource spatialSource;
     [SerializeField] AudioSource musicSource;
     
     public static AudioController Instance { get; private set; }
@@ -27,9 +26,9 @@ public class AudioController : MonoBehaviour
         generalSource.PlayOneShot(clip, volume);
     }
 
-    public void PlaySpatialSound(AudioClip clip, float volume)
+    public void PlaySpatialSound(AudioClip clip, Vector3 pos, float volume)
     {
-        spatialSource.PlayOneShot(clip, volume);
+        AudioSource.PlayClipAtPoint(clip, pos, volume);
     }
 
     public void PlayMusic(AudioClip clip, float volume)
