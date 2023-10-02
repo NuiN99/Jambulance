@@ -78,12 +78,6 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
 
-    private void Start()
-    {
-        SpawnStartEnemies();
-        //InvokeRepeating(nameof(SpawnEnemy), spawnInterval, spawnInterval);
-    }
-
     private void Update()
     {
         if (GameController.Instance.started && (Time.time - lastSpawnTime) > CurrSpawnInterval())
@@ -92,48 +86,6 @@ public class EnemySpawner : MonoBehaviour
             lastSpawnTime = Time.time;
         }
     }
-
-    void SpawnStartEnemies()
-    {
-        for (int i = 0; i < startSpawnCount; i++)
-        {
-            Enemy enemy = SpawnEnemy();
-            if (enemy == null)
-                continue;
-            if (enemy.roadData.direction != Vector2.up)
-            {
-                Destroy(enemy.gameObject);
-            }
-
-            Vector2 camPos = Camera.main.transform.position;
-            Vector2 randomPosInView = new Vector2(Random.Range(camPos.x - 4, camPos.x + 4), Random.Range(camPos.y - 10, camPos.y + 10));
-            enemy.transform.position = randomPosInView;
-
-            if (Vector3.Distance(enemy.transform.position, camPos) < 1.5f)
-            {
-                Destroy(enemy.gameObject);
-                return;
-            }
-
-            float dist = 999;
-            foreach (Lane lane in FindObjectsOfType<Lane>())
-            {
-                if (lane.road.direction != Vector2.up)
-                    continue;
-
-                float newDist = Vector3.Distance(lane.GetClosestPoint(enemy.transform.position, out _), enemy.transform.position);
-                if (newDist < dist)
-                {
-                    dist = newDist;
-                    enemy.currentLane = lane;
-                }
-            }
-
-            float dirAngle = (Mathf.Atan2(roadData.direction.y, roadData.direction.x) * Mathf.Rad2Deg) - 90;
-            enemy.transform.eulerAngles = new Vector3(0, 0, dirAngle);
-        }
-    }
-
     //Returns the spawn interval given current ramp up time
     float CurrSpawnInterval()
     {
