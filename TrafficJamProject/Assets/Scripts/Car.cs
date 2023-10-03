@@ -226,6 +226,8 @@ public class Car : MonoBehaviour, IDestructable
         else
             GameController.Instance.gameOver = true;
 
+        GetComponent<Health>().health = 0f;
+
         AudioClip clip = stats.explosionSounds[Random.Range(0, stats.explosionSounds.Length)];
         float dist = Vector2.Distance(transform.position, (Vector2)Camera.main.transform.position);
         float vol = 0.35f;

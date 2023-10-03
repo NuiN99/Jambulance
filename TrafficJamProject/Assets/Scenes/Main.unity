@@ -170,7 +170,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -354,7 +354,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -780,7 +780,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -834,7 +834,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -945,7 +945,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -1308,7 +1308,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -1351,9 +1351,9 @@ MonoBehaviour:
   spawnInterval: 0.03
   minSpeedIncrement: 0
   maxSpeedIncrement: 10
-  spawnIntervalMin: 0.025
-  spawnIntervalMax: 0.001
-  rampTime: 0
+  spawnIntervalMin: 0.15
+  spawnIntervalMax: 0.0075
+  rampTime: 75
   spawnMask:
     serializedVersion: 2
     m_Bits: 4096
@@ -1637,8 +1637,8 @@ MonoBehaviour:
   minSpeedIncrement: 75
   maxSpeedIncrement: 100
   spawnIntervalMin: 0.75
-  spawnIntervalMax: 0.2
-  rampTime: 0
+  spawnIntervalMax: 0.3
+  rampTime: 75
   spawnMask:
     serializedVersion: 2
     m_Bits: 4096
@@ -1704,7 +1704,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -1810,7 +1810,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   points: []
   roadIndicatorPrefab: {fileID: 9112765195377913305, guid: 0495a81f0ff3342478d69a48aee99649, type: 3}
   roadLinePrefab: {fileID: 9112765195377913305, guid: c9e30ba25630c894db8a230fa482ea5b, type: 3}
-  generationSpeed: 0.5
+  generationSpeed: 0.2
   minHorizontal: 0
   maxHorizontal: 0
   minVertical: 2
@@ -2273,6 +2273,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4700381344855282008, guid: 9977019e899a9b944acd5a701cafdb40, type: 3}
+      propertyPath: startTime
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 5681507809342234658, guid: 9977019e899a9b944acd5a701cafdb40, type: 3}
       propertyPath: m_Name
       value: GameController

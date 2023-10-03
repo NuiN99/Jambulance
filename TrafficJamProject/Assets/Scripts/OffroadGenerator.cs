@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Runtime.CompilerServices;
 
 public class OffroadGenerator : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class OffroadGenerator : MonoBehaviour
     [SerializeField] float segmentLength;
 
     [SerializeField] int maxSegments;
+
+    [SerializeField] float interval = 0.2f;
 
     [SerializeField] LinkedList<GameObject> activeSegments;
     int startOfSegmentIndex = 0;
@@ -32,11 +35,8 @@ public class OffroadGenerator : MonoBehaviour
         activeSegments = new LinkedList<GameObject>();
         startPosition = transform.position;
         InstantiateStartingSegment();
-    }
 
-    void FixedUpdate()
-    {
-        CheckForNewSegments();
+        InvokeRepeating(nameof(CheckForNewSegments), interval, interval);
     }
 
     void CheckForNewSegments()
@@ -111,7 +111,8 @@ public class OffroadGenerator : MonoBehaviour
         newSegment.transform.up = transform.up;
 
         int randScale = UnityEngine.Random.Range(0, 2) == 1 ? 1 : -1;
-        newSegment.transform.localScale = new Vector3(newSegment.transform.localScale.x * randScale, newSegment.transform.localScale.y, newSegment.transform.localScale.z);
+        int randScaleY = UnityEngine.Random.Range(0, 2) == 1 ? 1 : -1;
+        newSegment.transform.localScale = new Vector3(newSegment.transform.localScale.x * randScale, newSegment.transform.localScale.y * randScaleY, newSegment.transform.localScale.z);
 
         return newSegment;
     }

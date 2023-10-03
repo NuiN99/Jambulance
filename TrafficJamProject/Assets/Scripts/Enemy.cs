@@ -39,9 +39,12 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] LayerMask carMask;
 
+    Player player;
+
     private void Awake()
     {
         car = GetComponent<Car>();
+        player = FindObjectOfType<Player>();    
     }
 
     private void Start()
@@ -267,7 +270,9 @@ public class Enemy : MonoBehaviour
 
     void DestroyIfFarAway()
     {
-        if(Vector2.Distance((Vector2)Camera.main.transform.position, transform.position) >= 10f)
+
+        float yDistance = Mathf.Abs(Camera.main.transform.position.y - transform.position.y);
+        if (yDistance >= 20f)
         {
             Destroy(gameObject);
         }

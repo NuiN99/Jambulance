@@ -18,7 +18,7 @@ public class AmbulanceLight : MonoBehaviour
         leftLight.SetActive(false);
         rightLight.SetActive(false);
 
-        if (TryGetComponent(out Enemy enemy) && enemy.currentLane.road.direction == Vector2.up)
+        if (TryGetComponent(out Enemy enemy) && enemy.currentLane != null && enemy.currentLane.road.direction == Vector2.up)
         {
             enabled = false;
             return;
@@ -54,6 +54,7 @@ public class AmbulanceLight : MonoBehaviour
 
     void SwapLights()
     {
+        if (health == null) return;
         if (health.health > 0)
         {
             toggle = !toggle;

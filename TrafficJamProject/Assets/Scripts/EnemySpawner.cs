@@ -36,14 +36,14 @@ public class EnemySpawner : MonoBehaviour
     {
         var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
 
-        float randomPosUp = Random.Range(20f, 25f);
-        float randomPosDown = Random.Range(-20f, -15f);
+        float randomPosUp = Random.Range(10f, 15f);
+        float randomPosDown = Random.Range(-15f, -10f);
         float randY = Random.Range(0, 2) == 0? randomPosDown : randomPosUp;
 
         if(roadData.direction == Vector2.down && randY == randomPosDown)
             return null;
 
-        Vector3 closestPoint = lane.GetClosestPoint((Vector2)player.transform.position, out int index);
+        Vector3 closestPoint = lane.GetClosestPoint((Vector2)Camera.main.transform.position, out int index);
         Vector3 randomYPos = closestPoint + new Vector3(0, randY);
 
         Vector3 spawnPoint = lane.CalculateHorizontalIntersection(closestPoint, index, randomYPos);

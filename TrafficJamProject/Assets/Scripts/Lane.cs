@@ -84,18 +84,10 @@ public class Lane : MonoBehaviour
         Vector3 increment = new(Random.Range(minHorizontal, maxHorizontal), Random.Range(minVertical, maxVertical));
         Vector3 newEndPoint = startPoint + increment;
 
-        if (Vector2.Distance((Vector2)Camera.main.transform.position, newEndPoint) > 50f)
+        if (Mathf.Abs(Camera.main.transform.position.y - newEndPoint.y) > 25f)
             return;
 
         points.Add(Instantiate(roadIndicatorPrefab, newEndPoint, Quaternion.identity, transform).GetComponent<RoadPoint>());
-
-        /*Vector3 newEndPointDir = (newEndPoint - startPoint).normalized;
-        Vector3 midPos = startPoint + (newEndPoint - startPoint) / 2;
-        float angle = (Mathf.Atan2(newEndPointDir.y, newEndPointDir.x) * Mathf.Rad2Deg) - 90;
-        GameObject line = Instantiate(roadLinePrefab, midPos, Quaternion.identity, transform);
-        line.transform.eulerAngles = new(0, 0, angle);
-        float dist = Vector3.Distance(startPoint, newEndPoint);
-        line.transform.localScale = new Vector3(.1f, dist, 1);*/
     }
 
     void CullFarPoints()
