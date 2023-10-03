@@ -22,11 +22,14 @@ public class CameraController : MonoBehaviour
 
     float targetZoom = 5f;
 
+    Rigidbody2D playerRB;
+
     private void Awake()
     {
         cam = Camera.main;
         sc = GetComponent<ScreenShake>();
-        player = FindObjectOfType<Player>(true).transform;   
+        player = FindObjectOfType<Player>(true).transform;
+        playerRB = player.GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -43,25 +46,9 @@ public class CameraController : MonoBehaviour
         Tween.CameraOrthographicSize(cam, targetZoom, 1f, Ease.InOutQuad);
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        //normal smoothing
-        /*Vector3 desiredPos = player.position + new Vector3(0, verticalOffset);
-        targetPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);*/
-
-        //bad scaling code
-        /*if(player.TryGetComponent(out Rigidbody2D playerRB))
-        {
-            float speedFactor = playerRB.velocity.magnitude / maxCamSize;
-            float lerpFactor = Mathf.Pow(speedFactor, cameraScaleExponent);
-
-            cam.orthographicSize = Mathf.Lerp(minCamSize, maxCamSize, lerpFactor);
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCamSize, maxCamSize);
-        }*/
-
-
-        Rigidbody2D playerRigidbody = player.GetComponent<Rigidbody2D>();
-        float verticalOffsetTemp = playerRigidbody.velocity.y * speedFactor + verticalOffset;
+        float verticalOffsetTemp = playerRB.velocity.y * speedFactor + verticalOffset;
         Vector3 desiredPos = player.position + new Vector3(0, verticalOffsetTemp);
         targetPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
 

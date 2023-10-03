@@ -78,10 +78,10 @@ public class Car : MonoBehaviour, IDestructable
             curAccel = stats.maxAcceleration;
         }
 
-        if(TryGetComponent(out Health health) && health.health <= stats.health / 2)
+        if(TryGetComponent(out Health health))
         {
             var emission = currentSmokeEffect.emission;
-            float lerpFactor = 1 - ((health.health + (stats.health / 2)) / stats.health);
+            float lerpFactor = 1 - (health.health / stats.health);
 
             emission.rateOverTime = Mathf.Lerp(0, smokeEmissionMax, lerpFactor);
         }
@@ -110,9 +110,6 @@ public class Car : MonoBehaviour, IDestructable
         float step = speed * rb.velocity.magnitude;
         Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
         transform.rotation = newRotation;
-
-        
-        //rb.MoveRotation(targetAngle);
     }
 
     public void RotateToDirection(Vector3 target, float speed)
@@ -159,8 +156,7 @@ public class Car : MonoBehaviour, IDestructable
                 colliding = true;
                 curAccel = 0;
             }
-
-            else if (collisionForce > 2f)
+            else if (collisionForce > 2f || collision.gameObject.GetComponent<Car>().stats.health == 1)
             {
                 car.rb.AddForceAtPosition(2 * collisionForce * collisionDir, collisionPoint, ForceMode2D.Impulse);
                 car.rb.angularVelocity += collisionForce * 50 * Random.Range(-1f, 1f);
@@ -174,6 +170,10 @@ public class Car : MonoBehaviour, IDestructable
 
             ScreenShake.Instance.ShakeScreen(collisionForce, .25f);
         }
+        else if(GetComponent<Player>() && collisionForce > 2f)
+        {
+            curAccel -= stats.maxAcceleration / 1.25f;
+        }
 
         curAccel -= collisionForce / 50;
     }
@@ -182,6 +182,8 @@ public class Car : MonoBehaviour, IDestructable
     {
         float distFromCam = Vector2.Distance(Camera.main.transform.position, transform.position);
         if (distFromCam > 12.5f) return;
+
+        distFromCam = Mathf.Clamp(distFromCam, 1f, 12.5f);
 
         if (force >= 7.5f)
             AudioController.Instance.PlaySpatialSound(crashSounds[0], transform.position, (0.1f * force) / distFromCam);
@@ -225,7 +227,10 @@ public class Car : MonoBehaviour, IDestructable
             GameController.Instance.gameOver = true;
 
         AudioClip clip = stats.explosionSounds[Random.Range(0, stats.explosionSounds.Length)];
-        AudioController.Instance.PlaySpatialSound(clip, transform.position, 0.35f);
+        float dist = Vector2.Distance(transform.position, (Vector2)Camera.main.transform.position);
+        float vol = 0.35f;
+        if (dist <= 0.5f) vol = 0.15f;
+        AudioController.Instance.PlaySpatialSound(clip, transform.position, vol);
 
         dead = true;
         Tween.Color(sr, sr.color, new Color(.2f, .2f, .2f, 2f), 2f, Ease.OutCubic);

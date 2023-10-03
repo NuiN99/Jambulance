@@ -57,7 +57,7 @@ MonoBehaviour:
   colliding: 0
   braking: 0
   curAccel: 0
-  smokeEmissionMax: 20
+  smokeEmissionMax: 25
   explosionEffect: {fileID: 6189802597587429948, guid: bba201105fa09b04092a80a04e869da7, type: 3}
   smokeEffect: {fileID: 1017400943997116486, guid: c486897625c67174bbc117486004980c, type: 3}
   crashSounds:

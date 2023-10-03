@@ -22,8 +22,10 @@ public class EnemySpawner : MonoBehaviour
     float startTime;
     float lastSpawnTime = 0f;
 
+    Player player;
     private void Awake()
     {
+        player = FindObjectOfType<Player>(true);
         carsController = FindObjectOfType<CarsController>();
         startTime = Time.time;
     }
@@ -39,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         if(roadData.direction == Vector2.down && randY == randomPosDown)
             return null;
 
-        Vector3 closestPoint = lane.GetClosestPoint((Vector2)Camera.main.transform.position, out int index);
+        Vector3 closestPoint = lane.GetClosestPoint((Vector2)player.transform.position, out int index);
         Vector3 randomYPos = closestPoint + new Vector3(0, randY);
 
         Vector3 spawnPoint = lane.CalculateHorizontalIntersection(closestPoint, index, randomYPos);

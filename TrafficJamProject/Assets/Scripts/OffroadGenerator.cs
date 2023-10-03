@@ -109,6 +109,10 @@ public class OffroadGenerator : MonoBehaviour
         GameObject newSegment = Instantiate<GameObject>(segmentsList[seededRandomInt(index) % segmentsList.Count]);
         newSegment.transform.position = position;
         newSegment.transform.up = transform.up;
+
+        int randScale = UnityEngine.Random.Range(0, 2) == 1 ? 1 : -1;
+        newSegment.transform.localScale = new Vector3(newSegment.transform.localScale.x * randScale, newSegment.transform.localScale.y, newSegment.transform.localScale.z);
+
         return newSegment;
     }
 

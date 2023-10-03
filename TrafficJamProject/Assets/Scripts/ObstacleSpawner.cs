@@ -27,6 +27,8 @@ public class ObstacleSpawner : MonoBehaviour
         {
             point.occupied = true;
             Instantiate(prefab, point.transform.position, Quaternion.identity);
+
+            
         }
 
         StartCoroutine(SpawnObstacles());

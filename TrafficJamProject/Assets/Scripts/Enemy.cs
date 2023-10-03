@@ -72,6 +72,9 @@ public class Enemy : MonoBehaviour
     void TryBrakeSounds()
     {
         float distFromCam = Vector2.Distance(Camera.main.transform.position, transform.position);
+
+        distFromCam = Mathf.Clamp(distFromCam, 1f, 100f);
+
         if (car.braking && Time.time - timeSinceLastHonk > honkDelay)
         {
             timeSinceLastHonk = Time.time;

@@ -31,26 +31,29 @@ public class ScreenShake : MonoBehaviour
 
     public IEnumerator ShakeScreenRoutine(float strength, float dur)
     {
-        shaking = true;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < dur)
+        if (strength >= 0.25f)
         {
-            Vector3 startPos = new(camControl.targetPos.x, camControl.targetPos.y, transform.position.z);
+            shaking = true;
+            float elapsedTime = 0f;
 
-            float shakeMult = 1f;
+            while (elapsedTime < dur)
+            {
+                Vector3 startPos = new(camControl.targetPos.x, camControl.targetPos.y, transform.position.z);
 
-            //if (ES3.KeyExists("ScreenShake"))
-                //shakeMult = ES3.Load<float>("ScreenShake");
+                float shakeMult = 1f;
 
-            elapsedTime += Time.deltaTime;
-            float curveStrength = curve.Evaluate(elapsedTime / dur);
-            transform.position = startPos + (strength * curveStrength * shakeMult * strengthMultiplier * Time.deltaTime * Random.insideUnitSphere);
+                elapsedTime += Time.deltaTime;
+                float curveStrength = curve.Evaluate(elapsedTime / dur);
+                float calculatedStrength = (strength * curveStrength * shakeMult * strengthMultiplier * Time.deltaTime);
+                transform.position = startPos + Random.insideUnitSphere * Mathf.Clamp(calculatedStrength, 0f, .75f);
 
-            yield return null;
-            transform.position = startPos;
+                yield return null;
+                transform.position = startPos;
+            }
+            shaking = false;
         }
-        shaking = false;
+
+        
     }
 
     public void ShakeScreen(float strength, float dur)
