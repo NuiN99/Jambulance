@@ -1351,9 +1351,9 @@ MonoBehaviour:
   spawnInterval: 0.03
   minSpeedIncrement: 0
   maxSpeedIncrement: 10
-  spawnIntervalMin: 0.15
+  spawnIntervalMin: 0.125
   spawnIntervalMax: 0.0075
-  rampTime: 75
+  rampTime: 60
   spawnMask:
     serializedVersion: 2
     m_Bits: 4096

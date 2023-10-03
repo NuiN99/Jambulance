@@ -184,15 +184,17 @@ public class Car : MonoBehaviour, IDestructable
         if (distFromCam > 12.5f) return;
 
         distFromCam = Mathf.Clamp(distFromCam, 1f, 12.5f);
+        float vol = (0.1f * force) / distFromCam;
+        if (vol <= 0.0025f) return;
 
         if (force >= 7.5f)
-            AudioController.Instance.PlaySpatialSound(crashSounds[0], transform.position, (0.1f * force) / distFromCam);
+            AudioController.Instance.PlaySpatialSound(crashSounds[0], transform.position, vol);
         else if (force >= 5f)
-            AudioController.Instance.PlaySpatialSound(crashSounds[1], transform.position, (0.1f * force) / distFromCam);
+            AudioController.Instance.PlaySpatialSound(crashSounds[1], transform.position, vol);
         else if (force >= 2.5f)
-            AudioController.Instance.PlaySpatialSound(crashSounds[2], transform.position, (0.1f * force) / distFromCam);
+            AudioController.Instance.PlaySpatialSound(crashSounds[2], transform.position, vol);
         else
-            AudioController.Instance.PlaySpatialSound(crashSounds[3], transform.position, (0.1f * force) / distFromCam);
+            AudioController.Instance.PlaySpatialSound(crashSounds[3], transform.position, vol);
     }
 
     Coroutine currentRoutine;

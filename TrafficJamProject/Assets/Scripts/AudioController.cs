@@ -104,10 +104,19 @@ public class AudioController : MonoBehaviour
 
     void OnGameWin()
     {
-        Tween.Custom(masterVolume, 0.0001f, 2f, (val) =>
+        float startVol = musicSource.volume;
+        Tween.AudioVolume(musicSource, 0, 1.5f, Ease.InOutSine)
+        .OnComplete(() =>
+        {
+            musicSource.clip = gameOverSound;
+            musicSource.Play();
+            Tween.AudioVolume(musicSource, startVol, 1, Ease.InOutSine);
+        });
+
+        /*Tween.Custom(masterVolume, 0.0001f, 2f, (val) =>
         {
             mixer.SetFloat("MasterVolume", Mathf.Log10(val) * 20);
-        });
+        });*/
     }
 
     public void UpdateVolume(float value)
