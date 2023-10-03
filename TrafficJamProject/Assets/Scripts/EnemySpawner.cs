@@ -22,6 +22,8 @@ public class EnemySpawner : MonoBehaviour
     float startTime;
     float lastSpawnTime = 0f;
 
+    [SerializeField] LayerMask spawnMask;
+
     Player player;
     private void Awake()
     {
@@ -34,8 +36,8 @@ public class EnemySpawner : MonoBehaviour
     {
         var lane = roadData.lanes[Random.Range(0, roadData.lanes.Count)];
 
-        float randomPosUp = Random.Range(12.5f, 17.5f);
-        float randomPosDown = Random.Range(-15f, -10f);
+        float randomPosUp = Random.Range(20f, 25f);
+        float randomPosDown = Random.Range(-20f, -15f);
         float randY = Random.Range(0, 2) == 0? randomPosDown : randomPosUp;
 
         if(roadData.direction == Vector2.down && randY == randomPosDown)
@@ -47,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPoint = lane.CalculateHorizontalIntersection(closestPoint, index, randomYPos);
 
         Physics2D.queriesStartInColliders = true;
-        RaycastHit2D spawnHit = Physics2D.CircleCast(spawnPoint, .75f, Vector3.forward);
+        RaycastHit2D spawnHit = Physics2D.CircleCast(spawnPoint, .75f, Vector3.forward, 0, spawnMask);
         if (spawnHit)
         {
             return null;

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3760176869367318070}
   - component: {fileID: 5408535511764366301}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmbulanceLightRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6733679827825971333}
   - component: {fileID: 1100750182397368837}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OffsetSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1527278755519106551}
   - component: {fileID: 5994980640418334620}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmbulanceLightWhite_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3471890746909424840}
   - component: {fileID: 6612207516395478108}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmbulanceLightWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 1926444980483699513}
   - component: {fileID: 2393982177192039491}
   - component: {fileID: 4114115216093247161}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player_Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3458116843057964057}
   - component: {fileID: 1980054228185361506}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmbulanceLightRed_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

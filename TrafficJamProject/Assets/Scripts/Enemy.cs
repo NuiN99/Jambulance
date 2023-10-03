@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float screechDelay;
     float timeSinceLastScreech = 0;
 
+    [SerializeField] LayerMask carMask;
+
     private void Awake()
     {
         car = GetComponent<Car>();
@@ -90,10 +92,10 @@ public class Enemy : MonoBehaviour
 
     void MoveTowardsRoadUpwards()
     {
-        RaycastHit2D[] hitFwdAll = Physics2D.BoxCastAll(transform.position, new Vector3(0.5f, 1f), transform.eulerAngles.z, transform.up, fwdCheckDist);
-        RaycastHit2D[] hitLeftAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist);
-        RaycastHit2D[] hitRightAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist);
-        RaycastHit2D[] hitBackAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.up, fwdCheckDist);
+        RaycastHit2D[] hitFwdAll = Physics2D.BoxCastAll(transform.position, new Vector3(0.5f, 1f), transform.eulerAngles.z, transform.up, fwdCheckDist, carMask);
+        RaycastHit2D[] hitLeftAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.right, horizontalCheckDist, carMask);
+        RaycastHit2D[] hitRightAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, transform.right, horizontalCheckDist, carMask);
+        RaycastHit2D[] hitBackAll = Physics2D.BoxCastAll(transform.position, transform.localScale, transform.eulerAngles.z, -transform.up, fwdCheckDist, carMask);
 
         RaycastHit2D hitFwd = new();
         RaycastHit2D hitLeft = new();

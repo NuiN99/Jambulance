@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4059410046566777640}
   - component: {fileID: 6190063141439511011}
   - component: {fileID: -2839948569757506813}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy_Car_Wide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,6 +104,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e50073d7cad42d74caa83c3ef743b859, type: 3}
   - {fileID: 8300000, guid: 2a6d2311f4917b4469e204b2c7062de8, type: 3}
   screechDelay: 10
+  carMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &-640577423546280042
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,12 @@ public class AmbulanceLight : MonoBehaviour
         leftLight.SetActive(false);
         rightLight.SetActive(false);
 
+        if (TryGetComponent(out Enemy enemy) && enemy.currentLane.road.direction == Vector2.up)
+        {
+            enabled = false;
+            return;
+        }
+
         health = GetComponent<Health>();
     }
 
