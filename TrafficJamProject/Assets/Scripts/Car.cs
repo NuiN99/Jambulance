@@ -156,7 +156,7 @@ public class Car : MonoBehaviour, IDestructable
                 colliding = true;
                 curAccel = 0;
             }
-            else if (collisionForce > 2f || collision.gameObject.GetComponent<Car>().stats.health == 1)
+            else if (collisionForce > 1.5f || collision.gameObject.GetComponent<Car>().stats.health == 1)
             {
                 car.rb.AddForceAtPosition(2 * collisionForce * collisionDir, collisionPoint, ForceMode2D.Impulse);
                 car.rb.angularVelocity += collisionForce * 50 * Random.Range(-1f, 1f);
@@ -165,14 +165,14 @@ public class Car : MonoBehaviour, IDestructable
                 car.rb.drag = car.stats.drag / 2f;
                 car.colliding = true;
 
-                curAccel -= stats.maxAcceleration / 1.25f;
+                curAccel -= stats.maxAcceleration / 1.1f;
             }
 
             ScreenShake.Instance.ShakeScreen(collisionForce, .25f);
         }
         else if(GetComponent<Player>() && collisionForce > 2f)
         {
-            curAccel -= stats.maxAcceleration / 1.25f;
+            curAccel -= stats.maxAcceleration / 1.1f;
         }
 
         curAccel -= collisionForce / 50;
