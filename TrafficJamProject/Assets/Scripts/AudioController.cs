@@ -14,6 +14,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] AudioClip gameOverSound;
 
     [SerializeField] AudioClip musicClip;
+    [SerializeField] AudioClip winMusic;
 
     [SerializeField] AudioClip music;
 
@@ -108,15 +109,10 @@ public class AudioController : MonoBehaviour
         Tween.AudioVolume(musicSource, 0, 1.5f, Ease.InOutSine)
         .OnComplete(() =>
         {
-            musicSource.clip = gameOverSound;
+            musicSource.clip = winMusic;
             musicSource.Play();
             Tween.AudioVolume(musicSource, startVol, 1, Ease.InOutSine);
         });
-
-        /*Tween.Custom(masterVolume, 0.0001f, 2f, (val) =>
-        {
-            mixer.SetFloat("MasterVolume", Mathf.Log10(val) * 20);
-        });*/
     }
 
     public void UpdateVolume(float value)
